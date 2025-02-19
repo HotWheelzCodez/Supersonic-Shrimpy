@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkfmp6gv66g5n"]
+
+[ext_resource type="Script" path="res://Player.cs" id="1_02cee"]
+[ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player.png" id="2_3dm0c"]
+[ext_resource type="Texture2D" uid="uid://c7uhyjbtcb4lm" path="res://claw.png" id="3_rctwv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhmr3"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6uhxj"]
+size = Vector2(8, 8)
+
+[node name="Player" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_02cee")
+speed = 64.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(-1, 1)
+texture = ExtResource("2_3dm0c")
+
+[node name="ClawBack" type="Sprite2D" parent="."]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+position = Vector2(-1.19904e-14, -9.53675e-07)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("3_rctwv")
+
+[node name="ClawFront" type="Sprite2D" parent="."]
+position = Vector2(-0.999997, 0.00208979)
+scale = Vector2(-1, 1)
+texture = ExtResource("3_rctwv")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_uhmr3")
+
+[node name="Attacks" type="Area2D" parent="."]
+
+[node name="Punchbox" type="CollisionShape2D" parent="Attacks"]
+position = Vector2(14, 0)
+shape = SubResource("RectangleShape2D_6uhxj")
