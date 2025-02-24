@@ -29,9 +29,10 @@ public partial class Enemy : CharacterBody2D {
   }
   public float hitDelay = -1;
 
-  public AnimationNodeStateMachine anim;
+  public AnimationNodeStateMachinePlayback anim;
 
   public override void _Ready() {
+    anim = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("AnimationTree").Get("parameters/playback");
   }
 
   public override void _PhysicsProcess(double doubelta) {
@@ -56,6 +57,7 @@ public partial class Enemy : CharacterBody2D {
     if (hitDelay >= 0) {
       hitDelay = Mathf.Max(hitDelay - delta, 0);
       if (hitDelay <= 0 && player.Hit(this)) {
+        anim.Travel("attack");
         hitDelay = 0.25f;
       }
     }
@@ -65,6 +67,7 @@ public partial class Enemy : CharacterBody2D {
     if (hitDelay > -1) {
       hitDelay = 0.25f;
     }
+    anim.Travel("hurt");
     Health -= source.stats.damage;
     var dir = source.player.Transform.X;
     GD.Print(Velocity.Slide(dir));
