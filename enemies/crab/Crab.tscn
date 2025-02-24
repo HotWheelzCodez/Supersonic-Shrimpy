@@ -1,38 +1,38 @@
 [gd_scene load_steps=22 format=3 uid="uid://01sseyhptr6v"]
 
-[ext_resource type="Script" path="res://MeleeEnemy.cs" id="1_2u35x"]
-[ext_resource type="Texture2D" uid="uid://dxsbit0x10d0k" path="res://crab.png" id="2_gsjp1"]
+[ext_resource type="Script" path="res://enemies/crab/Crab.cs" id="1_biw12"]
+[ext_resource type="Texture2D" uid="uid://dxsbit0x10d0k" path="res://enemies/crab/crab.png" id="2_6ihe3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bspjm"]
-atlas = ExtResource("2_gsjp1")
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3ih5"]
+atlas = ExtResource("2_6ihe3")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iss2h"]
-atlas = ExtResource("2_gsjp1")
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxh2e"]
+atlas = ExtResource("2_6ihe3")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y3pf0"]
-atlas = ExtResource("2_gsjp1")
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kt6s"]
+atlas = ExtResource("2_6ihe3")
 region = Rect2(0, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c4fc8"]
-atlas = ExtResource("2_gsjp1")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gxok"]
+atlas = ExtResource("2_6ihe3")
 region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qnj5g"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bspjm")
+"texture": SubResource("AtlasTexture_y3ih5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iss2h")
+"texture": SubResource("AtlasTexture_gxh2e")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y3pf0")
+"texture": SubResource("AtlasTexture_6kt6s")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c4fc8")
+"texture": SubResource("AtlasTexture_5gxok")
 }],
 "loop": true,
 "name": &"default",
@@ -147,15 +147,14 @@ _data = {
 "walk": SubResource("Animation_2svw1")
 }
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Crab" type="CharacterBody2D"]
 collision_layer = 4
 motion_mode = 1
-script = ExtResource("1_2u35x")
-name = &"Enemy"
+script = ExtResource("1_biw12")
 speed = 64.0
 acceleration = 4.0
 damage = 1.0
-Health = 6.0
+Health = 10.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

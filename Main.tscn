@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=11 format=3 uid="uid://dbde0mmbs7yg5"]
 
-[ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://Player.tscn" id="1_khh53"]
 [ext_resource type="Script" path="res://Game.cs" id="1_pgcch"]
 [ext_resource type="Texture2D" uid="uid://cwh744vgjjjah" path="res://tiles/coral.png" id="2_brj6x"]
 [ext_resource type="Script" path="res://EnemySpawner.cs" id="2_echtv"]
-[ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://MeleeEnemy.tscn" id="2_fb83g"]
 [ext_resource type="Script" path="res://NormalizedCamera.cs" id="3_n8r31"]
+[ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://player/Player.tscn" id="4_h42pe"]
 [ext_resource type="Texture2D" uid="uid://bs70y4g8bkkap" path="res://health.png" id="4_rnk6r"]
+[ext_resource type="PackedScene" uid="uid://sdc7ke2ryqpr" path="res://enemies/spinefish/Spinefish.tscn" id="6_b5das"]
+[ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://enemies/crab/Crab.tscn" id="6_j5fyd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3llfd"]
 texture = ExtResource("2_brj6x")
@@ -29,7 +30,7 @@ sources/2 = SubResource("TileSetAtlasSource_3llfd")
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("player", "healthBar")]
 texture_filter = 1
 script = ExtResource("1_pgcch")
-player = NodePath("Node2D")
+player = NodePath("Player")
 healthBar = NodePath("CanvasLayer/Control/HBoxContainer")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -43,16 +44,20 @@ script = ExtResource("3_n8r31")
 unitsH = 256
 unitsV = 144
 
-[node name="Node2D" parent="." instance=ExtResource("1_khh53")]
-speed = 128.0
-acceleration = 10.0
-Health = 4.0
+[node name="Player" parent="." instance=ExtResource("4_h42pe")]
 
 [node name="Spawner" type="Node2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(134, 0)
 script = ExtResource("2_echtv")
-enemy = ExtResource("2_fb83g")
-target = NodePath("../Node2D")
+enemy = ExtResource("6_j5fyd")
+target = NodePath("../Player")
+rate = 0.2
+
+[node name="Spawner2" type="Node2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(-120, 56)
+script = ExtResource("2_echtv")
+enemy = ExtResource("6_b5das")
+target = NodePath("../Player")
 rate = 0.2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

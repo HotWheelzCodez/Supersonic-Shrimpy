@@ -44,6 +44,7 @@ public partial class Enemy : CharacterBody2D {
 		if (hitDelay > -1) {
 			hitDelay = 0.25f;
 		}
+		anim?.Travel("hurt");
 		Health -= source.stats.damage;
 		var dir = source.player.Transform.X;
 		Velocity = (Velocity - source.player.Velocity).Slide(dir) + dir * source.stats.knockback + source.player.Velocity;

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class MeleeEnemy : Enemy
+public partial class Crab : Enemy
 {
 	public override void _PhysicsProcess(double doubelta)
 	{
@@ -22,7 +22,8 @@ public partial class MeleeEnemy : Enemy
 		if (hitDelay >= 0) {
 			hitDelay = Mathf.Max(hitDelay - delta, 0);
 			if (hitDelay <= 0 && player.Hit(this)) {
-			hitDelay = 0.25f;
+				anim.Travel("attack");
+				hitDelay = 0.25f;
 			}
 		}
 	}
