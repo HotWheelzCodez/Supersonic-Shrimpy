@@ -21,6 +21,9 @@ radius = 7.0
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_ksbgu")
+speed = 32.0
+acceleration = 4.0
+damage = 1.0
 Health = 6.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
