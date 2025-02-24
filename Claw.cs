@@ -13,10 +13,10 @@ public class Claw {
 
   public Claw(Player player) {
     this.player = player;
+
   }
 
   public void Update(float delta) {
-    GD.Print(punch, stats.cooldown);
     punch = Mathf.MoveToward(punch, 0, delta / stats.cooldown);
     foreach (var behavior in behaviors) {
       behavior.Update(delta);
@@ -29,11 +29,20 @@ public class Claw {
     foreach (var behavior in behaviors) {
       behavior.Punch();
     }
+    foreach (var body in ((Area2D)player.GetNode("Attacks")).GetOverlappingBodies()) {
+      if (body is Enemy enemy) {
+        enemy.Hit(this);
+        player.Velocity -= player.Transform.X * stats.recoil;
+        break;
+      }
+    }
   }
 
   public struct Stats {
-    public float damage = 1;
+    public float damage = 4;
     public float cooldown = 0.2f;
+    public float knockback = 64;
+    public float recoil = 128;
 
     public Stats() {}
   }

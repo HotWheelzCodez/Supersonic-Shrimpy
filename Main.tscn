@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=6 format=3 uid="uid://dbde0mmbs7yg5"]
 
 [ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://Player.tscn" id="1_khh53"]
+[ext_resource type="Script" path="res://Game.cs" id="1_pgcch"]
+[ext_resource type="Script" path="res://EnemySpawner.cs" id="2_echtv"]
+[ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://enemy.tscn" id="2_fb83g"]
+[ext_resource type="Texture2D" uid="uid://bs70y4g8bkkap" path="res://health.png" id="4_rnk6r"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("player", "healthBar")]
+texture_filter = 1
+script = ExtResource("1_pgcch")
+player = NodePath("Node2D")
+healthBar = NodePath("CanvasLayer/Control/HBoxContainer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -10,3 +18,50 @@ zoom = Vector2(4, 4)
 [node name="Node2D" parent="." instance=ExtResource("1_khh53")]
 speed = 128.0
 acceleration = 10.0
+Health = 4.0
+
+[node name="Spawner" type="Node2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(134, 0)
+script = ExtResource("2_echtv")
+enemy = ExtResource("2_fb83g")
+target = NodePath("../Node2D")
+rate = 0.2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_rnk6r")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_rnk6r")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_rnk6r")
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_rnk6r")
+
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_rnk6r")

@@ -1,24 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkfmp6gv66g5n"]
+[gd_scene load_steps=11 format=3 uid="uid://bkfmp6gv66g5n"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_02cee"]
 [ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player.png" id="2_3dm0c"]
 [ext_resource type="Texture2D" uid="uid://c7uhyjbtcb4lm" path="res://claw.png" id="3_rctwv"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_a73xp"]
+atlas = ExtResource("2_3dm0c")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o3sn"]
+atlas = ExtResource("2_3dm0c")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5aao1"]
+atlas = ExtResource("2_3dm0c")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlsf6"]
+atlas = ExtResource("2_3dm0c")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mblf3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a73xp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o3sn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5aao1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlsf6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhmr3"]
 size = Vector2(12, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6uhxj"]
-size = Vector2(8, 8)
+size = Vector2(22, 8)
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
+collision_layer = 2
+motion_mode = 1
 script = ExtResource("1_02cee")
 speed = 64.0
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(-1, 1)
-texture = ExtResource("2_3dm0c")
+sprite_frames = SubResource("SpriteFrames_mblf3")
 
 [node name="BackClaw" type="Sprite2D" parent="."]
 modulate = Color(0.501961, 0.501961, 0.501961, 1)
@@ -36,7 +74,9 @@ texture = ExtResource("3_rctwv")
 shape = SubResource("RectangleShape2D_uhmr3")
 
 [node name="Attacks" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 
 [node name="Punchbox" type="CollisionShape2D" parent="Attacks"]
-position = Vector2(14, 0)
+position = Vector2(7, 0)
 shape = SubResource("RectangleShape2D_6uhxj")
