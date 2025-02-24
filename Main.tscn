@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Game.cs" id="1_pgcch"]
 [ext_resource type="Texture2D" uid="uid://cwh744vgjjjah" path="res://tiles/coral.png" id="2_brj6x"]
 [ext_resource type="Script" path="res://EnemySpawner.cs" id="2_echtv"]
-[ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://enemy.tscn" id="2_fb83g"]
+[ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://MeleeEnemy.tscn" id="2_fb83g"]
 [ext_resource type="Script" path="res://NormalizedCamera.cs" id="3_n8r31"]
 [ext_resource type="Texture2D" uid="uid://bs70y4g8bkkap" path="res://health.png" id="4_rnk6r"]
 

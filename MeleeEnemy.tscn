@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://01sseyhptr6v"]
 
-[ext_resource type="Script" path="res://RangedEnemy.cs" id="1_eujid"]
+[ext_resource type="Script" path="res://MeleeEnemy.cs" id="1_2u35x"]
 [ext_resource type="Texture2D" uid="uid://dxsbit0x10d0k" path="res://crab.png" id="2_gsjp1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bspjm"]
@@ -39,11 +39,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtlds"]
-size = Vector2(16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_hrwk4"]
+radius = 7.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ky6b2"]
-size = Vector2(14, 14)
+[sub_resource type="CircleShape2D" id="CircleShape2D_es27s"]
+radius = 9.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mra24"]
 animation = &"attack"
@@ -150,7 +150,8 @@ _data = {
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 motion_mode = 1
-script = ExtResource("1_eujid")
+script = ExtResource("1_2u35x")
+name = &"Enemy"
 speed = 64.0
 acceleration = 4.0
 damage = 1.0
@@ -161,16 +162,14 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_qnj5g")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("RectangleShape2D_jtlds")
+shape = SubResource("CircleShape2D_hrwk4")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
-shape = SubResource("RectangleShape2D_ky6b2")
+shape = SubResource("CircleShape2D_es27s")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_mk1cj")
