@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4s42ndsdcrfj"]
+
+[ext_resource type="Script" path="res://enemies/spinefish/FishSpine.cs" id="1_6imty"]
+[ext_resource type="Texture2D" uid="uid://k16foamqfuc" path="res://icon.svg" id="2_vhnmc"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_nkks7"]
+b = Vector2(-2, 0)
+
+[node name="FishSpine" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_6imty")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_nkks7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6, 0)
+scale = Vector2(0.09, 0.015)
+texture = ExtResource("2_vhnmc")
+
+[connection signal="body_entered" from="." to="." method="_OnBodyEnter"]

@@ -3,18 +3,33 @@ using System;
 
 public partial class Crab : Enemy
 {
+
+	public enum State {
+		Follow,
+		Wander
+	}
+
+	public State state = State.Wander;
+
 	public override void _PhysicsProcess(double doubelta)
 	{
+		base._PhysicsProcess(doubelta);
+
 		var delta = (float)doubelta;
 		var acc = acceleration;
 
-
-		Velocity = Velocity.MoveToward(hitDelay <= 0 ? (player.Position - Position).Normalized() * speed : Vector2.Zero, speed * acc * delta);
-
-		if (Velocity.Dot(Vector2.Right) > 0) {
-			Scale = new Vector2(1, 1);
-		} else if (Velocity.Dot(Vector2.Left) > 0) {
-			Scale = new Vector2(1, 1);
+		switch (state) {
+			case State.Follow:
+				Velocity = Velocity.MoveToward(hitDelay <= 0 ? (lastSeen - Position).Normalized() * speed : Vector2.Zero, speed * acc * delta);
+				if (!playerVisible && Position.DistanceTo(lastSeen) < 8) {
+					state = State.Wander;
+				}
+				break;
+			case State.Wander:
+				if (playerVisible) {
+					state = State.Follow;
+				}
+				break;
 		}
 
 		MoveAndSlide();
