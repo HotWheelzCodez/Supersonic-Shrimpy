@@ -20,7 +20,11 @@ public partial class Crab : Enemy
 
 		switch (state) {
 			case State.Follow:
-				Velocity = Velocity.MoveToward(hitDelay <= 0 ? (lastSeen - Position).Normalized() * speed : Vector2.Zero, speed * acc * delta);
+				if (hitDelay <= 0) {
+					MoveTo(lastSeen, delta);
+				} else {
+					AccelerateTo(Vector2.Zero, delta);
+				}
 				if (!playerVisible && Position.DistanceTo(lastSeen) < 8) {
 					state = State.Wander;
 				}

@@ -29,10 +29,10 @@ public class Claw {
 		foreach (var behavior in behaviors) {
 			behavior.Punch();
 		}
-		foreach (var body in ((Area2D)player.GetNode("Attacks")).GetOverlappingBodies()) {
+		foreach (var body in player.attacks.GetOverlappingBodies()) {
 			if (body is Enemy enemy) {
 				enemy.Hit(this);
-				player.Velocity -= player.Transform.X * stats.recoil;
+				player.Velocity -= player.attacks.Transform.X * stats.recoil;
 				break;
 			}
 		}

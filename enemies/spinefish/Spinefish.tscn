@@ -170,7 +170,7 @@ Health = 6.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_igupl")
-frame_progress = 0.746469
+frame_progress = 0.643355
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_c5nlq")

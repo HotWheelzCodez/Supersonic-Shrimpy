@@ -35,11 +35,11 @@ public partial class Enemy : CharacterBody2D {
 	public override void _Ready() {
 		anim = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("AnimationTree").Get("parameters/playback");
 		animPlayer = (AnimationPlayer)GetNode<AnimationPlayer>("AnimationPlayer");
-		lastSeen = Position;
+		lastSeen = GlobalPosition;
 	}
 
 	private bool IsPlayerVisible() {
-		var res = GetWorld2D().DirectSpaceState.IntersectRay(PhysicsRayQueryParameters2D.Create(Position, player.Position, 1));
+		var res = GetWorld2D().DirectSpaceState.IntersectRay(PhysicsRayQueryParameters2D.Create(GlobalPosition, player.GlobalPosition, 1));
 		return res.Count == 0;
 	}
 
@@ -50,21 +50,21 @@ public partial class Enemy : CharacterBody2D {
 		}
 		playerVisible = IsPlayerVisible();
 		if (playerVisible) {
-			lastSeen = player.Position;
+			lastSeen = player.GlobalPosition;
 		}
 		QueueRedraw();
 	}
 
 	public override void _Draw() {
-		DrawLine(Vector2.Zero, lastSeen - Position, playerVisible ? Colors.Green : Colors.Red);
+		DrawLine(Vector2.Zero, lastSeen - GlobalPosition, playerVisible ? Colors.Green : Colors.Red);
 	}
 
 	public void MoveAway(Vector2 target, AutoFloat delta) {
-		AccelerateTo((Position - target).Normalized() * speed, delta);
+		AccelerateTo((GlobalPosition - target).Normalized() * speed, delta);
 	}
 
 	public void MoveTo(Vector2 target, AutoFloat delta) {
-		AccelerateTo((target - Position).Normalized() * speed, delta);
+		AccelerateTo((target - GlobalPosition).Normalized() * speed, delta);
 	}
 
 	public void AccelerateTo(Vector2 target, AutoFloat delta) {
@@ -77,7 +77,7 @@ public partial class Enemy : CharacterBody2D {
 		}
 		anim?.Start("hurt");
 		Health -= source.stats.damage;
-		var dir = source.player.Transform.X;
+		var dir = source.player.attacks.Transform.X;
 		Velocity = (Velocity - source.player.Velocity).Slide(dir) + dir * source.stats.knockback + source.player.Velocity;
 	}
 

@@ -24,7 +24,7 @@ public partial class Spinefish : Enemy
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		var dist = Position.DistanceTo(lastSeen);
+		var dist = GlobalPosition.DistanceTo(lastSeen);
 
 
 		if (anim.GetCurrentNode() == "walk") {
@@ -51,8 +51,8 @@ public partial class Spinefish : Enemy
 
 	public void Shoot() {
 		var proj = (FishSpine)projectile.Instantiate();
-		proj.velocity = (player.Position - Position).Normalized() * shootSpeed;
-		proj.Rotation = (GetAngleTo(player.Position));
+		proj.velocity = (player.GlobalPosition - GlobalPosition).Normalized() * shootSpeed;
+		proj.Rotation = (GetAngleTo(player.GlobalPosition));
 		proj.Position = Position;
 		proj.owner = this;
 		GetParent().AddChild(proj);

@@ -1,29 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=7 format=3 uid="uid://dbde0mmbs7yg5"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_pgcch"]
 [ext_resource type="Script" path="res://NormalizedCamera.cs" id="3_n8r31"]
 [ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://player/Player.tscn" id="4_h42pe"]
 [ext_resource type="Texture2D" uid="uid://bs70y4g8bkkap" path="res://health.png" id="4_rnk6r"]
 [ext_resource type="PackedScene" uid="uid://r0msv4r7chvm" path="res://rooms/reef/tree.tscn" id="5_1ar7q"]
+[ext_resource type="PackedScene" uid="uid://bdhdsa0ih4yvv" path="res://rooms/reef/expanse.tscn" id="6_agyv5"]
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("player", "healthBar")]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "camera")]
 texture_filter = 1
 script = ExtResource("1_pgcch")
 player = NodePath("Player")
 healthBar = NodePath("CanvasLayer/Control/HBoxContainer")
+camera = NodePath("Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("currentRoom")]
 position = Vector2(128, 72)
 zoom = Vector2(4, 4)
-limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("3_n8r31")
 unitsH = 256
 unitsV = 144
-currentRoom = NodePath("../Node2D")
+mode = 2
+currentRoom = NodePath("../Node2D2")
 
 [node name="Player" parent="." instance=ExtResource("4_h42pe")]
-position = Vector2(0, 48)
+position = Vector2(48, 48)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 scale = Vector2(4, 4)
@@ -65,3 +67,6 @@ layout_mode = 2
 texture = ExtResource("4_rnk6r")
 
 [node name="Node2D" parent="." instance=ExtResource("5_1ar7q")]
+
+[node name="Node2D2" parent="." instance=ExtResource("6_agyv5")]
+position = Vector2(256, -80)

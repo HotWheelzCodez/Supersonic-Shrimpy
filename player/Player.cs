@@ -10,6 +10,7 @@ public partial class Player : CharacterBody2D
 	public float acceleration;
 
 	private float _health;
+
 	[Export]
 	public float Health {
 		get => _health;
@@ -22,16 +23,30 @@ public partial class Player : CharacterBody2D
 			_health = value;
 		}
 	}
+
 	public float invul = 0;
+	public float facingAngle = 0;
 
 	public Claw[] claws;
 
-	private AnimatedSprite2D sprite;
+	[Node("Sprite")]
+	public AnimatedSprite2D sprite;
+	[Node("Rotations")]
+	public AnimationPlayer rotations;
+	[Node("RightClaw/Sprite")]
+	public AnimatedSprite2D rightClawSprite;
+	[Node("LeftClaw/Sprite")]
+	public AnimatedSprite2D leftClawSprite;
+	[Node("Attacks")]
+	public Area2D attacks;
+
+	public static readonly string[] rotationAnims = new string[8] {
+		"right", "down", "down", "down", "left", "left", "down", "right"
+	};
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		claws = new Claw[] {new Claw(this), new Claw(this)};
-		sprite = GetNode<AnimatedSprite2D>("Sprite");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,32 +56,21 @@ public partial class Player : CharacterBody2D
 		invul -= delta;
 
 		var movement = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-		if (Health == 0 || invul >= 0) {
+		if (Health == 0 || invul >= 0.25) {
 			Velocity *= 0.95f;
 			MoveAndSlide();
 			return;
 		}
 		if (Velocity.Dot(movement) < 0) { acc *= 2; }
-		Velocity = movement * speed;
+			Velocity = movement * speed;
 		if (movement.Length() > 0.1) {
-			Rotation = movement.Angle();
+			var angle = movement.Angle();
+			attacks.Rotation = angle;
+			var step = (int)(angle / Mathf.Pi * 4 + 8.5) % 8;
+			GD.Print((int)(angle / Mathf.Pi * 4 + 8.5) % 8);
+			rotations.Play(rotationAnims[step]);
+			facingAngle = angle;
 		}
-
-		if (movement.LengthSquared() > 0.1) {
-			int frame = 0;
-			if (movement.Y < 0) {
-			frame++;
-			}
-			if (movement.X < 0.25 && movement.X > -0.25) {
-			frame+=2;
-			}
-			sprite.FlipH = movement.X < 0;
-			sprite.Frame = frame;
-		}
-
-
-		((CollisionShape2D)GetNode("Hitbox")).Rotation = -Rotation * Scale.Y;
-		sprite.Rotation = -Rotation * Scale.Y;
 
 		MoveAndSlide();
 
@@ -77,23 +81,21 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed("punch_right")) {
 			claws[1].Punch();
 		}
-	}
 
-	public override void _Process(double delta) {
 		foreach(var claw in claws) {
 			claw.Update((float)delta);
 		}
 
-		GetNode<Node2D>(Scale.Y < 0 ? "FrontClaw" : "BackClaw").Position = new(12 * claws[0].punch, 0);
-		GetNode<Node2D>(Scale.Y < 0 ? "BackClaw" : "FrontClaw").Position = new(12 * claws[1].punch, 0);
-		GetNode<Node2D>("FrontClaw").Position -= new Vector2(1, 0);
+		rightClawSprite.Position = attacks.Transform.X * 12 * claws[0].punch;
+		leftClawSprite.Position = attacks.Transform.X * 12 * claws[1].punch;
+
 	}
 
 	public bool Hit(Enemy source) {
 		if (invul > 0) return false;
 			Health -= source.damage;
 			Velocity -= (source.Position - Position).Normalized() * 128;
-			invul = 0.25f;
+			invul = 0.5f;
 			return true;
 		}
 

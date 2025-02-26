@@ -17,7 +17,7 @@ public partial class NormalizedCamera : Camera2D
 	public Mode mode = Mode.Fit;
 
 	[Export]
-	private Room currentRoom;
+	public Room currentRoom;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -34,18 +34,22 @@ public partial class NormalizedCamera : Camera2D
 			Mode.Fit => new(Mathf.Min(zh, zv), Mathf.Min(zh, zv)),
 			Mode.Stretch => new(zh, zv),
 		};
+		GlobalPosition = Game.instance.player.GlobalPosition;
 	}
 
 	public void TransitionToRoom(Room room) {
-		currentRoom.Stop();
+		currentRoom?.Stop();
 		currentRoom = room;
-		var tween = GetTree().CreateTween();
+		Game.instance.player.ProcessMode = ProcessModeEnum.Disabled;
+		var tween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Quad);
 		tween.SetParallel();
 		tween.SetEase(Tween.EaseType.InOut);
-		tween.TweenProperty(this, "limit_left", room.Left, 1);
-		tween.TweenProperty(this, "limit_right", room.Right, 1);
-		tween.TweenProperty(this, "limit_top", room.Top, 1);
-		tween.TweenProperty(this, "limit_bottom", room.Bottom, 1);
-		tween.Chain().TweenCallback(Callable.From(() => room.Start()));
+		tween.TweenProperty(this, "limit_left", room.Left, 0.5);
+		tween.TweenProperty(this, "limit_right", room.Right, 0.5);
+		tween.TweenProperty(this, "limit_top", room.Top, 0.5);
+		tween.TweenProperty(this, "limit_bottom", room.Bottom, 0.5);
+		var finish = tween.Chain();
+		finish.TweenCallback(Callable.From(() => room.Start()));
+		finish.TweenCallback(Callable.From(delegate {Game.instance.player.ProcessMode = ProcessModeEnum.Inherit;}));
 	}
 }
