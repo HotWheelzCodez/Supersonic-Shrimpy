@@ -10,7 +10,17 @@ sealed class NodeAttribute : System.Attribute
 	private static MethodInfo methodGetNode = typeof(Node2D)
 				.GetMethod(nameof(Node2D.GetNode), 1, new Type[] {typeof(NodePath)});
 
-	public static void AssignNodes(Node node) {
+	public static void StartTreeListener(Node root) {
+		root.ChildEnteredTree += _OnTreeChildEnter;
+	}
+
+	private static void _OnTreeChildEnter(Node node) {
+		NodeAttribute.AssignNodes(node);
+		GD.Print(node.GetType().Name, " entered tree");
+		node.ChildEnteredTree += _OnTreeChildEnter;
+	}
+
+	private static void AssignNodes(Node node) {
 		var fields =
 			from field in node.GetType().GetFields()
 			from attr in field.GetCustomAttributes(true)

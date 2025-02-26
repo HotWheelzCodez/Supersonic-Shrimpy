@@ -41,7 +41,7 @@ public partial class Player : CharacterBody2D
 	public Area2D attacks;
 
 	public static readonly string[] rotationAnims = new string[8] {
-		"right", "down", "down", "down", "left", "left", "down", "right"
+		"right", "right", "down", "left", "left", "left_up", "up", "right_up"
 	};
 
 	// Called when the node enters the scene tree for the first time.
@@ -63,7 +63,8 @@ public partial class Player : CharacterBody2D
 		}
 		if (Velocity.Dot(movement) < 0) { acc *= 2; }
 			Velocity = movement * speed;
-		if (movement.Length() > 0.1) {
+		if (movement.Length() > 0.1 && (claws[0].punch == 0 && claws[1].punch == 0
+				|| Input.IsActionJustPressed("punch_left") || Input.IsActionJustPressed("punch_right"))) {
 			var angle = movement.Angle();
 			attacks.Rotation = angle;
 			var step = (int)(angle / Mathf.Pi * 4 + 8.5) % 8;

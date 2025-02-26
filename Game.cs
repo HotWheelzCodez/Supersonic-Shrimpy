@@ -13,14 +13,9 @@ public partial class Game : Node2D
 
 	public static Game instance;
 
-	private void _OnTreeChildEnter(Node node) {
-		NodeAttribute.AssignNodes(node);
-		GD.Print(node.GetType().Name, " entered tree");
-		node.ChildEnteredTree += _OnTreeChildEnter;
-	}
 
 	public override void _EnterTree() {
-		GetTree().Root.ChildEnteredTree += _OnTreeChildEnter;
+		NodeAttribute.StartTreeListener(GetTree().Root);
 	}
 
 	// Called when the node enters the scene tree for the first time.

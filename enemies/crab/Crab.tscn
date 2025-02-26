@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://01sseyhptr6v"]
+[gd_scene load_steps=25 format=3 uid="uid://01sseyhptr6v"]
 
 [ext_resource type="Script" path="res://enemies/crab/Crab.cs" id="1_biw12"]
 [ext_resource type="Texture2D" uid="uid://dxsbit0x10d0k" path="res://enemies/crab/crab.png" id="2_6ihe3"]
@@ -48,6 +48,9 @@ radius = 9.0
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mra24"]
 animation = &"attack"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rakvc"]
+animation = &"die"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_643y5"]
 animation = &"hurt"
 
@@ -66,14 +69,20 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nj0kb"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mk1cj"]
 states/attack/node = SubResource("AnimationNodeAnimation_mra24")
 states/attack/position = Vector2(308, 158)
+states/die/node = SubResource("AnimationNodeAnimation_rakvc")
+states/die/position = Vector2(462, 216)
 states/hurt/node = SubResource("AnimationNodeAnimation_643y5")
 states/hurt/position = Vector2(362, 73)
 states/walk/node = SubResource("AnimationNodeAnimation_kcuik")
 states/walk/position = Vector2(541, 113)
-transitions = ["hurt", "walk", SubResource("AnimationNodeStateMachineTransition_6wo55"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_tidli"), "Start", "walk", SubResource("AnimationNodeStateMachineTransition_wr21n")]
+transitions = ["hurt", "walk", SubResource("AnimationNodeStateMachineTransition_6wo55"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_tidli"), "Start", "walk", SubResource("AnimationNodeStateMachineTransition_wr21n"), "die", "End", SubResource("AnimationNodeStateMachineTransition_nj0kb")]
 
 [sub_resource type="Animation" id="Animation_bte3r"]
 length = 0.001
@@ -142,6 +151,47 @@ tracks/1/keys = {
 "values": [Vector2(0.833, 1.2), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_6bhnw"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.266667, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 0.833), Vector2(1.2, 0.833), Vector2(1.2, 0.833), Vector2(1.2, 0.833), Vector2(1.5, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_kkli3"]
 resource_name = "hurt"
 length = 0.6
@@ -203,6 +253,7 @@ tracks/1/keys = {
 _data = {
 "RESET": SubResource("Animation_bte3r"),
 "attack": SubResource("Animation_oacmr"),
+"die": SubResource("Animation_6bhnw"),
 "hurt": SubResource("Animation_kkli3"),
 "walk": SubResource("Animation_2svw1")
 }
