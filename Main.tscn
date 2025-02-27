@@ -96,9 +96,10 @@ layout_mode = 2
 texture = ExtResource("4_rnk6r")
 
 [node name="Player" parent="." instance=ExtResource("4_h42pe")]
-position = Vector2(320, 96)
+position = Vector2(208, -28)
 
 [node name="Node2D" parent="." instance=ExtResource("5_1ar7q")]
+position = Vector2(0, -144)
 
 [node name="Node2D2" parent="." instance=ExtResource("6_agyv5")]
 position = Vector2(256, -80)

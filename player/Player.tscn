@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bkfmp6gv66g5n"]
+[gd_scene load_steps=29 format=3 uid="uid://bkfmp6gv66g5n"]
 
 [ext_resource type="Script" path="res://player/Player.cs" id="1_s7fyg"]
 [ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player/player.png" id="2_3dm0c"]
@@ -59,9 +59,9 @@ animations = [{
 atlas = ExtResource("2_3dm0c")
 region = Rect2(72, 40, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bhoxk"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmh50"]
 atlas = ExtResource("2_3dm0c")
-region = Rect2(80, 16, 16, 16)
+region = Rect2(72, 8, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_57i7n"]
 animations = [{
@@ -70,7 +70,10 @@ animations = [{
 "texture": SubResource("AtlasTexture_hvwte")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bhoxk")
+"texture": SubResource("AtlasTexture_mmh50")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmh50")
 }],
 "loop": true,
 "name": &"default",
@@ -85,6 +88,10 @@ region = Rect2(40, 72, 32, 32)
 atlas = ExtResource("2_3dm0c")
 region = Rect2(8, 72, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy1hy"]
+atlas = ExtResource("2_3dm0c")
+region = Rect2(72, 72, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_06qy0"]
 animations = [{
 "frames": [{
@@ -93,28 +100,31 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xg3ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy1hy")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hmgns"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3stg"]
 atlas = ExtResource("2_3dm0c")
-region = Rect2(79, 8, 8, 8)
+region = Rect2(79, 0, 8, 8)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qaq1n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_df8i6"]
 atlas = ExtResource("2_3dm0c")
-region = Rect2(88, 8, 8, 8)
+region = Rect2(87, 0, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_omex0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hmgns")
+"texture": SubResource("AtlasTexture_w3stg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qaq1n")
+"texture": SubResource("AtlasTexture_df8i6")
 }],
 "loop": true,
 "name": &"default",

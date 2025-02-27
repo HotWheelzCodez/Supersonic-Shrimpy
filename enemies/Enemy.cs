@@ -29,12 +29,17 @@ public partial class Enemy : CharacterBody2D {
 	public Vector2 lastSeen;
 
 	public AnimationNodeStateMachinePlayback anim;
-	public AnimationPlayer animPlayer;
+
+	public Room room;
 
 	public override void _Ready() {
 		anim = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("AnimationTree").Get("parameters/playback");
-		animPlayer = (AnimationPlayer)GetNode<AnimationPlayer>("AnimationPlayer");
 		lastSeen = GlobalPosition;
+		var cur = GetParent();
+		while (cur != null && !(cur is Room)) {
+			cur = cur.GetParent();
+		}
+		room = (Room)cur;
 	}
 
 	private bool IsPlayerVisible() {
@@ -51,6 +56,12 @@ public partial class Enemy : CharacterBody2D {
 		if (playerVisible) {
 			lastSeen = player.GlobalPosition;
 		}
+		var vel = Velocity;
+		if (GlobalPosition.X < room.Left) vel.X = speed;
+		if (GlobalPosition.X > room.Right) vel.X = -speed;
+		if (GlobalPosition.Y < room.Top) vel.Y = speed;
+		if (GlobalPosition.Y > room.Bottom) vel.Y = -speed;
+		Velocity = vel;
 		QueueRedraw();
 	}
 

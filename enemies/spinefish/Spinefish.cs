@@ -14,22 +14,25 @@ public partial class Spinefish : Enemy
 	[Export]
 	public float shootSpeed;
 
-	private AnimatedSprite2D sprite;
+	[Node("Sprite")]
+	public AnimatedSprite2D sprite;
+	[Node("Raycast")]
+	public RayCast2D raycast;
 
 	public override void _Ready() {
 		base._Ready();
-		sprite = GetNode<AnimatedSprite2D>("Sprite");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
 		var dist = GlobalPosition.DistanceTo(lastSeen);
-
+		var away = (GlobalPosition - lastSeen).Normalized();
+		raycast.TargetPosition = away * 16;
 
 		if (anim.GetCurrentNode() == "walk") {
 			if (playerVisible && dist <= approachRange) {
-				if (dist >= retreatRange) {
+				if (dist >= retreatRange || raycast.IsColliding()) {
 					anim.Travel("shoot");
 				} else {
 					MoveAway(player.Position, delta);
@@ -52,6 +55,7 @@ public partial class Spinefish : Enemy
 	public void Shoot() {
 		var proj = (FishSpine)projectile.Instantiate();
 		proj.velocity = (player.GlobalPosition - GlobalPosition).Normalized() * shootSpeed;
+		Velocity -= proj.velocity / 8;
 		proj.Rotation = (GetAngleTo(player.GlobalPosition));
 		proj.Position = Position;
 		proj.owner = this;

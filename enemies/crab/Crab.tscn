@@ -3,36 +3,36 @@
 [ext_resource type="Script" path="res://enemies/crab/Crab.cs" id="1_biw12"]
 [ext_resource type="Texture2D" uid="uid://dxsbit0x10d0k" path="res://enemies/crab/crab.png" id="2_6ihe3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y3ih5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgs3r"]
 atlas = ExtResource("2_6ihe3")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(0, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gxh2e"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1geq4"]
 atlas = ExtResource("2_6ihe3")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(24, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6kt6s"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_17kkm"]
 atlas = ExtResource("2_6ihe3")
-region = Rect2(0, 16, 16, 16)
+region = Rect2(24, 24, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5gxok"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8iw4"]
 atlas = ExtResource("2_6ihe3")
-region = Rect2(16, 16, 16, 16)
+region = Rect2(0, 24, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qnj5g"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y3ih5")
+"texture": SubResource("AtlasTexture_tgs3r")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gxh2e")
+"texture": SubResource("AtlasTexture_1geq4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6kt6s")
+"texture": SubResource("AtlasTexture_17kkm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5gxok")
+"texture": SubResource("AtlasTexture_i8iw4")
 }],
 "loop": true,
 "name": &"default",
@@ -40,7 +40,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrwk4"]
-radius = 7.0
+radius = 7.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_es27s"]
 radius = 9.0

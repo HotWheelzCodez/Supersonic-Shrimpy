@@ -39,7 +39,6 @@ public partial class NormalizedCamera : Camera2D
 
 	public void TransitionToRoom(Room room) {
 		currentRoom?.Stop();
-		currentRoom = room;
 		Game.instance.player.ProcessMode = ProcessModeEnum.Disabled;
 		var tween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Quad);
 		tween.SetParallel();
@@ -48,8 +47,11 @@ public partial class NormalizedCamera : Camera2D
 		tween.TweenProperty(this, "limit_right", room.Right, 0.5);
 		tween.TweenProperty(this, "limit_top", room.Top, 0.5);
 		tween.TweenProperty(this, "limit_bottom", room.Bottom, 0.5);
+		tween.TweenProperty(room, "modulate", Colors.White, 0.5);
+		tween.TweenProperty(currentRoom, "modulate", new Color(0, 0, 0, 0), 0.5);
 		var finish = tween.Chain();
 		finish.TweenCallback(Callable.From(() => room.Start()));
 		finish.TweenCallback(Callable.From(delegate {Game.instance.player.ProcessMode = ProcessModeEnum.Inherit;}));
+		currentRoom = room;
 	}
 }

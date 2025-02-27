@@ -1,14 +1,39 @@
-[gd_scene load_steps=21 format=3 uid="uid://sdc7ke2ryqpr"]
+[gd_scene load_steps=25 format=3 uid="uid://sdc7ke2ryqpr"]
 
 [ext_resource type="Script" path="res://enemies/spinefish/Spinefish.cs" id="1_ksbgu"]
 [ext_resource type="PackedScene" uid="uid://c4s42ndsdcrfj" path="res://enemies/spinefish/FishSpine.tscn" id="2_1l5jm"]
 [ext_resource type="Texture2D" uid="uid://q0t6sos1ll07" path="res://enemies/spinefish/spinefish.png" id="3_ekchp"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bl5o"]
+atlas = ExtResource("3_ekchp")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwmvo"]
+atlas = ExtResource("3_ekchp")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4umn0"]
+atlas = ExtResource("3_ekchp")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fpdl"]
+atlas = ExtResource("3_ekchp")
+region = Rect2(24, 24, 24, 24)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_igupl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ekchp")
+"texture": SubResource("AtlasTexture_2bl5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwmvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4umn0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fpdl")
 }],
 "loop": true,
 "name": &"default",
@@ -235,3 +260,5 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_qkb5s")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="Raycast" type="RayCast2D" parent="."]

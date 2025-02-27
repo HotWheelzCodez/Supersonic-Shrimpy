@@ -31,12 +31,15 @@ public partial class Segment : AnimatedSprite2D
 			targangle = parent.GetAngleTo(((Node2D)parent.GetParent()).GlobalPosition);
 		}
 		if (Mathf.Abs(Mathf.AngleDifference(angle.Angle(), targangle)) > Mathf.Pi / 4) {
-			pos -= Vector2.FromAngle(targangle);
+			pos -= Vector2.FromAngle(targangle) * (float)delta * 60;
 		}
 
 		if (Mathf.Abs(angle.X) > Mathf.Abs(angle.Y)) {
 			Frame = 0;
 			FlipH = angle.X > 0;
+		} else if (angle.Y > 0) {
+			Frame = 2;
+			FlipH = false;
 		} else {
 			Frame = 1;
 			FlipH = false;
