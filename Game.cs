@@ -27,7 +27,7 @@ public partial class Game : Node2D
 	public override void _Process(double delta) {
 		int i = 0;
 		foreach (Node heart in healthBar.GetChildren()) {
-			((TextureRect)heart).Modulate = Colors.White * Mathf.Clamp(player.Health - i, 0, 1);
+			((CanvasItem)heart).Modulate = Colors.White * Mathf.Clamp(player.Health - i, 0, 1);
 			i++;
 		}
 		foreach (var child in GetChildren()) {

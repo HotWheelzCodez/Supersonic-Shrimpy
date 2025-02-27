@@ -1,12 +1,13 @@
-[gd_scene load_steps=29 format=3 uid="uid://bkfmp6gv66g5n"]
+[gd_scene load_steps=30 format=3 uid="uid://bkfmp6gv66g5n"]
 
 [ext_resource type="Script" path="res://player/Player.cs" id="1_s7fyg"]
 [ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player/player.png" id="2_3dm0c"]
 [ext_resource type="Script" path="res://player/Segment.cs" id="3_tlvuf"]
+[ext_resource type="AudioStream" uid="uid://dwaovk2y3addt" path="res://player/attack.wav" id="4_5332o"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_17v6y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_le12y"]
 atlas = ExtResource("2_3dm0c")
-region = Rect2(8, 8, 32, 32)
+region = Rect2(10, 10, 28, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yey0x"]
 atlas = ExtResource("2_3dm0c")
@@ -24,7 +25,7 @@ region = Rect2(8, 40, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_17v6y")
+"texture": SubResource("AtlasTexture_le12y")
 }],
 "loop": true,
 "name": &"down",
@@ -946,3 +947,7 @@ shape = SubResource("RectangleShape2D_6uhxj")
 libraries = {
 "": SubResource("AnimationLibrary_lis4o")
 }
+
+[node name="PunchSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5332o")
+bus = &"Player"

@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=22 format=4 uid="uid://dbde0mmbs7yg5"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_pgcch"]
 [ext_resource type="Shader" path="res://water.gdshader" id="3_8w0yx"]
 [ext_resource type="Script" path="res://NormalizedCamera.cs" id="3_n8r31"]
+[ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player/player.png" id="4_7d7gs"]
 [ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://player/Player.tscn" id="4_h42pe"]
-[ext_resource type="Texture2D" uid="uid://bs70y4g8bkkap" path="res://health.png" id="4_rnk6r"]
 [ext_resource type="PackedScene" uid="uid://r0msv4r7chvm" path="res://rooms/reef/tree.tscn" id="5_1ar7q"]
 [ext_resource type="PackedScene" uid="uid://bdhdsa0ih4yvv" path="res://rooms/reef/expanse.tscn" id="6_agyv5"]
 
@@ -31,6 +31,155 @@ fractal_octaves = 1
 seamless = true
 noise = SubResource("FastNoiseLite_er0aj")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_46mnh"]
+atlas = ExtResource("4_7d7gs")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwua5"]
+atlas = ExtResource("4_7d7gs")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkcge"]
+atlas = ExtResource("4_7d7gs")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g3nna"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46mnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwua5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkcge")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_muqd2"]
+resource_name = "normal"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.4, 0.5, 0.7, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.0872665, -0.0872665, 0.0872665, 0.0872665, 0.0872665, -0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gcs81"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pbn85"]
+resource_name = "pinched"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533, -0.174533, 0.174533]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_76u2l"]
+resource_name = "shelled"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0872665, -0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mja0f"]
+_data = {
+"RESET": SubResource("Animation_gcs81"),
+"normal": SubResource("Animation_muqd2"),
+"pinched": SubResource("Animation_pbn85"),
+"shelled": SubResource("Animation_76u2l")
+}
+
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "camera")]
 y_sort_enabled = true
 texture_filter = 1
@@ -44,8 +193,8 @@ position = Vector2(128, 72)
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 script = ExtResource("3_n8r31")
-unitsH = 512
-unitsV = 288
+unitsH = 384
+unitsV = 216
 mode = 2
 currentRoom = NodePath("../Node2D2")
 
@@ -55,6 +204,9 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_ck1gw")
 scale = Vector2(8, 8)
 texture = SubResource("NoiseTexture2D_24p2d")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera2D"]
+current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 scale = Vector2(4, 4)
@@ -75,25 +227,75 @@ offset_right = 8.0
 offset_bottom = 8.0
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="Control" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(11, 11)
 layout_mode = 2
-texture = ExtResource("4_rnk6r")
 
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("4_rnk6r")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/HBoxContainer/Control"]
+position = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_g3nna")
 
-[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("4_rnk6r")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/HBoxContainer/Control"]
+libraries = {
+"": SubResource("AnimationLibrary_mja0f")
+}
+autoplay = "normal"
 
-[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="Control2" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(11, 11)
 layout_mode = 2
-texture = ExtResource("4_rnk6r")
 
-[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/HBoxContainer/Control2"]
+position = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_g3nna")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/HBoxContainer/Control2"]
+libraries = {
+"": SubResource("AnimationLibrary_mja0f")
+}
+autoplay = "normal"
+
+[node name="Control3" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(11, 11)
 layout_mode = 2
-texture = ExtResource("4_rnk6r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/HBoxContainer/Control3"]
+position = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_g3nna")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/HBoxContainer/Control3"]
+libraries = {
+"": SubResource("AnimationLibrary_mja0f")
+}
+autoplay = "normal"
+
+[node name="Control4" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(11, 11)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/HBoxContainer/Control4"]
+position = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_g3nna")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/HBoxContainer/Control4"]
+libraries = {
+"": SubResource("AnimationLibrary_mja0f")
+}
+autoplay = "normal"
+
+[node name="Control5" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(11, 11)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/HBoxContainer/Control5"]
+position = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_g3nna")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/HBoxContainer/Control5"]
+libraries = {
+"": SubResource("AnimationLibrary_mja0f")
+}
+autoplay = "normal"
 
 [node name="Player" parent="." instance=ExtResource("4_h42pe")]
 position = Vector2(208, -28)

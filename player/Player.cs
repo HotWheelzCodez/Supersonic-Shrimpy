@@ -39,6 +39,8 @@ public partial class Player : CharacterBody2D
 	public AnimatedSprite2D leftClawSprite;
 	[Node("Attacks")]
 	public Area2D attacks;
+	[Node("PunchSound")]
+	public AudioStreamPlayer2D punchSound;
 
 	public static readonly string[] rotationAnims = new string[8] {
 		"right", "right", "down", "left", "left", "left_up", "up", "right_up"
@@ -77,10 +79,11 @@ public partial class Player : CharacterBody2D
 
 		if (Input.IsActionJustPressed("punch_left")) {
 			claws[0].Punch();
-
+			punchSound.Play();
 		}
 		if (Input.IsActionJustPressed("punch_right")) {
 			claws[1].Punch();
+			punchSound.Play();
 		}
 
 		foreach(var claw in claws) {
