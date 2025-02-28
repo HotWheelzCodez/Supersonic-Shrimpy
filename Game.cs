@@ -10,6 +10,10 @@ public partial class Game : Node2D
 	public HBoxContainer healthBar;
 	[Export]
 	public NormalizedCamera camera;
+	[Export(PropertyHint.Dir)]
+	public string roomsDirectory;
+	[Export]
+	public int roomCount;
 
 	public static Game instance;
 
@@ -32,6 +36,9 @@ public partial class Game : Node2D
 	public override void _Ready() {
 		timer.Timeout += _OnTimerTimeout;
 		shockwaveShader = (ShaderMaterial)shockwaveNode.Material;
+
+		RoomManager roomManager = new RoomManager(roomsDirectory, roomCount);
+		roomManager.Layout(this);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

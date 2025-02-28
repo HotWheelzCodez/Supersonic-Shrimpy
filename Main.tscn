@@ -1,14 +1,12 @@
-[gd_scene load_steps=25 format=4 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=23 format=4 uid="uid://dbde0mmbs7yg5"]
 
-[ext_resource type="Script" path="res://Game.cs" id="1_pgcch"]
+[ext_resource type="Script" path="res://Game.cs" id="1_mealk"]
 [ext_resource type="Shader" path="res://water.gdshader" id="3_8w0yx"]
 [ext_resource type="Script" path="res://NormalizedCamera.cs" id="3_n8r31"]
 [ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player/player.png" id="4_7d7gs"]
 [ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://player/Player.tscn" id="4_h42pe"]
-[ext_resource type="PackedScene" uid="uid://r0msv4r7chvm" path="res://rooms/reef/tree.tscn" id="5_1ar7q"]
 [ext_resource type="Shader" path="res://shockwave.gdshader" id="5_vbwl1"]
-[ext_resource type="PackedScene" uid="uid://bdte40ee6g6md" path="res://rooms/reef/spawn.tscn" id="5_w7u0a"]
-[ext_resource type="PackedScene" uid="uid://bdhdsa0ih4yvv" path="res://rooms/reef/expanse.tscn" id="6_agyv5"]
+[ext_resource type="PackedScene" uid="uid://bdte40ee6g6md" path="res://rooms/spawn.tscn" id="7_477c5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6svti"]
 fractal_octaves = 1
@@ -184,16 +182,18 @@ _data = {
 "shelled": SubResource("Animation_76u2l")
 }
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "camera")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "camera")]
 y_sort_enabled = true
 texture_filter = 1
-script = ExtResource("1_pgcch")
+script = ExtResource("1_mealk")
 player = NodePath("Player")
 healthBar = NodePath("CanvasLayer/Control/HBoxContainer")
 camera = NodePath("Camera2D")
+roomsDirectory = "res://rooms/reef"
+roomCount = 5
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("currentRoom")]
-position = Vector2(128, 72)
+position = Vector2(129, 72)
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 script = ExtResource("3_n8r31")
@@ -310,17 +310,11 @@ libraries = {
 autoplay = "normal"
 
 [node name="Player" parent="." instance=ExtResource("4_h42pe")]
-position = Vector2(-169, -32)
-
-[node name="Tree" parent="." instance=ExtResource("5_1ar7q")]
-position = Vector2(0, -80)
-
-[node name="Expanse" parent="." instance=ExtResource("6_agyv5")]
-position = Vector2(256, -80)
-
-[node name="Spawn" parent="." instance=ExtResource("5_w7u0a")]
-position = Vector2(-256, -80)
+position = Vector2(-168, 104)
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 3
 one_shot = true
+
+[node name="Spawn" parent="." instance=ExtResource("7_477c5")]
+position = Vector2(-256, 0)
