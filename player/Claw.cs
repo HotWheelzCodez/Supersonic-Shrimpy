@@ -36,6 +36,8 @@ public class Claw {
 				break;
 			}
 		}
+
+		Game.instance.Shockwave(player.attacks.GlobalTransform * new Vector2(16, 0));
 	}
 
 	public struct Stats {

@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://bkfmp6gv66g5n"]
+[gd_scene load_steps=31 format=3 uid="uid://bkfmp6gv66g5n"]
 
 [ext_resource type="Script" path="res://player/Player.cs" id="1_s7fyg"]
 [ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player/player.png" id="2_3dm0c"]
 [ext_resource type="Script" path="res://player/Segment.cs" id="3_tlvuf"]
 [ext_resource type="AudioStream" uid="uid://dwaovk2y3addt" path="res://player/attack.wav" id="4_5332o"]
+[ext_resource type="AudioStream" uid="uid://buwlsgy05r5fy" path="res://player/hurt.wav" id="5_1je5h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_le12y"]
 atlas = ExtResource("2_3dm0c")
@@ -949,5 +950,11 @@ libraries = {
 }
 
 [node name="PunchSound" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 stream = ExtResource("4_5332o")
+bus = &"Player"
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("5_1je5h")
 bus = &"Player"

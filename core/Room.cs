@@ -26,6 +26,7 @@ public partial class Room : Node2D {
 
 	public override void _Ready() {
 		if (Engine.IsEditorHint()) return;
+		Modulate = Colors.Transparent;
 		if (lineTexture == null) {
 			lineTexture = new GradientTexture2D();
 			GD.Print(lineTexture.GetSize());
@@ -45,6 +46,8 @@ public partial class Room : Node2D {
 		line.TextureMode = Line2D.LineTextureMode.Stretch;
 		line.Texture = lineTexture;
 		line.Width = 16;
+		line.EndCapMode = Line2D.LineCapMode.Box;
+		line.BeginCapMode = Line2D.LineCapMode.Box;
 		AddChild(line);
 
 		ProcessMode = ProcessModeEnum.Disabled;

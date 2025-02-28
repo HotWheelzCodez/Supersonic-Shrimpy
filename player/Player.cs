@@ -41,6 +41,8 @@ public partial class Player : CharacterBody2D
 	public Area2D attacks;
 	[Node("PunchSound")]
 	public AudioStreamPlayer2D punchSound;
+	[Node("HurtSound")]
+	public AudioStreamPlayer2D hurtSound;
 
 	public static readonly string[] rotationAnims = new string[8] {
 		"right", "right", "down", "left", "left", "left_up", "up", "right_up"
@@ -70,7 +72,6 @@ public partial class Player : CharacterBody2D
 			var angle = movement.Angle();
 			attacks.Rotation = angle;
 			var step = (int)(angle / Mathf.Pi * 4 + 8.5) % 8;
-			GD.Print((int)(angle / Mathf.Pi * 4 + 8.5) % 8);
 			rotations.Play(rotationAnims[step]);
 			facingAngle = angle;
 		}
@@ -97,14 +98,18 @@ public partial class Player : CharacterBody2D
 
 	public bool Hit(Enemy source) {
 		if (invul > 0) return false;
-			Health -= source.damage;
-			Velocity -= (source.Position - Position).Normalized() * 128;
-			invul = 0.5f;
-			return true;
-		}
+		hurtSound.Play();
+		Game.instance.Freeze(0.05f);
+		Game.instance.Shake(3, 4);
+		Health -= source.damage;
+		Velocity -= (source.Position - Position).Normalized() * 128;
+		invul = 0.5f;
+		return true;
+	}
 
-		public void Die() {
+	public void Die() {
 		Modulate = Colors.Red;
+		GetTree().ChangeSceneToFile("res://Main.tscn");
 
 	}
 }

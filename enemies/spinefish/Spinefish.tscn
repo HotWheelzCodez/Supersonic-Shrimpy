@@ -1,8 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://sdc7ke2ryqpr"]
+[gd_scene load_steps=27 format=3 uid="uid://sdc7ke2ryqpr"]
 
 [ext_resource type="Script" path="res://enemies/spinefish/Spinefish.cs" id="1_ksbgu"]
 [ext_resource type="PackedScene" uid="uid://c4s42ndsdcrfj" path="res://enemies/spinefish/FishSpine.tscn" id="2_1l5jm"]
 [ext_resource type="Texture2D" uid="uid://q0t6sos1ll07" path="res://enemies/spinefish/spinefish.png" id="3_ekchp"]
+[ext_resource type="AudioStream" uid="uid://x4jjaam6d5wp" path="res://enemies/spinefish/hurt.wav" id="4_kfrgp"]
+[ext_resource type="AudioStream" uid="uid://cwasn2lmjgvc5" path="res://enemies/spinefish/die.wav" id="4_lrkia"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2bl5o"]
 atlas = ExtResource("3_ekchp")
@@ -262,3 +264,11 @@ tree_root = SubResource("AnimationNodeStateMachine_qkb5s")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Raycast" type="RayCast2D" parent="."]
+
+[node name="DieSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_lrkia")
+bus = &"Enemies"
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_kfrgp")
+bus = &"Enemies"

@@ -1,7 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://01sseyhptr6v"]
+[gd_scene load_steps=27 format=3 uid="uid://01sseyhptr6v"]
 
 [ext_resource type="Script" path="res://enemies/crab/Crab.cs" id="1_biw12"]
 [ext_resource type="Texture2D" uid="uid://dxsbit0x10d0k" path="res://enemies/crab/crab.png" id="2_6ihe3"]
+[ext_resource type="AudioStream" uid="uid://di4p5jkupcgle" path="res://enemies/crab/hurt.wav" id="3_64bjb"]
+[ext_resource type="AudioStream" uid="uid://d5bw3mpiplxl" path="res://enemies/crab/die.wav" id="4_akhhs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tgs3r"]
 atlas = ExtResource("2_6ihe3")
@@ -289,6 +291,14 @@ anim_player = NodePath("../AnimationPlayer")
 libraries = {
 "": SubResource("AnimationLibrary_0orge")
 }
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_64bjb")
+bus = &"Enemies"
+
+[node name="DieSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_akhhs")
+bus = &"Enemies"
 
 [connection signal="body_entered" from="Area2D" to="." method="_OnBodyEnter"]
 [connection signal="body_exited" from="Area2D" to="." method="_OnBodyExit"]

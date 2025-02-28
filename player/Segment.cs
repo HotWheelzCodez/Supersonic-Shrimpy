@@ -30,7 +30,9 @@ public partial class Segment : AnimatedSprite2D
 		} else {
 			targangle = parent.GetAngleTo(((Node2D)parent.GetParent()).GlobalPosition);
 		}
-		if (Mathf.Abs(Mathf.AngleDifference(angle.Angle(), targangle)) > Mathf.Pi / 4) {
+		if (Mathf.Abs(Mathf.AngleDifference(angle.Angle(), targangle)) > Mathf.Pi * 0.9) {
+			pos -= Vector2.FromAngle(targangle + 1.5f) * (float)delta * 60;
+		} else if (Mathf.Abs(Mathf.AngleDifference(angle.Angle(), targangle)) > Mathf.Pi / 4) {
 			pos -= Vector2.FromAngle(targangle) * (float)delta * 60;
 		}
 

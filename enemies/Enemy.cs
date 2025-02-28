@@ -32,6 +32,11 @@ public partial class Enemy : CharacterBody2D {
 
 	public Room room;
 
+	[Node("HurtSound")]
+	public AudioStreamPlayer2D hurtSound;
+	[Node("DieSound")]
+	public AudioStreamPlayer2D dieSound;
+
 	public override void _Ready() {
 		anim = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("AnimationTree").Get("parameters/playback");
 		lastSeen = GlobalPosition;
@@ -84,6 +89,7 @@ public partial class Enemy : CharacterBody2D {
 	public virtual void Hit(Claw source) {
 		if (Health <= 0) return;
 		anim?.Start("hurt");
+		hurtSound?.Play();
 		Health -= source.stats.damage;
 		var dir = source.player.attacks.Transform.X;
 		Velocity = (Velocity - source.player.Velocity).Slide(dir) + dir * source.stats.knockback + source.player.Velocity;
@@ -92,5 +98,7 @@ public partial class Enemy : CharacterBody2D {
 	// Override per enemy class to destroy the enemy object
 	public virtual void Die() {
 		anim?.Travel("die");
+		hurtSound?.Stop();
+		dieSound?.Play();
 	}
 }
