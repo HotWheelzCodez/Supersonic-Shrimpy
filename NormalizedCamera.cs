@@ -54,15 +54,15 @@ public partial class NormalizedCamera : Camera2D
 		LimitTop    = (int)(pos.Y - unitsV / 2);
 		LimitBottom = (int)(pos.Y + unitsV / 2);
 
-		var center = room.Position + room.Size / 2;
-		if (room.Size.X > unitsH) {
+		var center = room.Position + room.PixelSize / 2;
+		if (room.PixelSize.X > unitsH) {
 			tween.TweenProperty(this, "limit_left", room.Left, 0.5);
 			tween.TweenProperty(this, "limit_right", room.Right, 0.5);
 		} else {
 			tween.TweenProperty(this, "limit_left", center.X - unitsH / 2, 0.5);
 			tween.TweenProperty(this, "limit_right", center.X + unitsH / 2, 0.5);
 		}
-		if (room.Size.Y > unitsV) {
+		if (room.PixelSize.Y > unitsV) {
 			tween.TweenProperty(this, "limit_top", room.Top, 0.5);
 			tween.TweenProperty(this, "limit_bottom", room.Bottom, 0.5);
 		} else {

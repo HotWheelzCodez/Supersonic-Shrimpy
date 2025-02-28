@@ -13,6 +13,8 @@ public partial class Game : Node2D
 
 	public static Game instance;
 
+	public static readonly Vector2 roomSize = new (256, 144);
+
 	[Node("Timer")]
 	public Timer timer;
 	[Node("%Shockwave")]

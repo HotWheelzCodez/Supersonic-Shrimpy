@@ -1,28 +1,34 @@
 using Godot;
+using Godot.Collections;
 
 [Tool]
 public partial class Room : Node2D {
 
 	public static GradientTexture2D lineTexture;
 
-	private Vector2 _size;
+	private Vector2I roomSize = new Vector2I(1, 1);
 	[Export]
-	public Vector2 Size {
-		get => _size;
+	public Vector2I Size {
+		get => roomSize;
 		set {
-			_size = value;
+			roomSize = value;
+			doors.Resize(2 * value.X + 2 * value.Y);
 			QueueRedraw();
 		}
 	}
+	public Vector2 PixelSize => roomSize * Game.roomSize;
+
+	[Export]
+	public Array<bool> doors = new Array<bool>();
 
 	private Line2D line;
 
 	public float Left => GlobalPosition.X;
-	public float Right => GlobalPosition.X + Size.X;
+	public float Right => GlobalPosition.X + PixelSize.X;
 	public float Top => GlobalPosition.Y;
-	public float Bottom => GlobalPosition.Y + Size.Y;
+	public float Bottom => GlobalPosition.Y + PixelSize.Y;
 
-	public Rect2 Rect => new Rect2(GlobalPosition, Size);
+	public Rect2 Rect => new Rect2(GlobalPosition, PixelSize);
 
 	public override void _Ready() {
 		if (Engine.IsEditorHint()) return;
@@ -38,9 +44,9 @@ public partial class Room : Node2D {
 		line = new Line2D();
 		line.Points = new Vector2[] {
 			new(0, 0),
-			new(Size.X, 0),
-			new(Size.X, Size.Y),
-			new(0, Size.Y),
+			new(PixelSize.X, 0),
+			new(PixelSize.X, PixelSize.Y),
+			new(0, PixelSize.Y),
 			new(0, 0)
 		};
 		line.TextureMode = Line2D.LineTextureMode.Stretch;
@@ -57,6 +63,47 @@ public partial class Room : Node2D {
 			}
 		}
 	}
+	public int GetDoorIndex(Side side, int index = 0) => (side) switch {
+		Side.Top => 0,
+		Side.Bottom => roomSize.X,
+		Side.Left => 2 * roomSize.X,
+		Side.Right => 2 * roomSize.X + roomSize.Y
+	} + index;
+
+	public bool HasDoor(Side side, int index = 0) => doors[GetDoorIndex(side, index)];
+
+	public bool HasDoorOnSide(Side side) {
+		var count = (side) switch {
+			Side.Top or Side.Bottom => roomSize.X,
+			Side.Left or Side.Right => roomSize.Y
+		};
+		for (int i = 0; i < count; i++) {
+			if (HasDoor(side, i)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Vector2 GetDoorPos(Side side, int index = 0) => (side) switch {
+		Side.Top => new Vector2(Game.roomSize.X / 2 + Game.roomSize.X * index, 0),
+		Side.Bottom => new Vector2(Game.roomSize.X / 2 + Game.roomSize.X * index, PixelSize.Y),
+		Side.Left => new Vector2(0, Game.roomSize.Y / 2 + Game.roomSize.Y * index),
+		Side.Right => new Vector2(PixelSize.X, Game.roomSize.Y / 2 + Game.roomSize.Y * index),
+	};
+
+	public Vector2 GetDoorPos(int index) {
+		if (index >= 2 * roomSize.X + roomSize.Y) {
+			return GetDoorPos(Side.Right, index - 2 * roomSize.X - roomSize.Y);
+		}
+		if (index >= 2 * roomSize.X) {
+			return GetDoorPos(Side.Left, index - 2 * roomSize.X);
+		}
+		if (index >= roomSize.X) {
+			return GetDoorPos(Side.Bottom, index - roomSize.X);
+		}
+		return GetDoorPos(Side.Top, index);
+	}
 
 	public override void _Process(double delta) {
 		if (Engine.IsEditorHint()) {
@@ -66,7 +113,12 @@ public partial class Room : Node2D {
 
 	public override void _Draw() {
 		if (Engine.IsEditorHint()) {
-			DrawRect(new Rect2(0, 0, Size), Colors.Cyan, filled: false);
+			DrawRect(new Rect2(0, 0, PixelSize), Colors.Cyan, filled: false);
+			for (int i = 0; i < doors.Count; i++) {
+				var pos = GetDoorPos(i);
+				DrawCircle(pos, 12, doors[i] ? Colors.Green : Colors.Red, false);
+				DrawString(ThemeDB.FallbackFont, pos, i.ToString());
+			}
 		}
 	}
 

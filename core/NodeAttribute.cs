@@ -16,7 +16,6 @@ sealed class NodeAttribute : System.Attribute
 
 	private static void _OnTreeChildEnter(Node node) {
 		NodeAttribute.AssignNodes(node);
-		GD.Print(node.GetType().Name, " entered tree");
 		node.ChildEnteredTree += _OnTreeChildEnter;
 	}
 
@@ -26,13 +25,8 @@ sealed class NodeAttribute : System.Attribute
 			from attr in field.GetCustomAttributes(true)
 			where attr is NodeAttribute
 			select (field, (NodeAttribute)attr);
-		GD.Print($"{node.GetType().Name} has {fields.Count()} attributes on fields");
-		foreach ((var field, var attr) in fields) {
-			GD.Print(field.Name, " ", attr.GetType().Name);
-		}
 
 		foreach ((var field, var attr) in fields) {
-			GD.Print($"{node.GetType().Name} has field {field.Name} to be assigned to node {attr.path}");
 			var method = methodGetNode.MakeGenericMethod(field.FieldType);
 			var v = method.Invoke(node, new object[]{attr.path});
 			field.SetValue(node, v);

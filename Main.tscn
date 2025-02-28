@@ -33,7 +33,7 @@ noise = SubResource("FastNoiseLite_er0aj")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ck1gw"]
 shader = ExtResource("5_vbwl1")
-shader_parameter/centers = null
+shader_parameter/centers = PackedVector3Array(0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_46mnh"]
 atlas = ExtResource("4_7d7gs")
@@ -211,7 +211,6 @@ texture = SubResource("NoiseTexture2D_24p2d")
 
 [node name="Shockwave" type="Sprite2D" parent="Camera2D"]
 unique_name_in_owner = true
-visible = false
 z_index = 999
 texture_repeat = 2
 material = SubResource("ShaderMaterial_ck1gw")
@@ -314,13 +313,13 @@ autoplay = "normal"
 position = Vector2(-169, -32)
 
 [node name="Tree" parent="." instance=ExtResource("5_1ar7q")]
-position = Vector2(0, -144)
+position = Vector2(0, -80)
 
 [node name="Expanse" parent="." instance=ExtResource("6_agyv5")]
 position = Vector2(256, -80)
 
 [node name="Spawn" parent="." instance=ExtResource("5_w7u0a")]
-position = Vector2(-256, -128)
+position = Vector2(-256, -80)
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 3
