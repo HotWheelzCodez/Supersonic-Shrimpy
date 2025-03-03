@@ -264,7 +264,7 @@ sources/0 = SubResource("TileSetAtlasSource_285xp")
 [node name="Expanse" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_cs30a")
-Size = Vector2i(3, 3)
+RoomSize = Vector2i(3, 3)
 doors = [true, null, true, null, true, null, true, null, true, true, null, true]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]

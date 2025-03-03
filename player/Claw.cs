@@ -36,7 +36,7 @@ public class Claw {
 				break;
 			}
 		}
-
+		player.punchSound.Play();
 		Game.instance.Shockwave(player.attacks.GlobalTransform * new Vector2(16, 0));
 	}
 

@@ -14,6 +14,8 @@ public partial class Game : Node2D
 	public string roomsDirectory;
 	[Export]
 	public int roomCount;
+	[Export]
+	public Room startingRoom;
 
 	public static Game instance;
 
@@ -38,7 +40,7 @@ public partial class Game : Node2D
 		shockwaveShader = (ShaderMaterial)shockwaveNode.Material;
 
 		RoomManager roomManager = new RoomManager(roomsDirectory, roomCount);
-		roomManager.Layout(this);
+		roomManager.Layout(startingRoom);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

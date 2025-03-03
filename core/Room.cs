@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System.Collections.Generic;
 
 [Tool]
 public partial class Room : Node2D {
@@ -8,7 +9,7 @@ public partial class Room : Node2D {
 
 	private Vector2I roomSize = new Vector2I(1, 1);
 	[Export]
-	public Vector2I Size {
+	public Vector2I RoomSize {
 		get => roomSize;
 		set {
 			roomSize = value;
@@ -17,6 +18,11 @@ public partial class Room : Node2D {
 		}
 	}
 	public Vector2 PixelSize => roomSize * Game.roomSize;
+
+	public Vector2I RoomPosition {
+		get => (Vector2I)(GlobalPosition / Game.roomSize);
+		set => GlobalPosition = value * Game.roomSize;
+	}
 
 	[Export]
 	public Array<bool> doors = new Array<bool>();
@@ -70,6 +76,19 @@ public partial class Room : Node2D {
 		Side.Right => 2 * roomSize.X + roomSize.Y
 	} + index;
 
+	public (Side, int) GetDoorSideIndex(int index) {
+		if (index >= 2 * roomSize.X + roomSize.Y) {
+			return (Side.Right, index - 2 * roomSize.X - roomSize.Y);
+		}
+		if (index >= 2 * roomSize.X) {
+			return (Side.Left, index - 2 * roomSize.X);
+		}
+		if (index >= roomSize.X) {
+			return (Side.Bottom, index - roomSize.X);
+		}
+		return (Side.Top, index);
+	}
+
 	public bool HasDoor(Side side, int index = 0) => doors[GetDoorIndex(side, index)];
 
 	public bool HasDoorOnSide(Side side) {
@@ -85,6 +104,21 @@ public partial class Room : Node2D {
 		return false;
 	}
 
+	public List<int> GetDoorsOnSide(Side side) {
+		var ret = new List<int>();
+		var count = (side) switch {
+			Side.Top or Side.Bottom => roomSize.X,
+			Side.Left or Side.Right => roomSize.Y
+		};
+		for (int i = 0; i < count; i++) {
+			if (HasDoor(side, i)) {
+				ret.Add(i);
+			}
+		}
+
+		return ret;
+	}
+
 	public Vector2 GetDoorPos(Side side, int index = 0) => (side) switch {
 		Side.Top => new Vector2(Game.roomSize.X / 2 + Game.roomSize.X * index, 0),
 		Side.Bottom => new Vector2(Game.roomSize.X / 2 + Game.roomSize.X * index, PixelSize.Y),
@@ -93,16 +127,20 @@ public partial class Room : Node2D {
 	};
 
 	public Vector2 GetDoorPos(int index) {
-		if (index >= 2 * roomSize.X + roomSize.Y) {
-			return GetDoorPos(Side.Right, index - 2 * roomSize.X - roomSize.Y);
-		}
-		if (index >= 2 * roomSize.X) {
-			return GetDoorPos(Side.Left, index - 2 * roomSize.X);
-		}
-		if (index >= roomSize.X) {
-			return GetDoorPos(Side.Bottom, index - roomSize.X);
-		}
-		return GetDoorPos(Side.Top, index);
+		(var side, var i) = GetDoorSideIndex(index);
+		return GetDoorPos(side, i);
+	}
+
+	public Vector2I GetDoorRoomOffset(Side side, int index = 0) => (side) switch {
+		Side.Top => new Vector2I(index, 0),
+		Side.Bottom => new Vector2I(index, RoomSize.Y),
+		Side.Left => new Vector2I(0, index),
+		Side.Right => new Vector2I(RoomSize.X, index),
+	};
+
+	public Vector2I GetDoorRoomOffset(int index) {
+		(var side, var i) = GetDoorSideIndex(index);
+		return GetDoorRoomOffset(side, i);
 	}
 
 	public override void _Process(double delta) {
@@ -132,5 +170,9 @@ public partial class Room : Node2D {
 		var tween = GetTree().CreateTween().SetParallel();
 		tween.TweenProperty(this, "modulate", Colors.Transparent, 0.5);
 
+	}
+
+	public override string ToString() {
+		return $"<Room: {GetName()} at {RoomPosition}>";
 	}
 }

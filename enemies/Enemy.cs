@@ -71,7 +71,7 @@ public partial class Enemy : CharacterBody2D {
 	}
 
 	public override void _Draw() {
-		DrawLine(Vector2.Zero, lastSeen - GlobalPosition, playerVisible ? Colors.Green : Colors.Red);
+		//DrawLine(Vector2.Zero, lastSeen - GlobalPosition, playerVisible ? Colors.Green : Colors.Red);
 	}
 
 	public void MoveAway(Vector2 target, AutoFloat delta) {

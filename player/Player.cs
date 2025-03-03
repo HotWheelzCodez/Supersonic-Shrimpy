@@ -80,7 +80,6 @@ public partial class Player : CharacterBody2D
 
 		if (Input.IsActionJustPressed("punch_left")) {
 			claws[0].Punch();
-			punchSound.Play();
 		}
 		if (Input.IsActionJustPressed("punch_right")) {
 			claws[1].Punch();

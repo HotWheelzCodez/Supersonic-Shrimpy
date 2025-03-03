@@ -182,7 +182,7 @@ _data = {
 "shelled": SubResource("Animation_76u2l")
 }
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "camera")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "camera", "startingRoom")]
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_mealk")
@@ -190,7 +190,8 @@ player = NodePath("Player")
 healthBar = NodePath("CanvasLayer/Control/HBoxContainer")
 camera = NodePath("Camera2D")
 roomsDirectory = "res://rooms/reef"
-roomCount = 5
+roomCount = 20
+startingRoom = NodePath("Spawn")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("currentRoom")]
 position = Vector2(129, 72)
