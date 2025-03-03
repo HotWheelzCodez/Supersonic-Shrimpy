@@ -54,11 +54,13 @@ public partial class Spinefish : Enemy
 
 	public void Shoot() {
 		var proj = (FishSpine)projectile.Instantiate();
-		proj.velocity = (player.GlobalPosition - GlobalPosition).Normalized() * shootSpeed;
-		Velocity -= proj.velocity / 8;
+		proj.Velocity = (player.GlobalPosition - GlobalPosition).Normalized() * shootSpeed;
+		Velocity -= proj.Velocity / 8;
 		proj.Rotation = (GetAngleTo(player.GlobalPosition));
 		proj.Position = Position;
 		proj.owner = this;
+		proj.Damage = Damage;
+		proj.knockbackStrength = knockbackStrength;
 		GetParent().AddChild(proj);
 	}
 }

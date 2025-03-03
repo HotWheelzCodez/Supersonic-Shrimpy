@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=25 format=4 uid="uid://dbde0mmbs7yg5"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_mealk"]
 [ext_resource type="Shader" path="res://water.gdshader" id="3_8w0yx"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://player/Player.tscn" id="4_h42pe"]
 [ext_resource type="Shader" path="res://shockwave.gdshader" id="5_vbwl1"]
 [ext_resource type="PackedScene" uid="uid://bdte40ee6g6md" path="res://rooms/spawn.tscn" id="7_477c5"]
+[ext_resource type="PackedScene" uid="uid://26lhh6ywk1w" path="res://rooms/reef/crab_fountain.tscn" id="8_w70k8"]
+[ext_resource type="PackedScene" uid="uid://cudiq112nqxew" path="res://rooms/reef/spinefish_fountain.tscn" id="9_cq3hy"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6svti"]
 fractal_octaves = 1
@@ -319,3 +321,8 @@ one_shot = true
 
 [node name="Spawn" parent="." instance=ExtResource("7_477c5")]
 position = Vector2(-256, 0)
+
+[node name="Tree" parent="." instance=ExtResource("8_w70k8")]
+
+[node name="Tree2" parent="." instance=ExtResource("9_cq3hy")]
+position = Vector2(256, 0)

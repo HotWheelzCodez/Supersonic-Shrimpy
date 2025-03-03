@@ -1,22 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4s42ndsdcrfj"]
+[gd_scene load_steps=5 format=3 uid="uid://c4s42ndsdcrfj"]
 
 [ext_resource type="Script" path="res://enemies/spinefish/FishSpine.cs" id="1_6imty"]
-[ext_resource type="Texture2D" uid="uid://k16foamqfuc" path="res://icon.svg" id="2_vhnmc"]
+[ext_resource type="Texture2D" uid="uid://dm1dphvmbn4hm" path="res://enemies/spinefish/fishspine.png" id="2_7ficq"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_nkks7"]
 b = Vector2(-2, 0)
 
-[node name="FishSpine" type="Area2D"]
-collision_layer = 3
-collision_mask = 3
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14g2e"]
+size = Vector2(8, 8)
+
+[node name="FishSpine" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_6imty")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7ficq")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 0)
 shape = SubResource("SegmentShape2D_nkks7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-6, 0)
-scale = Vector2(0.09, 0.015)
-texture = ExtResource("2_vhnmc")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_14g2e")
 
-[connection signal="body_entered" from="." to="." method="_OnBodyEnter"]
+[connection signal="body_entered" from="Area2D" to="." method="_OnBodyEnter"]

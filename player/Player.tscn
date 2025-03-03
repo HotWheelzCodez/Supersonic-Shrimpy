@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://bkfmp6gv66g5n"]
+[gd_scene load_steps=32 format=3 uid="uid://bkfmp6gv66g5n"]
 
 [ext_resource type="Script" path="res://player/Player.cs" id="1_s7fyg"]
 [ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player/player.png" id="2_3dm0c"]
 [ext_resource type="Script" path="res://player/Segment.cs" id="3_tlvuf"]
 [ext_resource type="AudioStream" uid="uid://dwaovk2y3addt" path="res://player/attack.wav" id="4_5332o"]
+[ext_resource type="Script" path="res://player/Claw.cs" id="4_fcecb"]
 [ext_resource type="AudioStream" uid="uid://buwlsgy05r5fy" path="res://player/hurt.wav" id="5_1je5h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_le12y"]
@@ -923,6 +924,7 @@ position = Vector2(4, 7)
 [node name="Sprite" type="AnimatedSprite2D" parent="LeftClaw"]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_omex0")
+script = ExtResource("4_fcecb")
 
 [node name="RightClaw" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -932,6 +934,7 @@ position = Vector2(-4, 7)
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_omex0")
 flip_h = true
+script = ExtResource("4_fcecb")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_uhmr3")
