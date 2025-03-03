@@ -54,11 +54,12 @@ public partial class Crab : Enemy
 
 	}
 
-	public override void Hit(Claw source) {
+	public override bool Hit(IDamageSource source) {
 		if (hitDelay > -1) {
 			hitDelay = 0.25f;
 		}
-		base.Hit(source);
+		return base.Hit(source);
+
 	}
 
 	public void _OnBodyEnter(Node2D body) {

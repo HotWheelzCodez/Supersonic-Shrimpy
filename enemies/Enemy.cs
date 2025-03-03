@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Enemy : CharacterBody2D {
+public partial class Enemy : CharacterBody2D, IHittable, IDamageSource {
 
 	[Export]
 	public Player player;
@@ -11,7 +11,13 @@ public partial class Enemy : CharacterBody2D {
 	[Export]
 	public float acceleration;
 	[Export]
-	public float damage;
+	public float Damage {get; set;}
+	[Export]
+	public float knockbackStrength;
+
+	public Vector2 Direction => (player.GlobalPosition - GlobalPosition).Normalized();
+	public Vector2 Knockback => Direction * knockbackStrength;
+
 	private float _health;
 	[Export]
 	public virtual float Health {
@@ -86,13 +92,13 @@ public partial class Enemy : CharacterBody2D {
 		Velocity = Velocity.MoveToward(target, speed * acceleration * delta);
 	}
 
-	public virtual void Hit(Claw source) {
-		if (Health <= 0) return;
+	public virtual bool Hit(IDamageSource source) {
+		if (Health <= 0) return false;
 		anim?.Start("hurt");
 		hurtSound?.Play();
-		Health -= source.stats.damage;
-		var dir = source.player.attacks.Transform.X;
-		Velocity = (Velocity - source.player.Velocity).Slide(dir) + dir * source.stats.knockback + source.player.Velocity;
+		Health -= source.Damage;
+		Velocity = source.Knockback;
+		return true;
 	}
 
 	// Override per enemy class to destroy the enemy object

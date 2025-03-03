@@ -265,7 +265,7 @@ sources/0 = SubResource("TileSetAtlasSource_285xp")
 y_sort_enabled = true
 script = ExtResource("1_cs30a")
 Size = Vector2i(3, 3)
-doors = [true, null, true, null, true, null, true, null, true, true, null, true]
+doors = [null, null, null, null, null, null, null, null, null, null, null, null]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

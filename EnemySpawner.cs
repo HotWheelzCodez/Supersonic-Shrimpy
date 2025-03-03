@@ -19,6 +19,7 @@ public partial class EnemySpawner : Node2D {
 
 	public override void _Ready() {
 		enemies = new Enemy[limit];
+		target = Game.instance.player;
 	}
 
 	public override void _Process(double delta) {

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Player : CharacterBody2D
+public partial class Player : CharacterBody2D, IHittable
 {
 
 	[Export]
@@ -27,16 +27,14 @@ public partial class Player : CharacterBody2D
 	public float invul = 0;
 	public float facingAngle = 0;
 
-	public Claw[] claws;
-
 	[Node("Sprite")]
 	public AnimatedSprite2D sprite;
 	[Node("Rotations")]
 	public AnimationPlayer rotations;
 	[Node("RightClaw/Sprite")]
-	public AnimatedSprite2D rightClawSprite;
+	public Claw rightClaw;
 	[Node("LeftClaw/Sprite")]
-	public AnimatedSprite2D leftClawSprite;
+	public Claw leftClaw;
 	[Node("Attacks")]
 	public Area2D attacks;
 	[Node("PunchSound")]
@@ -50,7 +48,7 @@ public partial class Player : CharacterBody2D
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-		claws = new Claw[] {new Claw(this), new Claw(this)};
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -67,7 +65,7 @@ public partial class Player : CharacterBody2D
 		}
 		if (Velocity.Dot(movement) < 0) { acc *= 2; }
 			Velocity = movement * speed;
-		if (movement.Length() > 0.1 && (claws[0].punch == 0 && claws[1].punch == 0
+		if (movement.Length() > 0.1 && (leftClaw.punch == 0 && rightClaw.punch == 0
 				|| Input.IsActionJustPressed("punch_left") || Input.IsActionJustPressed("punch_right"))) {
 			var angle = movement.Angle();
 			attacks.Rotation = angle;
@@ -79,30 +77,20 @@ public partial class Player : CharacterBody2D
 		MoveAndSlide();
 
 		if (Input.IsActionJustPressed("punch_left")) {
-			claws[0].Punch();
-			punchSound.Play();
+			leftClaw.Punch();
 		}
 		if (Input.IsActionJustPressed("punch_right")) {
-			claws[1].Punch();
-			punchSound.Play();
+			rightClaw.Punch();
 		}
-
-		foreach(var claw in claws) {
-			claw.Update((float)delta);
-		}
-
-		rightClawSprite.Position = attacks.Transform.X * 12 * claws[0].punch;
-		leftClawSprite.Position = attacks.Transform.X * 12 * claws[1].punch;
-
 	}
 
-	public bool Hit(Enemy source) {
+	public bool Hit(IDamageSource source) {
 		if (invul > 0) return false;
 		hurtSound.Play();
 		Game.instance.Freeze(0.05f);
 		Game.instance.Shake(3, 4);
-		Health -= source.damage;
-		Velocity -= (source.Position - Position).Normalized() * 128;
+		Health -= source.Damage;
+		Velocity += source.Knockback;
 		invul = 0.5f;
 		return true;
 	}

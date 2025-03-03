@@ -244,7 +244,8 @@ retreatRange = 64.0
 shootSpeed = 256.0
 speed = 32.0
 acceleration = 4.0
-damage = 1.0
+Damage = 1.0
+knockbackStrength = 128.0
 Health = 24.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
