@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://core/Room.cs" id="1_sxutt"]
 [ext_resource type="TileSet" uid="uid://b2ae6jfmxoxq4" path="res://tiles/coral.tres" id="2_jggqu"]
 [ext_resource type="PackedScene" uid="uid://cwbx4mm6flnka" path="res://items/minerals/hornfels/Hornfels.tscn" id="3_17h01"]
-[ext_resource type="PackedScene" uid="uid://b68ynv5q1wqvh" path="res://items/minerals/natrolite/Itacolumite.tscn" id="4_tk5mu"]
+[ext_resource type="PackedScene" uid="uid://b68ynv5q1wqvh" path="res://items/minerals/itacolumite/Itacolumite.tscn" id="4_tk5mu"]
 
 [node name="Spawn" type="Node2D"]
 script = ExtResource("1_sxutt")
@@ -18,5 +18,5 @@ tile_set = ExtResource("2_jggqu")
 [node name="Hornfels" parent="." instance=ExtResource("3_17h01")]
 position = Vector2(174, 55)
 
-[node name="Natrolite" parent="." instance=ExtResource("4_tk5mu")]
-position = Vector2(139, 59)
+[node name="Itacolumite" parent="." instance=ExtResource("4_tk5mu")]
+position = Vector2(146, 47)
