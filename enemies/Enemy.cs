@@ -14,6 +14,10 @@ public partial class Enemy : CharacterBody2D, IHittable, IDamageSource {
 	public float Damage {get; set;}
 	[Export]
 	public float knockbackStrength;
+	[Export]
+	public int value;
+	[Export]
+	public int score;
 
 	public Vector2 Direction => (player.GlobalPosition - GlobalPosition).Normalized();
 	public Vector2 Knockback => Direction * knockbackStrength;
@@ -43,7 +47,14 @@ public partial class Enemy : CharacterBody2D, IHittable, IDamageSource {
 	[Node("DieSound")]
 	public AudioStreamPlayer2D dieSound;
 
+	public event EventHandler OnHit;
+
+	public static PackedScene coinPickup;
+	public static PackedScene healthPickup;
+
 	public override void _Ready() {
+		coinPickup ??= ResourceLoader.Load<PackedScene>("res://items/coin.tscn");
+		healthPickup ??= ResourceLoader.Load<PackedScene>("res://items/health.tscn");
 		anim = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("AnimationTree").Get("parameters/playback");
 		lastSeen = GlobalPosition;
 		var cur = GetParent();
@@ -94,6 +105,7 @@ public partial class Enemy : CharacterBody2D, IHittable, IDamageSource {
 
 	public virtual bool Hit(IDamageSource source) {
 		if (Health <= 0) return false;
+		OnHit?.Invoke(this, EventArgs.Empty);
 		anim?.Start("hurt");
 		hurtSound?.Play();
 		Health -= source.Damage;
@@ -106,5 +118,16 @@ public partial class Enemy : CharacterBody2D, IHittable, IDamageSource {
 		anim?.Travel("die");
 		hurtSound?.Stop();
 		dieSound?.Play();
+	}
+
+	public virtual void FinishDeath() {
+		for (int i = 0; i < value; i++) {
+			var node = (Pickup)(player.Health < player.maxHealth && GD.Randf() > 0.8f ? healthPickup : coinPickup).Instantiate();
+			node.Position = Position;
+			node.Velocity = Vector2.FromAngle(GD.Randf() * Mathf.Pi * 2) * 64 + Velocity;
+			AddSibling(node);
+		}
+		Game.instance.Score += score;
+		QueueFree();
 	}
 }

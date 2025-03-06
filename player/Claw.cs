@@ -41,6 +41,9 @@ public partial class Claw : AnimatedSprite2D, IDamageSource {
 			GD.Print("Intersecting ", body);
 			if (body is IHittable hittableThing) {
 				hittableThing.Hit(this);
+				foreach (var behavior in behaviors) {
+					behavior.PunchThing(hittableThing);
+				}
 				player.Velocity -= Direction * stats.recoil;
 				break;
 			}

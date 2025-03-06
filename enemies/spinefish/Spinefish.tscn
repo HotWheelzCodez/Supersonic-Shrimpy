@@ -110,7 +110,7 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"queue_free"
+"method": &"FinishDeath"
 }]
 }
 
@@ -246,6 +246,8 @@ speed = 32.0
 acceleration = 4.0
 Damage = 1.0
 knockbackStrength = 128.0
+value = 5
+score = 1000
 Health = 24.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]

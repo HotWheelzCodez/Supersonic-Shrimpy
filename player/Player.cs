@@ -16,13 +16,20 @@ public partial class Player : CharacterBody2D, IHittable
 		get => _health;
 		set {
 			if (value <= 0) {
-			Die();
-			_health = 0;
-			return;
+				Die();
+				_health = 0;
+				return;
+			}
+			if (value > maxHealth) {
+				_health = maxHealth;
+				return;
 			}
 			_health = value;
 		}
 	}
+
+	[Export]
+	public float maxHealth;
 
 	public float invul = 0;
 	public float facingAngle = 0;
@@ -48,7 +55,7 @@ public partial class Player : CharacterBody2D, IHittable
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-
+		Health = maxHealth;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

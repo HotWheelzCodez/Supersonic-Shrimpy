@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=26 format=4 uid="uid://dbde0mmbs7yg5"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_mealk"]
 [ext_resource type="Shader" path="res://water.gdshader" id="3_8w0yx"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player/player.png" id="4_7d7gs"]
 [ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://player/Player.tscn" id="4_h42pe"]
 [ext_resource type="Shader" path="res://shockwave.gdshader" id="5_vbwl1"]
+[ext_resource type="Texture2D" uid="uid://xldj1q57pmsu" path="res://items/coin.png" id="6_o41u1"]
 [ext_resource type="PackedScene" uid="uid://bdte40ee6g6md" path="res://rooms/spawn.tscn" id="7_477c5"]
+[ext_resource type="FontFile" uid="uid://diofk8ltw0r6r" path="res://skewpixel.ttf" id="7_s6owq"]
+[ext_resource type="PackedScene" uid="uid://b85bwaj1wyc1u" path="res://items/coin.tscn" id="8_e73tn"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6svti"]
 fractal_octaves = 1
@@ -182,15 +185,17 @@ _data = {
 "shelled": SubResource("Animation_76u2l")
 }
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "camera", "startingRoom")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "moneyLabel", "scoreLabel", "camera", "startingRoom")]
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_mealk")
 player = NodePath("Player")
-healthBar = NodePath("CanvasLayer/Control/HBoxContainer")
+healthBar = NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer")
+moneyLabel = NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/Label")
+scoreLabel = NodePath("CanvasLayer/Control/Label2")
 camera = NodePath("Camera2D")
 roomsDirectory = "res://rooms/reef"
-roomCount = 20
+roomCount = 10
 startingRoom = NodePath("Spawn")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("currentRoom")]
@@ -200,7 +205,6 @@ position_smoothing_enabled = true
 script = ExtResource("3_n8r31")
 unitsH = 384
 unitsV = 216
-mode = 2
 currentRoom = NodePath("../Spawn")
 
 [node name="ColorRect" type="Sprite2D" parent="Camera2D"]
@@ -222,96 +226,130 @@ texture = SubResource("NoiseTexture2D_24p2d")
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
+scale = Vector2(8, 8)
+transform = Transform2D(8, 0, 0, 8, 0, 0)
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 texture_filter = 1
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.125
+anchor_bottom = 0.125
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Control" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="Control" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(11, 11)
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/HBoxContainer/Control"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/Control"]
 position = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_g3nna")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/HBoxContainer/Control"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/Control"]
 libraries = {
 "": SubResource("AnimationLibrary_mja0f")
 }
 autoplay = "normal"
 
-[node name="Control2" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="Control2" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(11, 11)
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/HBoxContainer/Control2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/Control2"]
 position = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_g3nna")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/HBoxContainer/Control2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/Control2"]
 libraries = {
 "": SubResource("AnimationLibrary_mja0f")
 }
 autoplay = "normal"
 
-[node name="Control3" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="Control3" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(11, 11)
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/HBoxContainer/Control3"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/Control3"]
 position = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_g3nna")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/HBoxContainer/Control3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/Control3"]
 libraries = {
 "": SubResource("AnimationLibrary_mja0f")
 }
 autoplay = "normal"
 
-[node name="Control4" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="Control4" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(11, 11)
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/HBoxContainer/Control4"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/Control4"]
 position = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_g3nna")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/HBoxContainer/Control4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/Control4"]
 libraries = {
 "": SubResource("AnimationLibrary_mja0f")
 }
 autoplay = "normal"
 
-[node name="Control5" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="Control5" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(11, 11)
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/HBoxContainer/Control5"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/Control5"]
 position = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_g3nna")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/HBoxContainer/Control5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/Control5"]
 libraries = {
 "": SubResource("AnimationLibrary_mja0f")
 }
 autoplay = "normal"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+texture = ExtResource("6_o41u1")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 5
+text = "0"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -5.0
+offset_bottom = 5.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 5
+text = "0"
 
 [node name="Player" parent="." instance=ExtResource("4_h42pe")]
 position = Vector2(-168, 104)
+
+[node name="Coin" parent="." instance=ExtResource("8_e73tn")]
+position = Vector2(-15, 47.625)
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 3

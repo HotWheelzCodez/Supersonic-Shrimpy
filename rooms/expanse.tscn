@@ -1,12 +1,12 @@
 [gd_scene load_steps=7 format=4 uid="uid://bdhdsa0ih4yvv"]
 
-[ext_resource type="Script" path="res://core/Room.cs" id="1_cs30a"]
-[ext_resource type="Texture2D" uid="uid://dombt1hfgye1g" path="res://tiles/placeholder.png" id="2_7yslu"]
-[ext_resource type="PackedScene" uid="uid://sdc7ke2ryqpr" path="res://enemies/spinefish/Spinefish.tscn" id="3_k7ys8"]
-[ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://enemies/crab/Crab.tscn" id="4_snl7y"]
+[ext_resource type="Script" path="res://core/Room.cs" id="1_6uc67"]
+[ext_resource type="Texture2D" uid="uid://dombt1hfgye1g" path="res://tiles/placeholder.png" id="2_b2vis"]
+[ext_resource type="PackedScene" uid="uid://sdc7ke2ryqpr" path="res://enemies/spinefish/Spinefish.tscn" id="3_mm1jg"]
+[ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://enemies/crab/Crab.tscn" id="4_rcuvg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_285xp"]
-texture = ExtResource("2_7yslu")
+texture = ExtResource("2_b2vis")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
@@ -263,9 +263,9 @@ sources/0 = SubResource("TileSetAtlasSource_285xp")
 
 [node name="Expanse" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_cs30a")
+script = ExtResource("1_6uc67")
 RoomSize = Vector2i(3, 3)
-doors = [true, null, true, null, true, null, true, null, true, true, null, true]
+doors = [true, null, true, null, true, null, true, null, null, null, null, null]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
@@ -276,35 +276,35 @@ tile_map_data = PackedByteArray("AAAAAAgAAAAGAAMAAAABAAgAAAAGAAMAAAACAAgAAAAGAAM
 tile_set = SubResource("TileSet_eiy83")
 x_draw_order_reversed = true
 
-[node name="Spinefish" parent="." instance=ExtResource("3_k7ys8")]
+[node name="Spinefish" parent="." instance=ExtResource("3_mm1jg")]
 position = Vector2(216, 112)
 
-[node name="Crab" parent="." instance=ExtResource("4_snl7y")]
+[node name="Crab" parent="." instance=ExtResource("4_rcuvg")]
 position = Vector2(176, 352)
 
-[node name="Crab2" parent="." instance=ExtResource("4_snl7y")]
+[node name="Crab2" parent="." instance=ExtResource("4_rcuvg")]
 position = Vector2(176, 280)
 
-[node name="Spinefish2" parent="." instance=ExtResource("3_k7ys8")]
+[node name="Spinefish2" parent="." instance=ExtResource("3_mm1jg")]
 position = Vector2(56, 320)
 
-[node name="Crab3" parent="." instance=ExtResource("4_snl7y")]
+[node name="Crab3" parent="." instance=ExtResource("4_rcuvg")]
 position = Vector2(48, 176)
 
-[node name="Crab4" parent="." instance=ExtResource("4_snl7y")]
+[node name="Crab4" parent="." instance=ExtResource("4_rcuvg")]
 position = Vector2(64, 208)
 
-[node name="Crab5" parent="." instance=ExtResource("4_snl7y")]
+[node name="Crab5" parent="." instance=ExtResource("4_rcuvg")]
 position = Vector2(592, 160)
 
-[node name="Crab6" parent="." instance=ExtResource("4_snl7y")]
+[node name="Crab6" parent="." instance=ExtResource("4_rcuvg")]
 position = Vector2(592, 224)
 
-[node name="Crab7" parent="." instance=ExtResource("4_snl7y")]
+[node name="Crab7" parent="." instance=ExtResource("4_rcuvg")]
 position = Vector2(704, 304)
 
-[node name="Crab8" parent="." instance=ExtResource("4_snl7y")]
+[node name="Crab8" parent="." instance=ExtResource("4_rcuvg")]
 position = Vector2(720, 336)
 
-[node name="Spinefish3" parent="." instance=ExtResource("3_k7ys8")]
+[node name="Spinefish3" parent="." instance=ExtResource("3_mm1jg")]
 position = Vector2(712, 192)

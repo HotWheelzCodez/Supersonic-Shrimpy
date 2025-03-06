@@ -9,6 +9,10 @@ public partial class Game : Node2D
 	[Export]
 	public HBoxContainer healthBar;
 	[Export]
+	public Label moneyLabel;
+	[Export]
+	public Label scoreLabel;
+	[Export]
 	public NormalizedCamera camera;
 	[Export(PropertyHint.Dir)]
 	public string roomsDirectory;
@@ -16,6 +20,24 @@ public partial class Game : Node2D
 	public int roomCount;
 	[Export]
 	public Room startingRoom;
+
+	private int _money;
+	public int Money {
+		get => _money;
+		set {
+			moneyLabel.Text = value.ToString();
+			_money = value;
+		}
+	}
+	[Export]
+	private int _score;
+	public int Score {
+		get => _score;
+		set {
+			scoreLabel.Text = value.ToString();
+			tween.TweenProperty(this, "_score", value, 1);
+		}
+	}
 
 	public static Game instance;
 
@@ -28,6 +50,7 @@ public partial class Game : Node2D
 	public ShaderMaterial shockwaveShader;
 	private int nextShockwave;
 	private Vector3[] shockwaves = new Vector3[16];
+	public Tween tween;
 
 	public override void _EnterTree() {
 		instance = this;
@@ -36,6 +59,7 @@ public partial class Game : Node2D
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
+		tween = GetTree().CreateTween();
 		timer.Timeout += _OnTimerTimeout;
 		shockwaveShader = (ShaderMaterial)shockwaveNode.Material;
 

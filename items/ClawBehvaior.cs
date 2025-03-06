@@ -14,4 +14,6 @@ public class ClawBehavior {
 
 	public virtual void Punch() {}
 
+	public virtual void PunchThing(IHittable thing) {}
+
 }

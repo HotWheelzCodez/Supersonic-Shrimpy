@@ -11,7 +11,12 @@ public partial class RoomManager {
 	private List<Room> availableRooms = new List<Room>();
 	private int roomCount = 10;
 
+	private PackedScene doorH;
+	private PackedScene doorV;
+
 	public RoomManager(string roomsDirectory, int roomCount) {
+		doorH = ResourceLoader.Load<PackedScene>("res://rooms/door_h.tscn");
+		doorV = ResourceLoader.Load<PackedScene>("res://rooms/door_v.tscn");
 		this.roomCount = roomCount;
 
 		string path = roomsDirectory;
@@ -109,7 +114,7 @@ public partial class RoomManager {
 						sb.Append(c);
 						sb.Append(c);
 					}
-					GD.Print(sb);
+					//GD.Print(sb);
 				}
 			}
 		}
@@ -117,8 +122,30 @@ public partial class RoomManager {
 
 	Finished:
 
+		GD.Print($"Generated {rooms.Count} rooms");
+
 		// TODO: Add controlled randamization to the room generation
 		foreach (var room in rooms) {
+
+			for (int i = 0; i < room.doors.Count; i++) {
+				if (!room.doors[i]) continue;
+				var side = room.GetDoorSideIndex(i).Item1;
+				var conPos = room.GetConnectingRoomPos(i);
+				Room con;
+				if (occupied.TryGetValue(conPos, out con)) {
+					if (con.HasDoorAtRoomPos(room.GetDoorRoomPos(i), side)) {
+						continue;
+					}
+				} else {
+				}
+				var node = (Node2D)((side) switch {
+					Side.Top or Side.Bottom => doorH,
+					Side.Left or Side.Right => doorV,
+				}).Instantiate();
+				node.Position = room.GetDoorPos(i);
+				room.AddChild(node);
+			}
+
 			parent.AddChild(room);
 		}
 		return rooms;

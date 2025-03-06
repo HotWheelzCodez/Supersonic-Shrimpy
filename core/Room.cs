@@ -138,6 +138,29 @@ public partial class Room : Node2D {
 		Side.Right => new Vector2I(RoomSize.X, index),
 	};
 
+	public Vector2I GetDoorRoomPos(Side side, int index = 0) => GetDoorRoomOffset(side, index) + RoomPosition;
+
+	public Vector2I GetDoorRoomPos(int index) {
+		(var side, var i) = GetDoorSideIndex(index);
+		return GetDoorRoomPos(side, i);
+	}
+
+	public Vector2I GetConnectingRoomPos(Side side, int index = 0) => (side) switch {
+		Side.Top => GetDoorRoomPos(side, index) + Vector2I.Up,
+		Side.Left => GetDoorRoomPos(side, index) + Vector2I.Left,
+		_ => GetDoorRoomPos(side, index),
+	};
+
+	public Vector2I GetConnectingRoomPos(int index) {
+		(var side, var i) = GetDoorSideIndex(index);
+		return GetConnectingRoomPos(side, i);
+	}
+
+	public bool HasDoorAtRoomPos(Vector2I pos, Side side) => (side) switch {
+		Side.Top or Side.Bottom => HasDoor(side.Reverse(), pos.X - RoomPosition.X),
+		Side.Left or Side.Right => HasDoor(side.Reverse(), pos.Y - RoomPosition.Y),
+	};
+
 	public Vector2I GetDoorRoomOffset(int index) {
 		(var side, var i) = GetDoorSideIndex(index);
 		return GetDoorRoomOffset(side, i);
