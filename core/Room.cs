@@ -7,6 +7,9 @@ public partial class Room : Node2D {
 
 	public static GradientTexture2D lineTexture;
 
+	public bool active = false;
+	public bool visited = false;
+
 	private Vector2I roomSize = new Vector2I(1, 1);
 	[Export]
 	public Vector2I RoomSize {
@@ -20,7 +23,7 @@ public partial class Room : Node2D {
 	public Vector2 PixelSize => roomSize * Game.roomSize;
 
 	public Vector2I RoomPosition {
-		get => (Vector2I)(GlobalPosition / Game.roomSize);
+		get => (Vector2I)((GlobalPosition + Vector2.One) / Game.roomSize).Floor();
 		set => GlobalPosition = value * Game.roomSize;
 	}
 
@@ -38,13 +41,14 @@ public partial class Room : Node2D {
 
 	public override void _Ready() {
 		if (Engine.IsEditorHint()) return;
-		Modulate = Colors.Transparent;
+		Modulate = new Color(0f, 0f, 0f, 0f);
 		if (lineTexture == null) {
 			lineTexture = new GradientTexture2D();
 			GD.Print(lineTexture.GetSize());
 			lineTexture.Gradient = new Gradient();
 			lineTexture.FillTo = Vector2.Down;
-			lineTexture.Gradient.SetColor(1, new Color(0, 0, 0, 0));
+			lineTexture.Gradient.SetColor(1, Game.bg * new Color(1, 1, 1, 0));
+			lineTexture.Gradient.SetColor(0, Game.bg);
 		}
 
 		line = new Line2D();
@@ -185,13 +189,14 @@ public partial class Room : Node2D {
 
 	public void Start() {
 		ProcessMode = ProcessModeEnum.Inherit;
-		var tween = GetTree().CreateTween().SetParallel();
+		active = true;
+		visited = true;
+		Game.instance.roomDebug.Text = ToString();
 	}
 
 	public void Stop() {
 		ProcessMode = ProcessModeEnum.Disabled;
-		var tween = GetTree().CreateTween().SetParallel();
-		tween.TweenProperty(this, "modulate", Colors.Transparent, 0.5);
+		active = false;
 
 	}
 

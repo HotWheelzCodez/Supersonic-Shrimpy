@@ -29,15 +29,8 @@ public partial class Game : Node2D
 			_money = value;
 		}
 	}
-	[Export]
 	private int _score;
-	public int Score {
-		get => _score;
-		set {
-			scoreLabel.Text = value.ToString();
-			tween.TweenProperty(this, "_score", value, 1);
-		}
-	}
+	public int Score;
 
 	public static Game instance;
 
@@ -50,7 +43,14 @@ public partial class Game : Node2D
 	public ShaderMaterial shockwaveShader;
 	private int nextShockwave;
 	private Vector3[] shockwaves = new Vector3[16];
-	public Tween tween;
+	[Node("%Map")]
+	public Map map;
+	[Node("%RoomDebug")]
+	public Label roomDebug;
+	[Node("%PosDebug")]
+	public Label posDebug;
+
+	public static readonly Color bg = new Color(0, 0.05f, 0.1f);
 
 	public override void _EnterTree() {
 		instance = this;
@@ -59,12 +59,11 @@ public partial class Game : Node2D
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-		tween = GetTree().CreateTween();
 		timer.Timeout += _OnTimerTimeout;
 		shockwaveShader = (ShaderMaterial)shockwaveNode.Material;
 
 		RoomManager roomManager = new RoomManager(roomsDirectory, roomCount);
-		roomManager.Layout(startingRoom);
+		map.GenMap(roomManager.Layout(startingRoom));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -73,9 +72,17 @@ public partial class Game : Node2D
 			shockwaves[j].Z += (float)delta;
 		}
 		shockwaveShader.SetShaderParameter("centers", shockwaves);
-		int i = 0;
+		int i = Mathf.CeilToInt(player.maxHealth) - healthBar.GetChildren().Count;
+		for (; i --> 0 ;) {
+			healthBar.AddChild(ResourceLoader.Load<PackedScene>("res://ui/healthIndicator.tscn").Instantiate());
+		}
+		i = 0;
 		foreach (Node heart in healthBar.GetChildren()) {
-			((CanvasItem)heart).Modulate = Colors.White * Mathf.Clamp(player.Health - i, 0, 1);
+			if (i >= player.Health) {
+				((HealthIndicator)heart).SetState("lose");
+			} else {
+				((HealthIndicator)heart).SetState("normal");
+			}
 			i++;
 		}
 		foreach (var child in GetChildren()) {
@@ -85,6 +92,9 @@ public partial class Game : Node2D
 				}
 			}
 		}
+		_score = (int)Mathf.MoveToward(_score, Score, (float)delta * 1000);
+		scoreLabel.Text = _score.ToString();
+		posDebug.Text = player.GlobalPosition.ToString();
 	}
 
 	private void _OnTimerTimeout() {

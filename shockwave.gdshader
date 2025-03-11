@@ -14,9 +14,9 @@ void fragment() {
 		vec2 dir = normalize(WORLD_SPACE.xy - centers[i].xy);
 		float x = length(WORLD_SPACE.xy - centers[i].xy);
 		float h = centers[i].z * 32.0;
-		
+
 		float v = pow(2, -pow(x-h, 2)) * (x-h) * 20.0 / h;
-		
+
 		uv -= dir * v * v;
 	}
 

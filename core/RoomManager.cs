@@ -64,30 +64,30 @@ public partial class RoomManager {
 		while (true) {
 			if (frontier.Count <= 0) break;
 			var room = frontier.Dequeue();
-			GD.Print($"Building off of {room}");
+			//GD.Print($"Building off of {room}");
 			for (int i = 0; i < room.doors.Count; i++) {
 				if (!room.doors[i]) continue;
 				(var side, var index) = room.GetDoorSideIndex(i);
-				GD.Print($"  Trying {side} door #{index}");
+				//GD.Print($"  Trying {side} door #{index}");
 				availableRooms.Shuffle(random);
 				foreach (var next in availableRooms) {
-					GD.Print($"    Trying {next}");
+					//GD.Print($"    Trying {next}");
 					var doors = next.GetDoorsOnSide(side.Reverse());
 					doors.Shuffle(random);
 					foreach (var nextIndex in doors) {
-						GD.Print($"      Trying matching door #{nextIndex}");
+						//GD.Print($"      Trying matching door #{nextIndex}");
 						var pos = room.RoomPosition + room.GetDoorRoomOffset(side, index) - next.GetDoorRoomOffset(side.Reverse(), nextIndex);
 						var fits = true;
 						for (int y = pos.Y; y < pos.Y + next.RoomSize.Y; y++) {
 							for (int x = pos.X; x < pos.X + next.RoomSize.X; x++) {
 								if (occupied.ContainsKey(new (x, y))) {
-									GD.Print($"        Room intersects existing room at ({x}, {y})");
+									//GD.Print($"        Room intersects existing room at ({x}, {y})");
 									fits = false;
 								}
 							}
 						}
 						if (fits) {
-							GD.Print("        Room fits");
+							//GD.Print("        Room fits");
 							var nex = (Room)next.Duplicate(8);
 							for (int y = pos.Y; y < pos.Y + next.RoomSize.Y; y++) {
 								for (int x = pos.X; x < pos.X + next.RoomSize.X; x++) {
@@ -132,16 +132,20 @@ public partial class RoomManager {
 				var side = room.GetDoorSideIndex(i).Item1;
 				var conPos = room.GetConnectingRoomPos(i);
 				Room con;
+				Color mod;
 				if (occupied.TryGetValue(conPos, out con)) {
 					if (con.HasDoorAtRoomPos(room.GetDoorRoomPos(i), side)) {
 						continue;
 					}
+					mod = Colors.Green;
 				} else {
+					mod = Colors.Blue;
 				}
 				var node = (Node2D)((side) switch {
 					Side.Top or Side.Bottom => doorH,
 					Side.Left or Side.Right => doorV,
 				}).Instantiate();
+				node.Modulate = mod;
 				node.Position = room.GetDoorPos(i);
 				room.AddChild(node);
 			}

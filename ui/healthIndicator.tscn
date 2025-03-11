@@ -1,0 +1,382 @@
+[gd_scene load_steps=30 format=3 uid="uid://b20dq2juqiylt"]
+
+[ext_resource type="Script" path="res://ui/HealthIndicator.cs" id="1_62p4e"]
+[ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player/player.png" id="1_xpvju"]
+[ext_resource type="Script" path="res://ui/healthIcon.cs" id="3_einld"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46mnh"]
+atlas = ExtResource("1_xpvju")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwua5"]
+atlas = ExtResource("1_xpvju")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkcge"]
+atlas = ExtResource("1_xpvju")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s8vh1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46mnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwua5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkcge")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_gcs81"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slot/Icon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slot/Icon:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Slot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, 6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Slot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Slot/Icon:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ercbx"]
+resource_name = "gain"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(-5, 6), Vector2(6, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_stwtc"]
+resource_name = "lose"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slot/Icon:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slot/Icon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Fall"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_muqd2"]
+resource_name = "normal"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slot/Icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slot/Icon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.4, 0.5, 0.7, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.0872665, -0.0872665, 0.0872665, 0.0872665, 0.0872665, -0.0872665]
+}
+
+[sub_resource type="Animation" id="Animation_pbn85"]
+resource_name = "pinched"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slot/Icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slot/Icon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.233333, 0.483333, 0.733333, 0.983333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533, -0.174533, 0.174533]
+}
+
+[sub_resource type="Animation" id="Animation_6gkcs"]
+resource_name = "regain"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slot/Icon:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.8, 1.2), Vector2(1.1, 0.9), Vector2(1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slot/Icon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Return"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_76u2l"]
+resource_name = "shelled"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slot/Icon:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0872665, -0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slot/Icon:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_ld8ky"]
+resource_name = "pinchedEnter"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slot/Icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slot/Icon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0.7, 1.4), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mja0f"]
+_data = {
+"RESET": SubResource("Animation_gcs81"),
+"gain": SubResource("Animation_ercbx"),
+"lose": SubResource("Animation_stwtc"),
+"normal": SubResource("Animation_muqd2"),
+"pinched": SubResource("Animation_pbn85"),
+"pinchedEnter": SubResource("Animation_ld8ky"),
+"regain": SubResource("Animation_6gkcs"),
+"shelled": SubResource("Animation_76u2l")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oumj3"]
+animation = &"lose"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3g6ld"]
+animation = &"normal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cp0xk"]
+animation = &"pinched"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lmrdl"]
+animation = &"pinchedEnter"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5d6ua"]
+animation = &"regain"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1vy8i"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2vdwp"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bnrly"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7ivor"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0l21f"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fim1v"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5slcx"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ux6ol"]
+states/lose/node = SubResource("AnimationNodeAnimation_oumj3")
+states/lose/position = Vector2(399, 69)
+states/normal/node = SubResource("AnimationNodeAnimation_3g6ld")
+states/normal/position = Vector2(548, 160)
+states/pinched/node = SubResource("AnimationNodeAnimation_cp0xk")
+states/pinched/position = Vector2(733, 160)
+states/pinchedEnter/node = SubResource("AnimationNodeAnimation_lmrdl")
+states/pinchedEnter/position = Vector2(733, 69)
+states/regain/node = SubResource("AnimationNodeAnimation_5d6ua")
+states/regain/position = Vector2(548, 69)
+transitions = ["lose", "regain", SubResource("AnimationNodeStateMachineTransition_1vy8i"), "regain", "normal", SubResource("AnimationNodeStateMachineTransition_2vdwp"), "normal", "lose", SubResource("AnimationNodeStateMachineTransition_bnrly"), "normal", "pinchedEnter", SubResource("AnimationNodeStateMachineTransition_7ivor"), "pinchedEnter", "pinched", SubResource("AnimationNodeStateMachineTransition_0l21f"), "pinched", "normal", SubResource("AnimationNodeStateMachineTransition_fim1v"), "Start", "normal", SubResource("AnimationNodeStateMachineTransition_5slcx")]
+
+[node name="HealthIndicator" type="Control"]
+custom_minimum_size = Vector2(11, 11)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_62p4e")
+
+[node name="Slot" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(6, 6)
+texture = ExtResource("1_xpvju")
+region_enabled = true
+region_rect = Rect2(30, 0, 10, 10)
+
+[node name="Icon" type="AnimatedSprite2D" parent="Slot"]
+sprite_frames = SubResource("SpriteFrames_s8vh1")
+script = ExtResource("3_einld")
+
+[node name="SlotAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mja0f")
+}
+autoplay = "gain"
+
+[node name="IconAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mja0f")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_ux6ol")
+anim_player = NodePath("../IconAnim")

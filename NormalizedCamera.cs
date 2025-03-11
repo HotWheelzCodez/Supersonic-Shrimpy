@@ -70,7 +70,7 @@ public partial class NormalizedCamera : Camera2D
 			tween.TweenProperty(this, "limit_bottom", center.Y + unitsV / 2, 0.5);
 		}
 		tween.TweenProperty(room, "modulate", Colors.White, 0.5);
-		tween.TweenProperty(currentRoom, "modulate", new Color(0, 0, 0, 0), 0.5);
+		tween.TweenProperty(currentRoom, "modulate", new Color(0f, 0f, 0f, 0f), 0.5);
 		var finish = tween.Chain();
 		finish.TweenCallback(Callable.From(() => room.Start()));
 		finish.TweenCallback(Callable.From(delegate {Game.instance.player.ProcessMode = ProcessModeEnum.Inherit;}));
