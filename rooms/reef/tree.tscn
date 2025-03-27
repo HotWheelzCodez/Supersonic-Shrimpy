@@ -6,6 +6,7 @@
 
 [node name="Tree" type="Node2D"]
 script = ExtResource("1_n7x74")
+doors = Array[bool]([true, false, true, true])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

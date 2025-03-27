@@ -265,6 +265,7 @@ sources/0 = SubResource("TileSetAtlasSource_285xp")
 y_sort_enabled = true
 script = ExtResource("1_6uc67")
 RoomSize = Vector2i(3, 3)
+doors = Array[bool]([true, false, true, false, true, false, true, false, true, true, false, true])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

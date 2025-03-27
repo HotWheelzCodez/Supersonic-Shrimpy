@@ -46,6 +46,7 @@ public partial class RoomManager {
 	}
 
 	public List<Room> Layout(Room origin) {
+		GD.Print("Starting layout");
 		var random = new Random();
 		var rooms = new List<Room>();
 		var occupied = new Dictionary<Vector2I, Room>();
@@ -152,6 +153,8 @@ public partial class RoomManager {
 
 			parent.AddChild(room);
 		}
+
+		GD.Print("finished layout");
 		return rooms;
 	}
 

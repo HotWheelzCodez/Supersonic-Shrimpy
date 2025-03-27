@@ -6,7 +6,7 @@
 
 [node name="Fork" type="Node2D"]
 script = ExtResource("1_k7tgx")
-doors = [false, true, true, true]
+doors = Array[bool]([false, true, true, true])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

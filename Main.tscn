@@ -60,6 +60,7 @@ unitsV = 216
 currentRoom = NodePath("../Spawn")
 
 [node name="ColorRect" type="Sprite2D" parent="Camera2D"]
+visible = false
 z_index = 999
 texture_repeat = 2
 material = SubResource("ShaderMaterial_oeg4x")
@@ -68,6 +69,7 @@ texture = SubResource("NoiseTexture2D_24p2d")
 
 [node name="Shockwave" type="Sprite2D" parent="Camera2D"]
 unique_name_in_owner = true
+visible = false
 z_index = 999
 texture_repeat = 2
 material = SubResource("ShaderMaterial_ck1gw")
@@ -165,7 +167,6 @@ one_shot = true
 
 [node name="Spawn" parent="." instance=ExtResource("7_477c5")]
 position = Vector2(-256, 0)
-doors = Array[bool]([])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_2bna7")

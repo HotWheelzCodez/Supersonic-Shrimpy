@@ -6,6 +6,7 @@
 
 [node name="HCorridor" type="Node2D"]
 script = ExtResource("1_dbslm")
+doors = Array[bool]([false, false, true, true])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
