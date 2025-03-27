@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=4 uid="uid://bqqj7uepbhcp1"]
 
-[ext_resource type="Script" path="res://core/Room.cs" id="1_k7tgx"]
+[ext_resource type="Script" uid="uid://dfctl4r7idv7s" path="res://core/Room.cs" id="1_k7tgx"]
 [ext_resource type="TileSet" uid="uid://b2ae6jfmxoxq4" path="res://tiles/coral.tres" id="2_eibbh"]
 [ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://enemies/crab/Crab.tscn" id="3_n2yn6"]
 

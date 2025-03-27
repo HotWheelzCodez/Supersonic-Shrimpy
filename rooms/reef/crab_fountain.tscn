@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=4 uid="uid://26lhh6ywk1w"]
 
-[ext_resource type="Script" path="res://core/Room.cs" id="1_t7ia2"]
+[ext_resource type="Script" uid="uid://dfctl4r7idv7s" path="res://core/Room.cs" id="1_t7ia2"]
 [ext_resource type="TileSet" uid="uid://b2ae6jfmxoxq4" path="res://tiles/coral.tres" id="2_y2f7r"]
-[ext_resource type="Script" path="res://EnemySpawner.cs" id="3_eiq84"]
+[ext_resource type="Script" uid="uid://epu8h7vvhqdr" path="res://EnemySpawner.cs" id="3_eiq84"]
 [ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://enemies/crab/Crab.tscn" id="4_sxi6j"]
 
 [node name="CrabFountain" type="Node2D"]

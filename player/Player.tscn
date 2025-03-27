@@ -1,10 +1,10 @@
 [gd_scene load_steps=32 format=3 uid="uid://bkfmp6gv66g5n"]
 
-[ext_resource type="Script" path="res://player/Player.cs" id="1_s7fyg"]
+[ext_resource type="Script" uid="uid://cv7nqs52q32lf" path="res://player/Player.cs" id="1_s7fyg"]
 [ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player/player.png" id="2_3dm0c"]
-[ext_resource type="Script" path="res://player/Segment.cs" id="3_tlvuf"]
+[ext_resource type="Script" uid="uid://q786da1ttb6s" path="res://player/Segment.cs" id="3_tlvuf"]
 [ext_resource type="AudioStream" uid="uid://dwaovk2y3addt" path="res://player/attack.wav" id="4_5332o"]
-[ext_resource type="Script" path="res://player/Claw.cs" id="4_fcecb"]
+[ext_resource type="Script" uid="uid://e15spfheibqf" path="res://player/Claw.cs" id="4_fcecb"]
 [ext_resource type="AudioStream" uid="uid://buwlsgy05r5fy" path="res://player/hurt.wav" id="5_1je5h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_le12y"]
@@ -877,13 +877,13 @@ tracks/8/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lis4o"]
 _data = {
-"RESET": SubResource("Animation_2yote"),
-"down": SubResource("Animation_s73vq"),
-"left": SubResource("Animation_155y2"),
-"left_up": SubResource("Animation_lj2rh"),
-"right": SubResource("Animation_heegw"),
-"right_up": SubResource("Animation_m2nbh"),
-"up": SubResource("Animation_fjpmm")
+&"RESET": SubResource("Animation_2yote"),
+&"down": SubResource("Animation_s73vq"),
+&"left": SubResource("Animation_155y2"),
+&"left_up": SubResource("Animation_lj2rh"),
+&"right": SubResource("Animation_heegw"),
+&"right_up": SubResource("Animation_m2nbh"),
+&"up": SubResource("Animation_fjpmm")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -950,7 +950,7 @@ shape = SubResource("RectangleShape2D_6uhxj")
 
 [node name="Rotations" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_lis4o")
+&"": SubResource("AnimationLibrary_lis4o")
 }
 
 [node name="PunchSound" type="AudioStreamPlayer2D" parent="."]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://bdte40ee6g6md"]
 
-[ext_resource type="Script" path="res://core/Room.cs" id="1_sxutt"]
+[ext_resource type="Script" uid="uid://dfctl4r7idv7s" path="res://core/Room.cs" id="1_sxutt"]
 [ext_resource type="TileSet" uid="uid://b2ae6jfmxoxq4" path="res://tiles/coral.tres" id="2_jggqu"]
 [ext_resource type="PackedScene" uid="uid://cwbx4mm6flnka" path="res://items/minerals/hornfels/Hornfels.tscn" id="3_17h01"]
 [ext_resource type="PackedScene" uid="uid://b68ynv5q1wqvh" path="res://items/minerals/itacolumite/Itacolumite.tscn" id="4_5rkbo"]
@@ -8,7 +8,6 @@
 
 [node name="Spawn" type="Node2D"]
 script = ExtResource("1_sxutt")
-doors = [null, null, null, true]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
