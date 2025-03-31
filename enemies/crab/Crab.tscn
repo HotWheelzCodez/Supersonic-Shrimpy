@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://01sseyhptr6v"]
 
-[ext_resource type="Script" path="res://enemies/crab/Crab.cs" id="1_biw12"]
+[ext_resource type="Script" uid="uid://jpr72ovrcxaa" path="res://enemies/crab/Crab.cs" id="1_biw12"]
 [ext_resource type="Texture2D" uid="uid://dxsbit0x10d0k" path="res://enemies/crab/crab.png" id="2_6ihe3"]
 [ext_resource type="AudioStream" uid="uid://di4p5jkupcgle" path="res://enemies/crab/hurt.wav" id="3_64bjb"]
 [ext_resource type="AudioStream" uid="uid://d5bw3mpiplxl" path="res://enemies/crab/die.wav" id="4_akhhs"]
@@ -253,11 +253,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0orge"]
 _data = {
-"RESET": SubResource("Animation_bte3r"),
-"attack": SubResource("Animation_oacmr"),
-"die": SubResource("Animation_6bhnw"),
-"hurt": SubResource("Animation_kkli3"),
-"walk": SubResource("Animation_2svw1")
+&"RESET": SubResource("Animation_bte3r"),
+&"attack": SubResource("Animation_oacmr"),
+&"die": SubResource("Animation_6bhnw"),
+&"hurt": SubResource("Animation_kkli3"),
+&"walk": SubResource("Animation_2svw1")
 }
 
 [node name="Crab" type="CharacterBody2D"]
@@ -292,7 +292,7 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_0orge")
+&"": SubResource("AnimationLibrary_0orge")
 }
 
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="."]

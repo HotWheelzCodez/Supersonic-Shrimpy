@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://bdhdsa0ih4yvv"]
 
-[ext_resource type="Script" path="res://core/Room.cs" id="1_6uc67"]
+[ext_resource type="Script" uid="uid://dfctl4r7idv7s" path="res://core/Room.cs" id="1_6uc67"]
 [ext_resource type="Texture2D" uid="uid://dombt1hfgye1g" path="res://tiles/placeholder.png" id="2_b2vis"]
 [ext_resource type="PackedScene" uid="uid://sdc7ke2ryqpr" path="res://enemies/spinefish/Spinefish.tscn" id="3_mm1jg"]
 [ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://enemies/crab/Crab.tscn" id="4_rcuvg"]
@@ -265,7 +265,7 @@ sources/0 = SubResource("TileSetAtlasSource_285xp")
 y_sort_enabled = true
 script = ExtResource("1_6uc67")
 RoomSize = Vector2i(3, 3)
-doors = [true, null, true, null, true, null, true, null, true, true, null, true]
+doors = Array[bool]([true, false, true, false, true, false, true, false, true, true, false, true])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

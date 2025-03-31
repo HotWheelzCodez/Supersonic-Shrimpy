@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=4 uid="uid://cudiq112nqxew"]
 
-[ext_resource type="Script" path="res://core/Room.cs" id="1_j61at"]
+[ext_resource type="Script" uid="uid://dfctl4r7idv7s" path="res://core/Room.cs" id="1_j61at"]
 [ext_resource type="TileSet" uid="uid://b2ae6jfmxoxq4" path="res://tiles/coral.tres" id="2_e0bjr"]
-[ext_resource type="Script" path="res://EnemySpawner.cs" id="3_2yvuk"]
+[ext_resource type="Script" uid="uid://epu8h7vvhqdr" path="res://EnemySpawner.cs" id="3_2yvuk"]
 [ext_resource type="PackedScene" uid="uid://sdc7ke2ryqpr" path="res://enemies/spinefish/Spinefish.tscn" id="4_300qf"]
 
 [node name="SpinefishFountain" type="Node2D"]
 script = ExtResource("1_j61at")
 RoomSize = Vector2i(1, 2)
-doors = [false, null, true, false, true, null]
+doors = Array[bool]([false, false, true, false, true, false])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1

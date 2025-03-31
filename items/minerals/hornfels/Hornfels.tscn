@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cwbx4mm6flnka"]
 
-[ext_resource type="Script" path="res://items/minerals/hornfels/Hornfels.cs" id="1_hraxr"]
+[ext_resource type="Script" uid="uid://dstmxi2pbuojl" path="res://items/minerals/hornfels/Hornfels.cs" id="1_hraxr"]
 [ext_resource type="Texture2D" uid="uid://k16foamqfuc" path="res://icon.svg" id="2_do27g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pty7l"]

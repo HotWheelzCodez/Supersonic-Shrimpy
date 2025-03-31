@@ -54,6 +54,7 @@ public partial class RoomManager {
 	}
 
 	public List<Room> Layout(Room origin) {
+		GD.Print("Starting layout");
 		var random = new Random();
 		var parent = origin.GetParent();
 
@@ -157,6 +158,8 @@ public partial class RoomManager {
 
 			parent.AddChild(room);
 		}
+
+		GD.Print("finished layout");
 		return rooms;
 	}
 

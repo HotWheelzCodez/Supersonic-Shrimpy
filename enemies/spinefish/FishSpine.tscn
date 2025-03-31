@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c4s42ndsdcrfj"]
 
-[ext_resource type="Script" path="res://enemies/spinefish/FishSpine.cs" id="1_6imty"]
+[ext_resource type="Script" uid="uid://blbsj2evy2bak" path="res://enemies/spinefish/FishSpine.cs" id="1_6imty"]
 [ext_resource type="Texture2D" uid="uid://dm1dphvmbn4hm" path="res://enemies/spinefish/fishspine.png" id="2_7ficq"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_nkks7"]

@@ -1,12 +1,12 @@
 [gd_scene load_steps=18 format=4 uid="uid://dbde0mmbs7yg5"]
 
-[ext_resource type="Script" path="res://Game.cs" id="1_mealk"]
-[ext_resource type="Shader" path="res://water.gdshader" id="3_8w0yx"]
-[ext_resource type="Script" path="res://NormalizedCamera.cs" id="3_n8r31"]
+[ext_resource type="Script" uid="uid://b75xvyy24pn2a" path="res://Game.cs" id="1_mealk"]
+[ext_resource type="Shader" uid="uid://dpfet2i52louo" path="res://water.gdshader" id="3_8w0yx"]
+[ext_resource type="Script" uid="uid://drrpbslu1qm4p" path="res://NormalizedCamera.cs" id="3_n8r31"]
 [ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://player/Player.tscn" id="4_h42pe"]
-[ext_resource type="Shader" path="res://shockwave.gdshader" id="5_vbwl1"]
+[ext_resource type="Shader" uid="uid://bxr8gnf64cfu0" path="res://shockwave.gdshader" id="5_vbwl1"]
 [ext_resource type="Texture2D" uid="uid://xldj1q57pmsu" path="res://items/coin.png" id="6_o41u1"]
-[ext_resource type="Script" path="res://Map.cs" id="7_10li1"]
+[ext_resource type="Script" uid="uid://nt74tqu04k71" path="res://Map.cs" id="7_10li1"]
 [ext_resource type="PackedScene" uid="uid://bdte40ee6g6md" path="res://rooms/spawn.tscn" id="7_477c5"]
 [ext_resource type="FontFile" uid="uid://diofk8ltw0r6r" path="res://skewpixel.ttf" id="7_s6owq"]
 [ext_resource type="PackedScene" uid="uid://b85bwaj1wyc1u" path="res://items/coin.tscn" id="8_e73tn"]
@@ -21,9 +21,9 @@ noise = SubResource("FastNoiseLite_6svti")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oeg4x"]
 shader = ExtResource("3_8w0yx")
+shader_parameter/texs = Array[Texture2D]([SubResource("NoiseTexture2D_372gt")])
 shader_parameter/speeds = PackedVector4Array(16, 16, 1, 3, 8, 6, 0.7, 1, 6, 8, 0.7, 1)
 shader_parameter/texCount = 3
-shader_parameter/texs = Array[Texture2D]([SubResource("NoiseTexture2D_372gt")])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_er0aj"]
 fractal_type = 2
@@ -60,6 +60,7 @@ unitsV = 216
 currentRoom = NodePath("../Spawn")
 
 [node name="ColorRect" type="Sprite2D" parent="Camera2D"]
+visible = false
 z_index = 999
 texture_repeat = 2
 material = SubResource("ShaderMaterial_oeg4x")
@@ -68,6 +69,7 @@ texture = SubResource("NoiseTexture2D_24p2d")
 
 [node name="Shockwave" type="Sprite2D" parent="Camera2D"]
 unique_name_in_owner = true
+visible = false
 z_index = 999
 texture_repeat = 2
 material = SubResource("ShaderMaterial_ck1gw")

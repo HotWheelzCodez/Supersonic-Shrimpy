@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://7iskxd0xumv0"]
 
-[ext_resource type="Script" path="res://items/minerals/natrolite/Natrolite.cs" id="1_8o5ut"]
+[ext_resource type="Script" uid="uid://dnsa4cddcvgql" path="res://items/minerals/natrolite/Natrolite.cs" id="1_8o5ut"]
 [ext_resource type="Texture2D" uid="uid://k16foamqfuc" path="res://icon.svg" id="2_sacnk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pty7l"]

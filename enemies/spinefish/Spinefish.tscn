@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://sdc7ke2ryqpr"]
 
-[ext_resource type="Script" path="res://enemies/spinefish/Spinefish.cs" id="1_ksbgu"]
+[ext_resource type="Script" uid="uid://bjwty068eif8i" path="res://enemies/spinefish/Spinefish.cs" id="1_ksbgu"]
 [ext_resource type="PackedScene" uid="uid://c4s42ndsdcrfj" path="res://enemies/spinefish/FishSpine.tscn" id="2_1l5jm"]
 [ext_resource type="Texture2D" uid="uid://q0t6sos1ll07" path="res://enemies/spinefish/spinefish.png" id="3_ekchp"]
 [ext_resource type="AudioStream" uid="uid://x4jjaam6d5wp" path="res://enemies/spinefish/hurt.wav" id="4_kfrgp"]
@@ -189,11 +189,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q6tw6"]
 _data = {
-"RESET": SubResource("Animation_55gw5"),
-"die": SubResource("Animation_u3kf2"),
-"hurt": SubResource("Animation_d0j65"),
-"shoot": SubResource("Animation_iwx7f"),
-"walk": SubResource("Animation_3sifl")
+&"RESET": SubResource("Animation_55gw5"),
+&"die": SubResource("Animation_u3kf2"),
+&"hurt": SubResource("Animation_d0j65"),
+&"shoot": SubResource("Animation_iwx7f"),
+&"walk": SubResource("Animation_3sifl")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2o3qd"]
@@ -259,7 +259,7 @@ shape = SubResource("CircleShape2D_c5nlq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_q6tw6")
+&"": SubResource("AnimationLibrary_q6tw6")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

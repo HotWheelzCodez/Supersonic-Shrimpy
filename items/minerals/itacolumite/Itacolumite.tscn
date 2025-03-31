@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b68ynv5q1wqvh"]
 
-[ext_resource type="Script" path="res://items/minerals/itacolumite/Itacolumite.cs" id="1_x27py"]
+[ext_resource type="Script" uid="uid://q4msblpjg7ij" path="res://items/minerals/itacolumite/Itacolumite.cs" id="1_x27py"]
 [ext_resource type="Texture2D" uid="uid://k16foamqfuc" path="res://icon.svg" id="2_d1sgx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pty7l"]
