@@ -14,6 +14,10 @@ public partial class RoomManager {
 	private PackedScene doorH;
 	private PackedScene doorV;
 
+	private List<Room> rooms = new();
+	private Dictionary<Vector2I, Room> occupied = new();
+	private Queue<Room> frontier = new();
+
 	public RoomManager(string roomsDirectory, int roomCount) {
 		doorH = ResourceLoader.Load<PackedScene>("res://rooms/door_h.tscn");
 		doorV = ResourceLoader.Load<PackedScene>("res://rooms/door_v.tscn");
@@ -45,11 +49,12 @@ public partial class RoomManager {
 		}
 	}
 
+	public void AddSpecialRoom(PackedScene scene) {
+
+	}
+
 	public List<Room> Layout(Room origin) {
 		var random = new Random();
-		var rooms = new List<Room>();
-		var occupied = new Dictionary<Vector2I, Room>();
-		var frontier = new Queue<Room>();
 		var parent = origin.GetParent();
 
 		var oPos = origin.RoomPosition;
