@@ -1,40 +1,36 @@
-[gd_scene load_steps=27 format=3 uid="uid://01sseyhptr6v"]
+[gd_scene load_steps=26 format=3 uid="uid://01sseyhptr6v"]
 
 [ext_resource type="Script" uid="uid://jpr72ovrcxaa" path="res://enemies/crab/Crab.cs" id="1_biw12"]
-[ext_resource type="Texture2D" uid="uid://dxsbit0x10d0k" path="res://enemies/crab/crab.png" id="2_6ihe3"]
+[ext_resource type="Texture2D" uid="uid://bqeowviday83p" path="res://enemies/crab/crayber.png" id="2_31njt"]
 [ext_resource type="AudioStream" uid="uid://di4p5jkupcgle" path="res://enemies/crab/hurt.wav" id="3_64bjb"]
 [ext_resource type="AudioStream" uid="uid://d5bw3mpiplxl" path="res://enemies/crab/die.wav" id="4_akhhs"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tgs3r"]
-atlas = ExtResource("2_6ihe3")
-region = Rect2(0, 0, 24, 24)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j52f"]
+atlas = ExtResource("2_31njt")
+region = Rect2(8, 8, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1geq4"]
-atlas = ExtResource("2_6ihe3")
-region = Rect2(24, 0, 24, 24)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l47l0"]
+atlas = ExtResource("2_31njt")
+region = Rect2(40, 8, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_17kkm"]
-atlas = ExtResource("2_6ihe3")
-region = Rect2(24, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i8iw4"]
-atlas = ExtResource("2_6ihe3")
-region = Rect2(0, 24, 24, 24)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v8wu"]
+atlas = ExtResource("2_31njt")
+region = Rect2(8, 40, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qnj5g"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tgs3r")
+"texture": SubResource("AtlasTexture_7j52f")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1geq4")
+"texture": SubResource("AtlasTexture_l47l0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_17kkm")
+"texture": SubResource("AtlasTexture_8v8wu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i8iw4")
+"texture": SubResource("AtlasTexture_8v8wu")
 }],
 "loop": true,
 "name": &"default",

@@ -63,7 +63,11 @@ public partial class Game : Node2D
 		shockwaveShader = (ShaderMaterial)shockwaveNode.Material;
 
 		RoomManager roomManager = new RoomManager(roomsDirectory, roomCount);
-		map.GenMap(roomManager.Layout(startingRoom));
+		roomManager.Layout(startingRoom);
+		var room = roomManager.AddSpecialRoom(GD.Load<PackedScene>("rooms/reef/special/treasure.tscn"), new(0, -1));
+		map.GenMap(roomManager.Finalize(this));
+		GD.Print(room?.RoomPosition);
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

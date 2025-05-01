@@ -20,6 +20,7 @@ sealed class NodeAttribute : System.Attribute
 	}
 
 	private static void AssignNodes(Node node) {
+		GD.Print(node.Name);
 		var fields =
 			from field in node.GetType().GetFields()
 			from attr in field.GetCustomAttributes(true)
@@ -29,6 +30,10 @@ sealed class NodeAttribute : System.Attribute
 		foreach ((var field, var attr) in fields) {
 			var method = methodGetNode.MakeGenericMethod(field.FieldType);
 			var v = method.Invoke(node, new object[]{attr.path});
+			GD.Print(v, node.Name);
+			if (v == null) {
+				GD.PushWarning($"could not find {field.FieldType.Name} at path {attr.path} for field {field.Name} of {node}");
+			}
 			field.SetValue(node, v);
 		}
 	}

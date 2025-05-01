@@ -179,7 +179,7 @@ sprite_frames = SubResource("SpriteFrames_7qd7x")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_0xcde")
+&"": SubResource("AnimationLibrary_0xcde")
 }
 autoplay = "bounce"
 

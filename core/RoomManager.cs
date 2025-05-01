@@ -18,6 +18,8 @@ public partial class RoomManager {
 	private Dictionary<Vector2I, Room> occupied = new();
 	private Queue<Room> frontier = new();
 
+	private Random random = new Random();
+
 	public RoomManager(string roomsDirectory, int roomCount) {
 		doorH = ResourceLoader.Load<PackedScene>("res://rooms/door_h.tscn");
 		doorV = ResourceLoader.Load<PackedScene>("res://rooms/door_v.tscn");
@@ -49,22 +51,78 @@ public partial class RoomManager {
 		}
 	}
 
-	public void AddSpecialRoom(PackedScene scene) {
+	public Room AddSpecialRoom(PackedScene scene, Vector2 dir) {
+		var node = (Room)scene.Instantiate();
+		dir *= 1000000;
+		var center = Vector2.Zero;
+		var c = 0;
+		foreach (var r in rooms) {
+			center += r.RoomPosition + r.RoomSize.Float() / 2f;
+			c += r.RoomSize.X * r.RoomSize.Y;
+		}
+		dir += center / c;
 
+		rooms.Sort((a, b) =>
+			(int)(
+			(a.RoomPosition + a.RoomSize.Float() / 2f - dir).Length() -
+			(b.RoomPosition + b.RoomSize.Float() / 2f - dir).Length() )
+		);
+
+		foreach (var room in rooms) {
+			if (AddRoomAdj(room, node)) return node;
+		}
+		return null;
 	}
 
-	public List<Room> Layout(Room origin) {
+	public bool AddRoomAdj(Room room, Room next) {
+		GD.Print($"Building off of {room}");
+		for (int i = 0; i < room.doors.Count; i++) {
+			if (!room.doors[i]) continue;
+			(var side, var index) = room.GetDoorSideIndex(i);
+			GD.Print($"  Trying {side} door #{index}");
+			GD.Print($"    Trying {next}");
+			var doors = next.GetDoorsOnSide(side.Reverse());
+			doors.Shuffle(random);
+			foreach (var nextIndex in doors) {
+				GD.Print($"      Trying matching door #{nextIndex}");
+				var pos = room.RoomPosition + room.GetDoorRoomOffset(side, index) - next.GetDoorRoomOffset(side.Reverse(), nextIndex);
+				var fits = true;
+				for (int y = pos.Y; y < pos.Y + next.RoomSize.Y; y++) {
+					for (int x = pos.X; x < pos.X + next.RoomSize.X; x++) {
+						if (occupied.ContainsKey(new (x, y))) {
+							GD.Print($"        Room intersects existing room at ({x}, {y})");
+							fits = false;
+						}
+					}
+				}
+				if (fits) {
+					GD.Print("        Room fits");
+					for (int y = pos.Y; y < pos.Y + next.RoomSize.Y; y++) {
+						for (int x = pos.X; x < pos.X + next.RoomSize.X; x++) {
+							occupied[new (x, y)] = next;
+						}
+					}
+					frontier.Enqueue(next);
+					next.RoomPosition = pos;
+					rooms.Add(next);
+					GD.Print(next);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public void Layout(Room origin) {
 		GD.Print("Starting layout");
-		var random = new Random();
-		var parent = origin.GetParent();
 
 		var oPos = origin.RoomPosition;
 		for (int y = oPos.Y; y < oPos.Y + origin.RoomSize.Y; y++) {
 			for (int x = oPos.X; x < oPos.X + origin.RoomSize.X; x++) {
 				occupied[new (x, y)] = origin;
-				frontier.Enqueue(origin);
 			}
 		}
+		frontier.Enqueue(origin);
 		var debug = new char[45, 15];
 
 		while (true) {
@@ -111,17 +169,8 @@ public partial class RoomManager {
 						}
 					}
 				}
-				AddedRoom:
-				for (int y = -7; y < 8; y++) {
-					var sb = new StringBuilder();
-					for (int x = -7; x < 8; x++) {
-						char c = occupied.ContainsKey(new (x, y)) ? chars[(rooms.IndexOf(occupied[new (x, y)]) + chars.Length) % chars.Length] : ' ';
-						sb.Append(c);
-						sb.Append(c);
-						sb.Append(c);
-					}
-					//GD.Print(sb);
-				}
+			AddedRoom:
+				continue;
 			}
 		}
 		GD.Print("-- Queue Empty --");
@@ -130,7 +179,11 @@ public partial class RoomManager {
 
 		GD.Print($"Generated {rooms.Count} rooms");
 
-		// TODO: Add controlled randamization to the room generation
+	}
+
+	public List<Room> Finalize(Node parent) {
+
+		// TODO: Add controlled randomization to the room generation
 		foreach (var room in rooms) {
 
 			for (int i = 0; i < room.doors.Count; i++) {

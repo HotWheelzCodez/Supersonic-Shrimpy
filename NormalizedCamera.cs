@@ -29,7 +29,7 @@ public partial class NormalizedCamera : Camera2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
-		var size = GetTree().Root.Size;
+		var size = new Vector2I(1280, 720);
 		var zh = (float)size.X / unitsH;
 		var zv = (float)size.Y / unitsV;
 		Zoom = (mode) switch {

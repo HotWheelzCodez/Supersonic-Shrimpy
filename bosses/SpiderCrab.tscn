@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://d18k2marg6qik"]
+
+[ext_resource type="Script" uid="uid://dls51yxt7avfo" path="res://bosses/SpiderCrab.cs" id="1_1jnbo"]
+[ext_resource type="Script" uid="uid://cjv5fl6n2fydu" path="res://bosses/SpiderCrabClaw.cs" id="1_8evvd"]
+[ext_resource type="Texture2D" uid="uid://corvvwi0ae8pg" path="res://bosses/spider_crab_claw_shadow.png" id="2_1jnbo"]
+[ext_resource type="Texture2D" uid="uid://c87qjw4orvvab" path="res://bosses/spider_crab_claw.png" id="3_0fetp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r60q5"]
+atlas = ExtResource("3_0fetp")
+region = Rect2(0, 0, 64, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o31op"]
+atlas = ExtResource("3_0fetp")
+region = Rect2(64, 0, 64, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4oso"]
+atlas = ExtResource("3_0fetp")
+region = Rect2(128, 0, 64, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxjxc"]
+atlas = ExtResource("3_0fetp")
+region = Rect2(192, 0, 64, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5cil0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r60q5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o31op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4oso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxjxc")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ivrbq"]
+size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hkmn"]
+size = Vector2(24, 24)
+
+[node name="SpiderCrab" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_1jnbo")
+
+[node name="Claw2" type="CharacterBody2D" parent="." node_paths=PackedStringArray("other")]
+position = Vector2(-64, 96)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_8evvd")
+other = NodePath("../Claw")
+anchor = Vector2(-192, -64)
+
+[node name="Shadow" type="Sprite2D" parent="Claw2"]
+texture = ExtResource("2_1jnbo")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Claw2"]
+z_index = 3
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_5cil0")
+frame = 3
+frame_progress = 1.0
+offset = Vector2(-5, -69)
+flip_h = true
+
+[node name="AttackBox" type="Area2D" parent="Claw2"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Claw2/AttackBox"]
+shape = SubResource("RectangleShape2D_ivrbq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Claw2"]
+shape = SubResource("RectangleShape2D_2hkmn")
+
+[node name="Claw" type="CharacterBody2D" parent="." node_paths=PackedStringArray("other")]
+position = Vector2(72, 96)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_8evvd")
+other = NodePath("../Claw2")
+anchor = Vector2(192, -64)
+
+[node name="Shadow" type="Sprite2D" parent="Claw"]
+texture = ExtResource("2_1jnbo")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Claw"]
+z_index = 3
+sprite_frames = SubResource("SpriteFrames_5cil0")
+frame = 3
+frame_progress = 1.0
+offset = Vector2(5, -69)
+
+[node name="AttackBox" type="Area2D" parent="Claw"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Claw/AttackBox"]
+shape = SubResource("RectangleShape2D_ivrbq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Claw"]
+shape = SubResource("RectangleShape2D_2hkmn")

@@ -13,7 +13,17 @@ config_version=5
 config/name="Supersonic-Shrimpy"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+run/max_fps=30
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/mode=3
+window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [dotnet]
 
