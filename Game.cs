@@ -49,6 +49,8 @@ public partial class Game : Node2D
 	public Label roomDebug;
 	[Node("%PosDebug")]
 	public Label posDebug;
+	[Node("%GameOver")]
+	public ColorRect gameOver;
 
 	public static readonly Color bg = new Color(0, 0.05f, 0.1f);
 
@@ -99,6 +101,8 @@ public partial class Game : Node2D
 		_score = (int)Mathf.MoveToward(_score, Score, (float)delta * 1000);
 		scoreLabel.Text = _score.ToString();
 		posDebug.Text = player.GlobalPosition.ToString();
+		gameOver.Visible = player.Health <= 0;
+
 	}
 
 	private void _OnTimerTimeout() {

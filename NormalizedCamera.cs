@@ -37,7 +37,7 @@ public partial class NormalizedCamera : Camera2D
 			Mode.Fit => new(Mathf.Min(zh, zv), Mathf.Min(zh, zv)),
 			Mode.Stretch => new(zh, zv),
 		};
-		GlobalPosition = Game.instance.player.GlobalPosition;
+		GlobalPosition = Game.instance.player.GlobalPosition.Clamp(currentRoom.GlobalPosition + Game.roomSize / 2, currentRoom.GlobalPosition + currentRoom.PixelSize - Game.roomSize / 2);
 	}
 
 	public void TransitionToRoom(Room room) {
@@ -49,26 +49,6 @@ public partial class NormalizedCamera : Camera2D
 
 		var pos = GetScreenCenterPosition();
 
-		LimitLeft   = (int)(pos.X - unitsH / 2);
-		LimitRight  = (int)(pos.X + unitsH / 2);
-		LimitTop    = (int)(pos.Y - unitsV / 2);
-		LimitBottom = (int)(pos.Y + unitsV / 2);
-
-		var center = room.Position + room.PixelSize / 2;
-		if (room.PixelSize.X > unitsH) {
-			tween.TweenProperty(this, "limit_left", room.Left, 0.5);
-			tween.TweenProperty(this, "limit_right", room.Right, 0.5);
-		} else {
-			tween.TweenProperty(this, "limit_left", center.X - unitsH / 2, 0.5);
-			tween.TweenProperty(this, "limit_right", center.X + unitsH / 2, 0.5);
-		}
-		if (room.PixelSize.Y > unitsV) {
-			tween.TweenProperty(this, "limit_top", room.Top, 0.5);
-			tween.TweenProperty(this, "limit_bottom", room.Bottom, 0.5);
-		} else {
-			tween.TweenProperty(this, "limit_top", center.Y - unitsV / 2, 0.5);
-			tween.TweenProperty(this, "limit_bottom", center.Y + unitsV / 2, 0.5);
-		}
 		tween.TweenProperty(room, "modulate", Colors.White, 0.5);
 		tween.TweenProperty(currentRoom, "modulate", new Color(0f, 0f, 0f, 0f), 0.5);
 		var finish = tween.Chain();

@@ -1,9 +1,95 @@
-[gd_scene load_steps=12 format=3 uid="uid://d18k2marg6qik"]
+[gd_scene load_steps=59 format=4 uid="uid://d18k2marg6qik"]
 
 [ext_resource type="Script" uid="uid://dls51yxt7avfo" path="res://bosses/SpiderCrab.cs" id="1_1jnbo"]
 [ext_resource type="Script" uid="uid://cjv5fl6n2fydu" path="res://bosses/SpiderCrabClaw.cs" id="1_8evvd"]
-[ext_resource type="Texture2D" uid="uid://corvvwi0ae8pg" path="res://bosses/spider_crab_claw_shadow.png" id="2_1jnbo"]
 [ext_resource type="Texture2D" uid="uid://c87qjw4orvvab" path="res://bosses/spider_crab_claw.png" id="3_0fetp"]
+[ext_resource type="Shader" uid="uid://5u43cllsg0af" path="res://shripcolors.gdshader" id="3_r60q5"]
+[ext_resource type="Texture2D" uid="uid://defvnqugi30rf" path="res://ring.png" id="4_o31op"]
+[ext_resource type="Shader" uid="uid://bopv303i4jciv" path="res://bosses/clip.gdshader" id="5_r60q5"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_er0aj"]
+fractal_type = 2
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x4oso"]
+seamless = true
+noise = SubResource("FastNoiseLite_er0aj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dxjxc"]
+shader = ExtResource("3_r60q5")
+shader_parameter/texs = Array[Texture2D]([SubResource("NoiseTexture2D_x4oso")])
+shader_parameter/speeds = PackedVector4Array(100, 100, 1, 1, -100, -100, 1, 1)
+shader_parameter/texCount = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kklip"]
+atlas = ExtResource("4_o31op")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a5yc"]
+atlas = ExtResource("4_o31op")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf5qr"]
+atlas = ExtResource("4_o31op")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aj1yn"]
+atlas = ExtResource("4_o31op")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5cil0"]
+atlas = ExtResource("4_o31op")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivrbq"]
+atlas = ExtResource("4_o31op")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hkmn"]
+atlas = ExtResource("4_o31op")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67q7o"]
+atlas = ExtResource("4_o31op")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mhp8n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kklip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a5yc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf5qr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aj1yn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5cil0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivrbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hkmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67q7o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kklip"]
+resource_local_to_scene = true
+shader = ExtResource("5_r60q5")
+shader_parameter/origin = Vector2(-64, 96)
+shader_parameter/normal = Vector2(0, -1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r60q5"]
 atlas = ExtResource("3_0fetp")
@@ -47,11 +133,244 @@ size = Vector2(24, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hkmn"]
 size = Vector2(24, 24)
 
+[sub_resource type="Animation" id="Animation_8a5yc"]
+resource_name = "open"
+length = 0.2667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shadow:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_bf5qr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shadow:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_aj1yn"]
+resource_name = "idle"
+length = 0.2667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shadow:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_mhp8n"]
+resource_name = "close"
+length = 0.2667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shadow:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_r60q5"]
+resource_name = "lock"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shadow:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_o31op"]
+resource_name = "hide"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shadow:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h3w06"]
+_data = {
+&"RESET": SubResource("Animation_bf5qr"),
+&"close": SubResource("Animation_mhp8n"),
+&"hide": SubResource("Animation_o31op"),
+&"idle": SubResource("Animation_aj1yn"),
+&"lock": SubResource("Animation_r60q5"),
+&"open": SubResource("Animation_8a5yc")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tx5xo"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x4oso"]
+animation = &"close"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y63hn"]
+animation = &"close"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dxjxc"]
+animation = &"hide"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7jhfs"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vcv1j"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o31op"]
+animation = &"lock"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_asi1b"]
+animation = &"open"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5cil0"]
+animation = &"hide"
+play_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t5jc7"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tns0c"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h01ql"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xaltk"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e10is"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h3d7h"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x4oso"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ivrbq"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2hkmn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_67q7o"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kklip"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8a5yc"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bf5qr"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r60q5"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_l3u4a"]
+states/RESET/node = SubResource("AnimationNodeAnimation_tx5xo")
+states/RESET/position = Vector2(304, 81)
+states/Start/position = Vector2(205, -62)
+states/close/node = SubResource("AnimationNodeAnimation_y63hn")
+states/close/position = Vector2(259, 168)
+"states/close 2/node" = SubResource("AnimationNodeAnimation_x4oso")
+"states/close 2/position" = Vector2(389, -52)
+states/hide/node = SubResource("AnimationNodeAnimation_dxjxc")
+states/hide/position = Vector2(271, 21)
+states/idle/node = SubResource("AnimationNodeAnimation_vcv1j")
+states/idle/position = Vector2(504, 168)
+"states/idle 2/node" = SubResource("AnimationNodeAnimation_7jhfs")
+"states/idle 2/position" = Vector2(389, 214)
+states/lock/node = SubResource("AnimationNodeAnimation_o31op")
+states/lock/position = Vector2(460, 37)
+states/open/node = SubResource("AnimationNodeAnimation_asi1b")
+states/open/position = Vector2(465, 93)
+states/show/node = SubResource("AnimationNodeAnimation_5cil0")
+states/show/position = Vector2(359, 18)
+transitions = ["open", "idle", SubResource("AnimationNodeStateMachineTransition_t5jc7"), "RESET", "open", SubResource("AnimationNodeStateMachineTransition_tns0c"), "idle", "idle 2", SubResource("AnimationNodeStateMachineTransition_h01ql"), "idle 2", "idle", SubResource("AnimationNodeStateMachineTransition_xaltk"), "idle", "close", SubResource("AnimationNodeStateMachineTransition_e10is"), "idle 2", "close", SubResource("AnimationNodeStateMachineTransition_h3d7h"), "open", "lock", SubResource("AnimationNodeStateMachineTransition_x4oso"), "RESET", "hide", SubResource("AnimationNodeStateMachineTransition_ivrbq"), "hide", "show", SubResource("AnimationNodeStateMachineTransition_2hkmn"), "show", "RESET", SubResource("AnimationNodeStateMachineTransition_67q7o"), "lock", "close 2", SubResource("AnimationNodeStateMachineTransition_kklip"), "close 2", "hide", SubResource("AnimationNodeStateMachineTransition_8a5yc"), "close", "open", SubResource("AnimationNodeStateMachineTransition_bf5qr"), "Start", "hide", SubResource("AnimationNodeStateMachineTransition_r60q5")]
+graph_offset = Vector2(0, -86.5643)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0aoiw"]
+resource_local_to_scene = true
+shader = ExtResource("5_r60q5")
+shader_parameter/origin = Vector2(64, 96)
+shader_parameter/normal = Vector2(0, -1)
+
 [node name="SpiderCrab" type="CharacterBody2D"]
 texture_filter = 1
 script = ExtResource("1_1jnbo")
 
 [node name="Claw2" type="CharacterBody2D" parent="." node_paths=PackedStringArray("other")]
+visible = false
 position = Vector2(-64, 96)
 collision_layer = 4
 collision_mask = 0
@@ -59,12 +378,15 @@ script = ExtResource("1_8evvd")
 other = NodePath("../Claw")
 anchor = Vector2(-192, -64)
 
-[node name="Shadow" type="Sprite2D" parent="Claw2"]
-texture = ExtResource("2_1jnbo")
+[node name="Shadow" type="AnimatedSprite2D" parent="Claw2"]
+z_index = -3
+material = SubResource("ShaderMaterial_dxjxc")
+sprite_frames = SubResource("SpriteFrames_mhp8n")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Claw2"]
 z_index = 3
-rotation = -1.5708
+material = SubResource("ShaderMaterial_kklip")
+rotation = -0.433391
 sprite_frames = SubResource("SpriteFrames_5cil0")
 frame = 3
 frame_progress = 1.0
@@ -72,6 +394,7 @@ offset = Vector2(-5, -69)
 flip_h = true
 
 [node name="AttackBox" type="Area2D" parent="Claw2"]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -79,7 +402,18 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_ivrbq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Claw2"]
+visible = false
 shape = SubResource("RectangleShape2D_2hkmn")
+
+[node name="ReticleAnims" type="AnimationPlayer" parent="Claw2"]
+libraries = {
+&"": SubResource("AnimationLibrary_h3w06")
+}
+next/open = &"idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="Claw2"]
+tree_root = SubResource("AnimationNodeStateMachine_l3u4a")
+anim_player = NodePath("../ReticleAnims")
 
 [node name="Claw" type="CharacterBody2D" parent="." node_paths=PackedStringArray("other")]
 position = Vector2(72, 96)
@@ -89,11 +423,25 @@ script = ExtResource("1_8evvd")
 other = NodePath("../Claw2")
 anchor = Vector2(192, -64)
 
-[node name="Shadow" type="Sprite2D" parent="Claw"]
-texture = ExtResource("2_1jnbo")
+[node name="ReticleAnims" type="AnimationPlayer" parent="Claw"]
+libraries = {
+&"": SubResource("AnimationLibrary_h3w06")
+}
+next/open = &"idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="Claw"]
+tree_root = SubResource("AnimationNodeStateMachine_l3u4a")
+anim_player = NodePath("../ReticleAnims")
+
+[node name="Shadow" type="AnimatedSprite2D" parent="Claw"]
+z_index = -3
+material = SubResource("ShaderMaterial_dxjxc")
+sprite_frames = SubResource("SpriteFrames_mhp8n")
+flip_h = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Claw"]
 z_index = 3
+material = SubResource("ShaderMaterial_0aoiw")
 sprite_frames = SubResource("SpriteFrames_5cil0")
 frame = 3
 frame_progress = 1.0

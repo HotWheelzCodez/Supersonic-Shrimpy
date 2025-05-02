@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=14 format=3 uid="uid://dbde0mmbs7yg5"]
 
 [ext_resource type="Script" uid="uid://b75xvyy24pn2a" path="res://Game.cs" id="1_mealk"]
-[ext_resource type="Shader" uid="uid://dpfet2i52louo" path="res://water.gdshader" id="3_8w0yx"]
 [ext_resource type="Script" uid="uid://drrpbslu1qm4p" path="res://NormalizedCamera.cs" id="3_n8r31"]
 [ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://player/Player.tscn" id="4_h42pe"]
 [ext_resource type="Shader" uid="uid://bxr8gnf64cfu0" path="res://shockwave.gdshader" id="5_vbwl1"]
@@ -12,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://b85bwaj1wyc1u" path="res://items/coin.tscn" id="8_e73tn"]
 [ext_resource type="AudioStream" uid="uid://i807jy4dngsj" path="res://music/donotuse.mp3" id="11_2bna7"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oeg4x"]
-render_priority = 0
-shader = ExtResource("3_8w0yx")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ck1gw"]
+shader = ExtResource("5_vbwl1")
+shader_parameter/centers = PackedVector3Array(0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_er0aj"]
 fractal_type = 2
@@ -24,18 +23,14 @@ fractal_octaves = 1
 seamless = true
 noise = SubResource("FastNoiseLite_er0aj")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ck1gw"]
-shader = ExtResource("5_vbwl1")
-shader_parameter/centers = PackedVector3Array(0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1)
-
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "moneyLabel", "scoreLabel", "camera", "startingRoom")]
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_mealk")
 player = NodePath("Player")
-healthBar = NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer")
-moneyLabel = NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/Label")
-scoreLabel = NodePath("CanvasLayer/Control/Label2")
+healthBar = NodePath("CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer")
+moneyLabel = NodePath("CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer2/Label")
+scoreLabel = NodePath("CanvasLayer/Control2/Control/Label2")
 camera = NodePath("Camera2D")
 roomsDirectory = "res://rooms/reef"
 startingRoom = NodePath("Spawn")
@@ -47,14 +42,6 @@ script = ExtResource("3_n8r31")
 unitsH = 108
 unitsV = 192
 currentRoom = NodePath("../Spawn")
-
-[node name="ColorRect" type="Sprite2D" parent="Camera2D"]
-visible = false
-z_index = 999
-texture_repeat = 2
-material = SubResource("ShaderMaterial_oeg4x")
-scale = Vector2(8, 8)
-texture = SubResource("NoiseTexture2D_24p2d")
 
 [node name="Shockwave" type="Sprite2D" parent="Camera2D"]
 unique_name_in_owner = true
@@ -72,42 +59,48 @@ current = true
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control2" type="Control" parent="CanvasLayer"]
 texture_filter = 1
 layout_mode = 3
-anchors_preset = 0
 offset_right = 320.0
 offset_bottom = 180.0
+
+[node name="Control" type="Control" parent="CanvasLayer/Control2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/Control"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control2/Control/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control2/Control/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 texture = ExtResource("6_o41u1")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_s6owq")
 theme_override_font_sizes/font_size = 5
 text = "0"
 
-[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+[node name="Label2" type="Label" parent="CanvasLayer/Control2/Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -119,7 +112,7 @@ theme_override_fonts/font = ExtResource("7_s6owq")
 theme_override_font_sizes/font_size = 5
 text = "0"
 
-[node name="Map" type="Control" parent="CanvasLayer/Control"]
+[node name="Map" type="Control" parent="CanvasLayer/Control2/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -129,7 +122,7 @@ offset_top = 6.0
 grow_horizontal = 0
 script = ExtResource("7_10li1")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control2/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -137,13 +130,108 @@ anchor_bottom = 1.0
 grow_vertical = 0
 scale = Vector2(0.25, 0.25)
 
-[node name="RoomDebug" type="Label" parent="CanvasLayer/Control/VBoxContainer2"]
+[node name="RoomDebug" type="Label" parent="CanvasLayer/Control2/Control/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PosDebug" type="Label" parent="CanvasLayer/Control/VBoxContainer2"]
+[node name="PosDebug" type="Label" parent="CanvasLayer/Control2/Control/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="GameOver" type="ColorRect" parent="CanvasLayer/Control2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 20
+text = "GAME OVER"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "SCORE:"
+
+[node name="Score" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "1000"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "+"
+
+[node name="BonusIcon" type="ScrollContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2/BonusIcon"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2/BonusIcon/VBoxContainer"]
+custom_minimum_size = Vector2(8, 10)
+layout_mode = 2
+size_flags_vertical = 10
+texture = ExtResource("6_o41u1")
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "*"
+
+[node name="BonusScore" type="ScrollContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2/BonusScore"]
+layout_mode = 2
+
+[node name="CoinScore" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2/BonusScore/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "20"
 
 [node name="Player" parent="." instance=ExtResource("4_h42pe")]
 position = Vector2(-168, 104)
@@ -160,6 +248,5 @@ position = Vector2(-256, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_2bna7")
-autoplay = true
 bus = &"Music"
 parameters/looping = true

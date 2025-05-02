@@ -15,74 +15,65 @@ public partial class SpiderCrabClaw : CharacterBody2D
 
 	[Node("Sprite")]
 	public AnimatedSprite2D sprite;
+	[Node("AnimationTree")]
+	public AnimationTree tree;
+	public AnimationNodeStateMachinePlayback anims;
 
 	[Export]
 	public SpiderCrabClaw other;
 	[Export]
 	public Vector2 anchor;
+	[Export]
+	public float reach = 0;
+
+	public override void _Ready() {
+		anims = (AnimationNodeStateMachinePlayback)tree.Get("parameters/playback");
+		PickAttack();
+	}
 
 	public void PickAttack() {
-		current = (GD.Randi() % 2) switch {
+		current = (GD.Randi() % 1) switch {
 			0 => Attack.JabVertical,
 			1 => Attack.Slash
 		};
-		GD.Print(current);
+		switch (current) {
+			case Attack.JabVertical:
+				anims.Travel("idle");
+				break;
+		}
+		progress = 0;
 	}
 
 	public override void _Process(double delta) {
 		var player = Game.instance.player;
-		var myDist = (player.GlobalPosition - GlobalPosition).Length();
-		var otDist = (player.GlobalPosition - other.GlobalPosition).Length();
-		var between = (GlobalPosition - other.GlobalPosition).Length();
-		var anchorPos = GetParent<SpiderCrab>().GlobalPosition + anchor;
-		sprite.GlobalPosition = GlobalPosition.Lerp(anchorPos + (GlobalPosition - anchorPos).Normalized() * 96, 1);
-		sprite.Rotation = (GlobalPosition - anchorPos).Angle() - Mathf.Pi / 2;
 		switch (current) {
 			case Attack.JabVertical:
-				timeInState += delta;
-				if (progress < 1) {
-					progress = Mathf.MoveToward(progress, 1, delta);
-					sprite.GlobalPosition = GlobalPosition.Lerp(sprite.GlobalPosition, ((float)progress));
-					Velocity = Vector2.Zero;
-				} else if (progress > 1) {
-					progress = Mathf.MoveToward(progress, 2, delta);
-					if (progress < 1.5) {
-						sprite.GlobalPosition = GlobalPosition.Lerp(sprite.GlobalPosition, (3 - (float)progress * 2));
-					} else {
-						sprite.GlobalPosition = GlobalPosition;
+				if (progress < 1.5) {
+					GlobalPosition = player.GlobalPosition;
+					if (progress + delta > 1.5) {
+						anims.Travel("lock");
 					}
-					if (progress >= 2) {
-						PickAttack();
-						progress = 0;
-						timeInState = 0;
+				} else if (2.6 < progress && progress < 2.8) {
+					reach = (((float)progress - 2.8f) * 5);
+					anims.Travel("hide");
+					if (progress + delta > 2.5) {
+						reach = 1;
 					}
-				} else if ((other.progress == 1 || other.progress >= 1.75) && (GlobalPosition - Game.instance.player.GlobalPosition).Length() < 8) {
-					progress += delta;
-				} else if (otDist < myDist && between < 64 && other.progress == 1) {
-					Velocity = Velocity.MoveToward((GlobalPosition - other.GlobalPosition).Normalized() * 64, (float)delta * 64);
-					MoveAndSlide();
-				} else {
-					Velocity = Velocity.MoveToward((Game.instance.player.GlobalPosition - GlobalPosition).Normalized() * 64, (float)delta * 64 * (1 + (float)timeInState));
-					MoveAndSlide();
+				} else if (4 < progress && progress < 5) {
+					reach = (5 - (float)progress);
+				} else if (5 < progress){
+					PickAttack();
+					break;
 				}
+				progress += delta;
 				break;
 			case Attack.Slash:
-				if (progress == 0) {
-					GlobalPosition = new(anchorPos.X, player.GlobalPosition.Y);
-					progress += delta;
-				}
-				if (progress <= 1) {
-					GlobalPosition = new (anchorPos.X - (float)progress * anchor.X * 2, GlobalPosition.Y);
-					sprite.GlobalPosition = GlobalPosition.Lerp(sprite.GlobalPosition, Mathf.Pow((float)progress * 2 - 1f, 4));
-					progress += delta;
-				} else {
-					PickAttack();
-					timeInState = 0;
-					progress = 0;
-				}
 				break;
 			default:
 				break;
 		}
+		var anchorPos = GetParent<SpiderCrab>().GlobalPosition + anchor;
+		sprite.GlobalPosition = GlobalPosition.Lerp(anchorPos + (GlobalPosition - anchorPos).Normalized() * 96, 1 - reach);
+		sprite.Rotation = (GlobalPosition - anchorPos).Angle() - Mathf.Pi / 2;
 	}
 }

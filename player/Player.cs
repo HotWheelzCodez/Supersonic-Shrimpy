@@ -104,7 +104,7 @@ public partial class Player : CharacterBody2D, IHittable
 
 	public void Die() {
 		Modulate = Colors.Red;
-		GetTree().ChangeSceneToFile("res://Main.tscn");
+		//GetTree().ChangeSceneToFile("res://Main.tscn");
 
 	}
 }
