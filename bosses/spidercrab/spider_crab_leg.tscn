@@ -1,0 +1,257 @@
+[gd_scene load_steps=24 format=3 uid="uid://bab7rn4uvfvwy"]
+
+[ext_resource type="Script" uid="uid://csypfyhqesc64" path="res://bosses/spidercrab/SpiderCrabLeg.cs" id="1_iu5ia"]
+[ext_resource type="Shader" uid="uid://bopv303i4jciv" path="res://bosses/spidercrab/clip.gdshader" id="2_thqvg"]
+[ext_resource type="Texture2D" uid="uid://bcfm83qdnhmh0" path="res://bosses/spidercrab/leg.png" id="3_yhbkn"]
+[ext_resource type="Texture2D" uid="uid://deqef654g0nux" path="res://tiles/sand_particle.png" id="4_6oyml"]
+[ext_resource type="Material" uid="uid://dnb6dqb1ebnpw" path="res://shrimpidescent.tres" id="5_y25kj"]
+[ext_resource type="Texture2D" uid="uid://yq5s4qgc2yvh" path="res://dot.png" id="6_5rohi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qiu7k"]
+shader = ExtResource("2_thqvg")
+shader_parameter/origin = Vector2(0, 0)
+shader_parameter/normal = Vector2(0, -1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4lxt"]
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_iopqn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Particles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rxiqc"]
+resource_name = "stomp"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.5, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -128), Vector2(0, 0), Vector2(0, -128)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.5, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Particles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"Attack"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Indicator")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l6tqv"]
+_data = {
+&"RESET": SubResource("Animation_iopqn"),
+&"stomp": SubResource("Animation_rxiqc")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1tokq"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_ruwy4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o31op"]
+gradient = SubResource("Gradient_ruwy4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_52n00"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 0, 0)
+direction = Vector3(0, -1, 0)
+spread = 60.0
+initial_velocity_min = 32.0
+initial_velocity_max = 64.0
+gravity = Vector3(0, 49, 0)
+damping_min = 1.0
+damping_max = 1.0
+color_ramp = SubResource("GradientTexture1D_o31op")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw6pp"]
+atlas = ExtResource("6_5rohi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw8kv"]
+atlas = ExtResource("6_5rohi")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vce8p"]
+atlas = ExtResource("6_5rohi")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5v0x"]
+atlas = ExtResource("6_5rohi")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6o34a"]
+atlas = ExtResource("6_5rohi")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3d4n"]
+atlas = ExtResource("6_5rohi")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu5ia"]
+atlas = ExtResource("6_5rohi")
+region = Rect2(0, 0, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cgx13"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw6pp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw8kv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vce8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5v0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6o34a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3d4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw6pp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iu5ia")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="Node2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_iu5ia")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qiu7k")
+texture = ExtResource("3_yhbkn")
+offset = Vector2(0, -80)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n4lxt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_l6tqv")
+}
+autoplay = "stomp"
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+z_index = 4
+material = SubResource("CanvasItemMaterial_1tokq")
+emitting = false
+amount = 32
+texture = ExtResource("4_6oyml")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_52n00")
+
+[node name="Indicator" type="AnimatedSprite2D" parent="."]
+material = ExtResource("5_y25kj")
+sprite_frames = SubResource("SpriteFrames_cgx13")
+autoplay = "default"
+frame = 7
+frame_progress = 1.0

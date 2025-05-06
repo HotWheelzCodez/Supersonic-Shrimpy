@@ -9,6 +9,7 @@ public partial class Room : Node2D {
 
 	public bool active = false;
 	public bool visited = false;
+	public int enemyPoints = 0;
 
 	private Vector2I roomSize = new Vector2I(1, 1);
 	[Export]
@@ -49,6 +50,8 @@ public partial class Room : Node2D {
 			lineTexture.FillTo = Vector2.Down;
 			lineTexture.Gradient.SetColor(1, Game.bg * new Color(1, 1, 1, 0));
 			lineTexture.Gradient.SetColor(0, Game.bg);
+			lineTexture.Gradient.SetOffset(0, 7/16f);
+			lineTexture.Gradient.SetOffset(1, 9/16f);
 		}
 
 		line = new Line2D();
@@ -61,7 +64,9 @@ public partial class Room : Node2D {
 		};
 		line.TextureMode = Line2D.LineTextureMode.Stretch;
 		line.Texture = lineTexture;
-		line.Width = 16;
+		line.Width = 128;
+		line.ZIndex = 999;
+		line.ZAsRelative = false;
 		line.EndCapMode = Line2D.LineCapMode.Box;
 		line.BeginCapMode = Line2D.LineCapMode.Box;
 		AddChild(line);

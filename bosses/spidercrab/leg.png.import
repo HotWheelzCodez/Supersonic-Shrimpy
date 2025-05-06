@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c87qjw4orvvab"
-path="res://.godot/imported/spider_crab_claw.png-4baa01f798ef12418482645399e35b8d.ctex"
+uid="uid://bcfm83qdnhmh0"
+path="res://.godot/imported/leg.png-778c7a64db9231e739d30f96dec28f74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bosses/spider_crab_claw.png"
-dest_files=["res://.godot/imported/spider_crab_claw.png-4baa01f798ef12418482645399e35b8d.ctex"]
+source_file="res://bosses/spidercrab/leg.png"
+dest_files=["res://.godot/imported/leg.png-778c7a64db9231e739d30f96dec28f74.ctex"]
 
 [params]
 

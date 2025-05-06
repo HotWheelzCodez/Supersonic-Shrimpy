@@ -51,6 +51,10 @@ public partial class Game : Node2D
 	public Label posDebug;
 	[Node("%GameOver")]
 	public ColorRect gameOver;
+	[Node("%Score")]
+	public Label goScore;
+	[Node("%Loading")]
+	public ColorRect loading;
 
 	public static readonly Color bg = new Color(0, 0.05f, 0.1f);
 
@@ -102,6 +106,15 @@ public partial class Game : Node2D
 		scoreLabel.Text = _score.ToString();
 		posDebug.Text = player.GlobalPosition.ToString();
 		gameOver.Visible = player.Health <= 0;
+		goScore.Text = _score.ToString();
+		if (loading.Visible) {
+			GetTree().ChangeSceneToFile("res://Main.tscn");
+		}
+		if (gameOver.Visible) {
+			if (Input.IsActionJustPressed("punch_left") || Input.IsActionJustPressed("punch_right")) {
+				loading.Visible = true;
+			}
+		}
 
 	}
 

@@ -33,6 +33,7 @@ moneyLabel = NodePath("CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer2
 scoreLabel = NodePath("CanvasLayer/Control2/Control/Label2")
 camera = NodePath("Camera2D")
 roomsDirectory = "res://rooms/reef"
+roomCount = 15
 startingRoom = NodePath("Spawn")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("currentRoom")]
@@ -62,6 +63,7 @@ transform = Transform2D(4, 0, 0, 4, 0, 0)
 [node name="Control2" type="Control" parent="CanvasLayer"]
 texture_filter = 1
 layout_mode = 3
+anchors_preset = 0
 offset_right = 320.0
 offset_bottom = 180.0
 
@@ -123,6 +125,7 @@ grow_horizontal = 0
 script = ExtResource("7_10li1")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control2/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -140,6 +143,7 @@ layout_mode = 2
 
 [node name="GameOver" type="ColorRect" parent="CanvasLayer/Control2"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -169,9 +173,6 @@ theme_override_fonts/font = ExtResource("7_s6owq")
 theme_override_font_sizes/font_size = 20
 text = "GAME OVER"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer"]
-layout_mode = 2
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -189,49 +190,33 @@ theme_override_fonts/font = ExtResource("7_s6owq")
 theme_override_font_sizes/font_size = 10
 text = "1000"
 
-[node name="Label3" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
+[node name="Loading" type="ColorRect" parent="CanvasLayer/Control2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control2/Loading"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -5.0
+offset_right = 41.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("7_s6owq")
 theme_override_font_sizes/font_size = 10
-text = "+"
-
-[node name="BonusIcon" type="ScrollContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2/BonusIcon"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2/BonusIcon/VBoxContainer"]
-custom_minimum_size = Vector2(8, 10)
-layout_mode = 2
-size_flags_vertical = 10
-texture = ExtResource("6_o41u1")
-stretch_mode = 5
-
-[node name="Label2" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_s6owq")
-theme_override_font_sizes/font_size = 10
-text = "*"
-
-[node name="BonusScore" type="ScrollContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2/BonusScore"]
-layout_mode = 2
-
-[node name="CoinScore" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/HBoxContainer2/BonusScore/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_s6owq")
-theme_override_font_sizes/font_size = 10
-text = "20"
+text = "LOADING..."
 
 [node name="Player" parent="." instance=ExtResource("4_h42pe")]
 position = Vector2(-168, 104)

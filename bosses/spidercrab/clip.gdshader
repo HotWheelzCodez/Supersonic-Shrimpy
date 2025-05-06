@@ -6,11 +6,14 @@ uniform vec2 normal;
 varying vec2 WORLD_SPACE;
 
 void vertex() {
-	WORLD_SPACE = (MODEL_MATRIX * vec4(VERTEX, 0, 1)).xy;
+	WORLD_SPACE = (MODEL_MATRIX * floor(vec4(VERTEX, 0, 1))).xy;
 }
 
 void fragment() {
-	if (dot(WORLD_SPACE - origin, normal) < 0.0) {
+	vec2 dif = floor(WORLD_SPACE) - origin;
+	float y = dot(dif, normal);
+	float x = dot(dif, vec2(-normal.y, normal.x));
+	if (y < min((x*x)/64.0-2.0, 0.0)) {
 		discard;
 	}
 }

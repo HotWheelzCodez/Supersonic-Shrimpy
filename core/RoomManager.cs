@@ -13,6 +13,8 @@ public partial class RoomManager {
 
 	private PackedScene doorH;
 	private PackedScene doorV;
+	private PackedScene wallH;
+	private PackedScene wallV;
 
 	private List<Room> rooms = new();
 	private Dictionary<Vector2I, Room> occupied = new();
@@ -23,6 +25,8 @@ public partial class RoomManager {
 	public RoomManager(string roomsDirectory, int roomCount) {
 		doorH = ResourceLoader.Load<PackedScene>("res://rooms/door_h.tscn");
 		doorV = ResourceLoader.Load<PackedScene>("res://rooms/door_v.tscn");
+		wallH = ResourceLoader.Load<PackedScene>("res://rooms/wall_h.tscn");
+		wallV = ResourceLoader.Load<PackedScene>("res://rooms/wall_v.tscn");
 		this.roomCount = roomCount;
 
 		string path = roomsDirectory;
@@ -42,6 +46,7 @@ public partial class RoomManager {
 				var scene = ResourceLoader.Load<PackedScene>(filePath);
 				if (scene != null) {
 					var room = (Room)scene.Instantiate();
+					room.ProcessMode = Node.ProcessModeEnum.Disabled;
 					availableRooms.Add(room);
 					GD.Print($"{filePath}, {room}");
 				}
@@ -115,6 +120,8 @@ public partial class RoomManager {
 
 	public void Layout(Room origin) {
 		GD.Print("Starting layout");
+
+		rooms.Add(origin);
 
 		var oPos = origin.RoomPosition;
 		for (int y = oPos.Y; y < oPos.Y + origin.RoomSize.Y; y++) {
@@ -194,6 +201,12 @@ public partial class RoomManager {
 				Color mod;
 				if (occupied.TryGetValue(conPos, out con)) {
 					if (con.HasDoorAtRoomPos(room.GetDoorRoomPos(i), side)) {
+						var nnode = (Node2D)((side) switch {
+							Side.Top or Side.Bottom => doorH,
+							Side.Left or Side.Right => doorV,
+						}).Instantiate();
+						nnode.Position = room.GetDoorPos(i);
+						room.AddChild(nnode);
 						continue;
 					}
 					mod = Colors.Green;
@@ -201,8 +214,8 @@ public partial class RoomManager {
 					mod = Colors.Blue;
 				}
 				var node = (Node2D)((side) switch {
-					Side.Top or Side.Bottom => doorH,
-					Side.Left or Side.Right => doorV,
+					Side.Top or Side.Bottom => wallH,
+					Side.Left or Side.Right => wallV,
 				}).Instantiate();
 				node.Modulate = mod;
 				node.Position = room.GetDoorPos(i);

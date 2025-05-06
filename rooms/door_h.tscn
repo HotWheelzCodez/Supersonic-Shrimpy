@@ -1,15 +1,82 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvdw1vrqkel1k"]
+[gd_scene load_steps=11 format=3 uid="uid://dwbidji4ovgml"]
 
-[ext_resource type="Texture2D" uid="uid://k16foamqfuc" path="res://icon.svg" id="1_g1576"]
+[ext_resource type="Texture2D" uid="uid://dnw0pw3okoo35" path="res://tiles/kelp.png" id="1_c4pom"]
+[ext_resource type="Script" uid="uid://cbiuphihct884" path="res://core/Door.cs" id="1_q0mkl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0mkl"]
+atlas = ExtResource("1_c4pom")
+region = Rect2(0, 64, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clhjt"]
+atlas = ExtResource("1_c4pom")
+region = Rect2(0, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1ftf"]
+atlas = ExtResource("1_c4pom")
+region = Rect2(96, 64, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k72fi"]
+atlas = ExtResource("1_c4pom")
+region = Rect2(96, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45yx1"]
+atlas = ExtResource("1_c4pom")
+region = Rect2(48, 64, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnog0"]
+atlas = ExtResource("1_c4pom")
+region = Rect2(48, 160, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k72fi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0mkl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clhjt")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1ftf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k72fi")
+}],
+"loop": true,
+"name": &"opened",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45yx1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnog0")
+}],
+"loop": true,
+"name": &"urchin",
+"speed": 2.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_04u38"]
-size = Vector2(48, 16)
+size = Vector2(32, 16)
 
 [node name="DoorH" type="StaticBody2D"]
+script = ExtResource("1_q0mkl")
 
-[node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(0.375, 0.125)
-texture = ExtResource("1_g1576")
+[node name="Icon" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -8)
+sprite_frames = SubResource("SpriteFrames_k72fi")
+animation = &"urchin"
+autoplay = "closed"
+frame_progress = 0.575569
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_04u38")
+disabled = true

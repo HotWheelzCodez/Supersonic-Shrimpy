@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=4 uid="uid://dnb6dqb1ebnpw"]
+
+[ext_resource type="Shader" uid="uid://5u43cllsg0af" path="res://shripcolors.gdshader" id="1_ybfr4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_er0aj"]
+fractal_type = 2
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x4oso"]
+seamless = true
+noise = SubResource("FastNoiseLite_er0aj")
+
+[resource]
+shader = ExtResource("1_ybfr4")
+shader_parameter/texs = Array[Texture2D]([SubResource("NoiseTexture2D_x4oso")])
+shader_parameter/speeds = PackedVector4Array(100, 100, 1, 1, -100, -100, 1, 1)
+shader_parameter/texCount = 2

@@ -398,6 +398,21 @@ texture = ExtResource("1_whn00")
 6:7/0 = 0
 6:7/0/terrain_set = 0
 6:7/0/terrain = 1
+6:7/0/probability = 0.1
+4:7/0 = 0
+4:7/0/terrain_set = 0
+4:7/0/terrain = 1
+4:7/0/probability = 0.1
+5:7/0 = 0
+5:7/0/terrain_set = 0
+5:7/0/terrain = 1
+5:7/0/probability = 0.1
+4:3/0 = 0
+4:3/0/terrain_set = 0
+4:3/0/terrain = 1
+5:3/0 = 0
+5:3/0/terrain_set = 0
+5:3/0/terrain = 1
 
 [resource]
 physics_layer_0/collision_layer = 1

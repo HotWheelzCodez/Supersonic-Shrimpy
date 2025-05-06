@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://corvvwi0ae8pg"
-path="res://.godot/imported/spider_crab_claw_shadow.png-8b0af78275ab5d8e21040a0e992cfb8d.ctex"
+path="res://.godot/imported/spider_crab_claw_shadow.png-d31e868d4bda48eaa0d211d7d461f3d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bosses/spider_crab_claw_shadow.png"
-dest_files=["res://.godot/imported/spider_crab_claw_shadow.png-8b0af78275ab5d8e21040a0e992cfb8d.ctex"]
+source_file="res://bosses/spidercrab/spider_crab_claw_shadow.png"
+dest_files=["res://.godot/imported/spider_crab_claw_shadow.png-d31e868d4bda48eaa0d211d7d461f3d3.ctex"]
 
 [params]
 

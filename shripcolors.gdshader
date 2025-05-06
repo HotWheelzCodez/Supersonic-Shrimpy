@@ -27,7 +27,6 @@ vec4 hsv(vec4 col) {
 void fragment() {
 	float v = 0.0;
 	float w = 0.0;
-	float bAlpha = 0.0;
 	for (int i = 0; i < texCount; i++) {
 		v += (0.5 - abs(
 			texture(texs[0],
@@ -40,4 +39,3 @@ void fragment() {
 
 	//COLOR = vec4(WORLD_SPACE, 1, 1);
 }
-
