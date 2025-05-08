@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://01sseyhptr6v" path="res://enemies/crab/Crab.tscn" id="3_b4pq4"]
 
 [node name="HCorridor" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_dbslm")
 doors = Array[bool]([false, false, true, true])
 

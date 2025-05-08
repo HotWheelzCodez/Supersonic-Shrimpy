@@ -33,7 +33,6 @@ moneyLabel = NodePath("CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer2
 scoreLabel = NodePath("CanvasLayer/Control2/Control/Label2")
 camera = NodePath("Camera2D")
 roomsDirectory = "res://rooms/reef"
-roomCount = 15
 startingRoom = NodePath("Spawn")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("currentRoom")]
@@ -218,8 +217,9 @@ theme_override_fonts/font = ExtResource("7_s6owq")
 theme_override_font_sizes/font_size = 10
 text = "LOADING..."
 
-[node name="Player" parent="." instance=ExtResource("4_h42pe")]
+[node name="Player" parent="." node_paths=PackedStringArray("sprites") instance=ExtResource("4_h42pe")]
 position = Vector2(-168, 104)
+sprites = []
 
 [node name="Coin" parent="." instance=ExtResource("8_e73tn")]
 position = Vector2(-15, 47.625)

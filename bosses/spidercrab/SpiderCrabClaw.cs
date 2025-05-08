@@ -36,6 +36,7 @@ public partial class SpiderCrabClaw : CharacterBody2D, IDamageSource, IHittable
 	public Vector2 anchor;
 	[Export]
 	public float reach = 0;
+	public double shakeDuration;
 
 	public override void _Ready() {
 		anims = (AnimationNodeStateMachinePlayback)tree.Get("parameters/playback");
@@ -57,6 +58,10 @@ public partial class SpiderCrabClaw : CharacterBody2D, IDamageSource, IHittable
 
 	public override void _Process(double delta) {
 		var player = Game.instance.player;
+		var shake = new Vector2(GD.Randf(), GD.Randf()) * 8 - Vector2.One * 16 * (float)shakeDuration;
+		if (0 >= (shakeDuration -= delta)) {
+			shake = Vector2.Zero;
+		}
 		switch (current) {
 			case Attack.JabVertical:
 				if (progress < 2) {
@@ -99,12 +104,13 @@ public partial class SpiderCrabClaw : CharacterBody2D, IDamageSource, IHittable
 				break;
 		}
 		var anchorPos = GetParent<SpiderCrab>().GlobalPosition + anchor;
-		sprite.GlobalPosition = GlobalPosition.Lerp(anchorPos + (GlobalPosition - anchorPos).Normalized() * 128, 1 - reach);
+		sprite.GlobalPosition = (GlobalPosition + shake).Lerp(anchorPos + (GlobalPosition - anchorPos).Normalized() * 128, 1 - reach);
 		sprite.Rotation = (GlobalPosition - anchorPos).Angle() - Mathf.Pi / 2;
 		((ShaderMaterial)sprite.Material).SetShaderParameter("origin", GlobalPosition);
 	}
 
 	public bool Hit(IDamageSource source) {
+		shakeDuration = 0.25;
 		return true;
 	}
 }

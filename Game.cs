@@ -58,6 +58,8 @@ public partial class Game : Node2D
 
 	public static readonly Color bg = new Color(0, 0.05f, 0.1f);
 
+	public Room boss;
+
 	public override void _EnterTree() {
 		instance = this;
 		NodeAttribute.StartTreeListener(GetTree().Root);
@@ -70,9 +72,8 @@ public partial class Game : Node2D
 
 		RoomManager roomManager = new RoomManager(roomsDirectory, roomCount);
 		roomManager.Layout(startingRoom);
-		var room = roomManager.AddSpecialRoom(GD.Load<PackedScene>("rooms/reef/special/treasure.tscn"), new(0, -1));
+		boss = roomManager.AddSpecialRoom(GD.Load<PackedScene>("rooms/reef/special/treasure.tscn"), new(0, -1));
 		map.GenMap(roomManager.Finalize(this));
-		GD.Print(room?.RoomPosition);
 
 	}
 
@@ -116,6 +117,9 @@ public partial class Game : Node2D
 			}
 		}
 
+		if (Input.IsActionJustPressed("debug_boss")) {
+			player.GlobalPosition = boss.GlobalPosition + boss.PixelSize / 2;
+		}
 	}
 
 	private void _OnTimerTimeout() {

@@ -34,6 +34,9 @@ public partial class Player : CharacterBody2D, IHittable
 	public float invul = 0;
 	public float facingAngle = 0;
 
+	[Export]
+	public Node2D[] sprites;
+
 	[Node("Sprite")]
 	public AnimatedSprite2D sprite;
 	[Node("Rotations")]
@@ -65,7 +68,7 @@ public partial class Player : CharacterBody2D, IHittable
 		invul -= delta;
 
 		var movement = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-		if (Health == 0 || invul >= 0.25) {
+		if (Health == 0 || invul >= 0.25 && invul <= 0.5f) {
 			Velocity *= 0.95f;
 			MoveAndSlide();
 			return;
@@ -88,6 +91,9 @@ public partial class Player : CharacterBody2D, IHittable
 		}
 		if (Input.IsActionJustPressed("punch_right")) {
 			rightClaw.Punch();
+		}
+		if (Input.IsActionJustPressed("debug_god")) {
+			invul = invul < 100 ? float.PositiveInfinity : 0;
 		}
 	}
 

@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://yq5s4qgc2yvh" path="res://dot.png" id="6_5rohi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qiu7k"]
+resource_local_to_scene = true
 shader = ExtResource("2_thqvg")
 shader_parameter/origin = Vector2(0, 0)
 shader_parameter/normal = Vector2(0, -1)
