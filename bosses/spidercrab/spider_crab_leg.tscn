@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://csypfyhqesc64" path="res://bosses/spidercrab/SpiderCrabLeg.cs" id="1_iu5ia"]
 [ext_resource type="Shader" uid="uid://bopv303i4jciv" path="res://bosses/spidercrab/clip.gdshader" id="2_thqvg"]
-[ext_resource type="Texture2D" uid="uid://bcfm83qdnhmh0" path="res://bosses/spidercrab/leg.png" id="3_yhbkn"]
+[ext_resource type="Texture2D" uid="uid://8jl18xwo8xmf" path="res://bosses/spidercrab/leg.png" id="3_yhbkn"]
 [ext_resource type="Texture2D" uid="uid://deqef654g0nux" path="res://tiles/sand_particle.png" id="4_6oyml"]
 [ext_resource type="Material" uid="uid://dnb6dqb1ebnpw" path="res://shrimpidescent.tres" id="5_y25kj"]
 [ext_resource type="Texture2D" uid="uid://yq5s4qgc2yvh" path="res://dot.png" id="6_5rohi"]
@@ -226,7 +226,7 @@ script = ExtResource("1_iu5ia")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_qiu7k")
 texture = ExtResource("3_yhbkn")
-offset = Vector2(0, -80)
+offset = Vector2(10, -80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_n4lxt")

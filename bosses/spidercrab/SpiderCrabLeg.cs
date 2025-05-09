@@ -20,6 +20,7 @@ public partial class SpiderCrabLeg : Area2D, IDamageSource
 
 	public override void _Ready() {
 		((ShaderMaterial)sprite.Material).SetShaderParameter("origin", GlobalPosition);
+		sprite.FlipH = GD.Randi() % 2 == 1;
 	}
 
 }

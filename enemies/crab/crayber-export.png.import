@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8jl18xwo8xmf"
-path="res://.godot/imported/leg.png-778c7a64db9231e739d30f96dec28f74.ctex"
+uid="uid://c5app8mepghok"
+path="res://.godot/imported/crayber-export.png-ece770c0b1205c94f18aeec20e89505f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bosses/spidercrab/leg.png"
-dest_files=["res://.godot/imported/leg.png-778c7a64db9231e739d30f96dec28f74.ctex"]
+source_file="res://enemies/crab/crayber-export.png"
+dest_files=["res://.godot/imported/crayber-export.png-ece770c0b1205c94f18aeec20e89505f.ctex"]
 
 [params]
 

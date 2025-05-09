@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8jl18xwo8xmf"
-path="res://.godot/imported/leg.png-778c7a64db9231e739d30f96dec28f74.ctex"
+uid="uid://bh12jqatflfyq"
+path="res://.godot/imported/Selection (30).png-81e149f958e587a47dcaa39f297348a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bosses/spidercrab/leg.png"
-dest_files=["res://.godot/imported/leg.png-778c7a64db9231e739d30f96dec28f74.ctex"]
+source_file="res://Selection (30).png"
+dest_files=["res://.godot/imported/Selection (30).png-81e149f958e587a47dcaa39f297348a8.ctex"]
 
 [params]
 
