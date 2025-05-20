@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dol0vix06sdvb"]
+
+[ext_resource type="Script" uid="uid://dy5jr2bu8tfg5" path="res://ui/LerpContainer.cs" id="1_s16gg"]
+[ext_resource type="Texture2D" uid="uid://k16foamqfuc" path="res://icon.svg" id="2_7vg5o"]
+
+[node name="Control" type="HFlowContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="Container" parent="."]
+layout_mode = 2
+script = ExtResource("1_s16gg")
+
+[node name="TextureRect" type="TextureRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("2_7vg5o")
+
+[node name="Container2" type="Container" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+script = ExtResource("1_s16gg")
+
+[node name="TextureRect" type="TextureRect" parent="Container2"]
+top_level = true
+layout_mode = 2
+texture = ExtResource("2_7vg5o")

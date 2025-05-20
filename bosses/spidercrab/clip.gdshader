@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 uniform vec2 origin;
 uniform vec2 normal;
+uniform float scale = 1;
 
 varying vec2 WORLD_SPACE;
 
@@ -13,7 +14,7 @@ void fragment() {
 	vec2 dif = floor(WORLD_SPACE) - origin;
 	float y = dot(dif, normal);
 	float x = dot(dif, vec2(-normal.y, normal.x));
-	if (y < min((x*x)/64.0-2.0, 0.0)) {
+	if (y < min((x*x)/64.0/scale-2.0*scale, 0.0)) {
 		discard;
 	}
 }

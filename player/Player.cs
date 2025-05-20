@@ -100,11 +100,16 @@ public partial class Player : CharacterBody2D, IHittable
 	public bool Hit(IDamageSource source) {
 		if (invul > 0) return false;
 		hurtSound.Play();
-		Game.instance.Freeze(0.05f);
+		Game.instance.Freeze(0.5f);
 		Game.instance.Shake(3, 4);
 		Health -= source.Damage;
 		Velocity += source.Knockback;
 		invul = 0.5f;
+		if (source is CanvasItem canv) {
+			canv.Modulate = Colors.White * 5;
+			var tween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Quad);
+			tween.TweenProperty(canv, "modulate", Colors.White, 1.0);
+		}
 		return true;
 	}
 

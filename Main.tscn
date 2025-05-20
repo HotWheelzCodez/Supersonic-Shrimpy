@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=34 format=4 uid="uid://dbde0mmbs7yg5"]
 
 [ext_resource type="Script" uid="uid://b75xvyy24pn2a" path="res://Game.cs" id="1_mealk"]
 [ext_resource type="Script" uid="uid://drrpbslu1qm4p" path="res://NormalizedCamera.cs" id="3_n8r31"]
@@ -7,9 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://xldj1q57pmsu" path="res://items/coin.png" id="6_o41u1"]
 [ext_resource type="Script" uid="uid://nt74tqu04k71" path="res://Map.cs" id="7_10li1"]
 [ext_resource type="PackedScene" uid="uid://bdte40ee6g6md" path="res://rooms/spawn.tscn" id="7_477c5"]
+[ext_resource type="Script" uid="uid://dy5jr2bu8tfg5" path="res://ui/LerpContainer.cs" id="7_c6i3y"]
+[ext_resource type="Texture2D" uid="uid://d1abaqi6bav7n" path="res://ui/map_unknown.png" id="7_fpfj3"]
 [ext_resource type="FontFile" uid="uid://diofk8ltw0r6r" path="res://skewpixel.ttf" id="7_s6owq"]
+[ext_resource type="Texture2D" uid="uid://no4tusle4mxn" path="res://ui/glass_panel.png" id="8_c2ibq"]
 [ext_resource type="PackedScene" uid="uid://b85bwaj1wyc1u" path="res://items/coin.tscn" id="8_e73tn"]
+[ext_resource type="Texture2D" uid="uid://dj151cvjf2xp8" path="res://ui/map_known.png" id="8_sc1dx"]
+[ext_resource type="Texture2D" uid="uid://dsji3huu8urk4" path="res://ui/blood_fill.png" id="9_j4qnp"]
+[ext_resource type="Texture2D" uid="uid://8p0tlqlj0ky" path="res://ui/map_current.png" id="9_sc1dx"]
+[ext_resource type="Texture2D" uid="uid://bjtsrn7jpirgo" path="res://ui/map_door_h.png" id="10_5tuhn"]
+[ext_resource type="Shader" uid="uid://bk706fera2fvg" path="res://items/minerals/mineral.gdshader" id="10_c2ibq"]
 [ext_resource type="AudioStream" uid="uid://i807jy4dngsj" path="res://music/donotuse.mp3" id="11_2bna7"]
+[ext_resource type="Texture2D" uid="uid://yqf4qwn54fgw" path="res://ui/map_door_v.png" id="11_2gh4u"]
+[ext_resource type="Texture2D" uid="uid://be0g5r33clmeq" path="res://ui/map_boss.png" id="12_2gh4u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ck1gw"]
 shader = ExtResource("5_vbwl1")
@@ -23,6 +33,118 @@ fractal_octaves = 1
 seamless = true
 noise = SubResource("FastNoiseLite_er0aj")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kjvhd"]
+texture = ExtResource("7_fpfj3")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5tuhn"]
+texture = ExtResource("8_sc1dx")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2gh4u"]
+texture = ExtResource("9_sc1dx")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fpfj3"]
+texture = ExtResource("8_c2ibq")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sc1dx"]
+texture = ExtResource("9_j4qnp")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4qnp"]
+shader = ExtResource("10_c2ibq")
+shader_parameter/texs = Array[Texture2D]([])
+shader_parameter/speeds = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/texCount = 0
+shader_parameter/alpha = 1.0
+shader_parameter/overlay = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_fpfj3"]
+font_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="Animation" id="Animation_kjvhd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:anchors_preset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_sc1dx"]
+resource_name = "intro"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:anchors_preset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [14, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5tuhn"]
+_data = {
+&"RESET": SubResource("Animation_kjvhd"),
+&"intro": SubResource("Animation_sc1dx")
+}
+
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "moneyLabel", "scoreLabel", "camera", "startingRoom")]
 y_sort_enabled = true
 texture_filter = 1
@@ -33,19 +155,17 @@ moneyLabel = NodePath("CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer2
 scoreLabel = NodePath("CanvasLayer/Control2/Control/Label2")
 camera = NodePath("Camera2D")
 roomsDirectory = "res://rooms/reef"
+roomCount = 14
 startingRoom = NodePath("Spawn")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("currentRoom")]
 position = Vector2(164, 72)
 position_smoothing_enabled = true
 script = ExtResource("3_n8r31")
-unitsH = 108
-unitsV = 192
 currentRoom = NodePath("../Spawn")
 
 [node name="Shockwave" type="Sprite2D" parent="Camera2D"]
 unique_name_in_owner = true
-visible = false
 z_index = 999
 texture_repeat = 2
 material = SubResource("ShaderMaterial_ck1gw")
@@ -56,15 +176,15 @@ texture = SubResource("NoiseTexture2D_24p2d")
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="Control2" type="Control" parent="CanvasLayer"]
 texture_filter = 1
 layout_mode = 3
-anchors_preset = 0
-offset_right = 320.0
-offset_bottom = 180.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Control" type="Control" parent="CanvasLayer/Control2"]
 texture_filter = 1
@@ -116,12 +236,18 @@ text = "0"
 [node name="Map" type="Control" parent="CanvasLayer/Control2/Control"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
 offset_top = 6.0
 grow_horizontal = 0
 script = ExtResource("7_10li1")
+unknown = SubResource("StyleBoxTexture_kjvhd")
+known = SubResource("StyleBoxTexture_5tuhn")
+current = SubResource("StyleBoxTexture_2gh4u")
+doorH = ExtResource("10_5tuhn")
+doorV = ExtResource("11_2gh4u")
+boss = ExtResource("12_2gh4u")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control2/Control"]
 visible = false
@@ -140,9 +266,80 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="Control" type="Control" parent="CanvasLayer/Control2/Control"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = 4.0
+offset_right = 80.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="Container" parent="CanvasLayer/Control2/Control/Control"]
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -4.0
+offset_right = 80.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_c6i3y")
+speed = 4.0
+
+[node name="BossBar" type="ProgressBar" parent="CanvasLayer/Control2/Control/Control/Container"]
+unique_name_in_owner = true
+top_level = true
+texture_filter = 1
+clip_contents = true
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxTexture_fpfj3")
+theme_override_styles/fill = SubResource("StyleBoxTexture_sc1dx")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/Control2/Control/Control/Container/BossBar"]
+material = SubResource("ShaderMaterial_j4qnp")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -3.0
+offset_right = 26.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 5
+text = "SPIDER CRAB"
+label_settings = SubResource("LabelSettings_fpfj3")
+
+[node name="BossBarAnim" type="AnimationPlayer" parent="CanvasLayer/Control2/Control/Control/Container"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_5tuhn")
+}
+
 [node name="GameOver" type="ColorRect" parent="CanvasLayer/Control2"]
 unique_name_in_owner = true
 visible = false
+top_level = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

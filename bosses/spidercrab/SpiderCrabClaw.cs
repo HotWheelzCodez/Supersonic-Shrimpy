@@ -1,30 +1,23 @@
 using Godot;
 using System;
 
+[Tool]
 public partial class SpiderCrabClaw : CharacterBody2D, IDamageSource, IHittable
 {
-	public enum Attack {
-		JabVertical,
-		JabAngled,
-		Slash
-	}
-
-	public Attack current = Attack.JabVertical;
-	[Export]
-	public double progress = 0;
-	public double timeInState = 0;
-
 	[Node("Sprite")]
 	public AnimatedSprite2D sprite;
-	[Node("AnimationTree")]
-	public AnimationTree tree;
-	public AnimationNodeStateMachinePlayback anims;
-	[Node("AttackBox")]
+	[Node("CollisionShape2D/AttackBox")]
 	public Area2D attack;
-	[Node("Particles")]
+	[Node("Animations")]
+	public AnimationPlayer anims;
+	[Node("CollisionShape2D/Particles")]
 	public GpuParticles2D particles;
 	[Node("CollisionShape2D")]
 	public CollisionShape2D col;
+	[Node("../Hit")]
+	public AudioStreamPlayer2D hitSound;
+	[Node("../Hurt")]
+	public AudioStreamPlayer2D hurtSound;
 
 	public Vector2 Direction => (GetParent<SpiderCrab>().GlobalPosition + anchor).DirectionTo(GlobalPosition);
 	public float Damage => 1;
@@ -36,81 +29,70 @@ public partial class SpiderCrabClaw : CharacterBody2D, IDamageSource, IHittable
 	public Vector2 anchor;
 	[Export]
 	public float reach = 0;
+	[Export]
+	public float follow;
+	[Export]
+	public bool hurts;
 	public double shakeDuration;
 
-	public override void _Ready() {
-		anims = (AnimationNodeStateMachinePlayback)tree.Get("parameters/playback");
-		PickAttack();
-		sprite.PlayBackwards();
+	public void PickAttack() {
+		var list = anims.GetAnimationList();
+		var i = GD.RandRange(0, list.Length-1);
+		GD.Print("claw",i);
+		anims.Play(list[i]);
 	}
 
-	public void PickAttack() {
-		current = (GD.Randi() % 1) switch {
-			0 => Attack.JabVertical,
-			1 => Attack.Slash
-		};
-		switch (current) {
-			case Attack.JabVertical:
-				anims.Travel("hide");
-				break;
-		}
+	public override void _Ready() {
+		NodeAttribute.AssignNodes(this);
+		anims.Play("desync");
 	}
 
 	public override void _Process(double delta) {
-		var player = Game.instance.player;
 		var shake = new Vector2(GD.Randf(), GD.Randf()) * 8 - Vector2.One * 16 * (float)shakeDuration;
 		if (0 >= (shakeDuration -= delta)) {
 			shake = Vector2.Zero;
 		}
-		switch (current) {
-			case Attack.JabVertical:
-				if (progress < 2) {
-					GlobalPosition = GlobalPosition.MoveToward(player.GlobalPosition, 128 * (float)delta);
-					if (progress + delta > 2) {
-						anims.Travel("lock");
-						Velocity = player.Velocity;
-					}
-				} else if (progress < 2.6) {
-					Velocity = Velocity.MoveToward(player.Velocity, 1024 * (float)delta);
-					MoveAndSlide();
-				} else if (progress < 2.8) {
-					sprite.Play("default");
-					reach = (((float)progress - 2.6f) * 5);
-					anims.Travel("hide");
-					if (progress + delta >= 2.8) {
-						reach = 1;
-						Game.instance.Shake(5, 5);
-						if (attack.OverlapsBody(player)) {
-							player.Hit(this);
-						} else {
-							col.Disabled = false;
-						}
-						particles.Emitting = true;
-					}
-				} else if (4 < progress && progress < 5) {
-					sprite.Play("open");
-					reach = (5 - (float)progress);
-					col.Disabled = true;
-				} else if (5 <= progress){
-					progress -= 5.0;
-					PickAttack();
-					break;
-	 			}
-				progress += delta;
-				break;
-			case Attack.Slash:
-				break;
-			default:
-				break;
+		if (!Engine.IsEditorHint() && GetNode<SpiderCrab>("..").health > 0) {
+			var parent = GetParent<SpiderCrab>();
+			anims.SpeedScale = 2 - (parent.health / parent.maxHealth);
+			if (!anims.IsPlaying()) {
+				PickAttack();
+			}
+			if (!Engine.IsEditorHint()) {
+				var player = Game.instance.player;
+				GlobalPosition = GlobalPosition.MoveToward(player.GlobalPosition, follow * (float)delta);
+			}
 		}
-		var anchorPos = GetParent<SpiderCrab>().GlobalPosition + anchor;
-		sprite.GlobalPosition = (GlobalPosition + shake).Lerp(anchorPos + (GlobalPosition - anchorPos).Normalized() * 128, 1 - reach);
+		var anchorPos = GetParent<Node2D>().GlobalPosition + anchor;
+		sprite.GlobalPosition = (col.GlobalPosition + shake).Lerp(anchorPos + (GlobalPosition - anchorPos).Normalized() * 128, 1 - reach);
 		sprite.Rotation = (GlobalPosition - anchorPos).Angle() - Mathf.Pi / 2;
 		((ShaderMaterial)sprite.Material).SetShaderParameter("origin", GlobalPosition);
 	}
 
+	public void Attack() {
+		var player = Game.instance.player;
+		Game.instance.Shake(5, 5);
+		hitSound.Play();
+		if (attack.OverlapsBody(player)) {
+			player.Hit(this);
+		} else {
+			col.Disabled = false;
+		}
+		particles.Emitting = true;
+	}
+
 	public bool Hit(IDamageSource source) {
 		shakeDuration = 0.25;
+		GetParent<SpiderCrab>().Damage(source.Damage);
+		hurtSound.Play();
 		return true;
+	}
+
+	public void _OnHitBody(Node2D node) {
+		GD.Print("Claw hit ", node);
+		if (hurts && node == Game.instance.player) {
+			hitSound.Play();
+			Game.instance.player.Hit(this);
+		}
 	}
 }

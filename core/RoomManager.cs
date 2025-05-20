@@ -190,7 +190,6 @@ public partial class RoomManager {
 
 	public List<Room> Finalize(Node parent) {
 
-		// TODO: Add controlled randomization to the room generation
 		foreach (var room in rooms) {
 
 			for (int i = 0; i < room.doors.Count; i++) {
@@ -198,7 +197,6 @@ public partial class RoomManager {
 				var side = room.GetDoorSideIndex(i).Item1;
 				var conPos = room.GetConnectingRoomPos(i);
 				Room con;
-				Color mod;
 				if (occupied.TryGetValue(conPos, out con)) {
 					if (con.HasDoorAtRoomPos(room.GetDoorRoomPos(i), side)) {
 						var nnode = (Node2D)((side) switch {
@@ -209,17 +207,15 @@ public partial class RoomManager {
 						room.AddChild(nnode);
 						continue;
 					}
-					mod = Colors.Green;
 				} else {
-					mod = Colors.Blue;
 				}
 				var node = (Node2D)((side) switch {
 					Side.Top or Side.Bottom => wallH,
 					Side.Left or Side.Right => wallV,
 				}).Instantiate();
-				node.Modulate = mod;
 				node.Position = room.GetDoorPos(i);
 				room.AddChild(node);
+				room.doors[i] = false;
 			}
 
 			parent.AddChild(room);

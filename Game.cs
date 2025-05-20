@@ -55,10 +55,12 @@ public partial class Game : Node2D
 	public Label goScore;
 	[Node("%Loading")]
 	public ColorRect loading;
+	[Node("%BossBar")]
+	public ProgressBar bossBar;
 
 	public static readonly Color bg = new Color(0, 0.05f, 0.1f);
 
-	public Room boss;
+	public Room bossRoom;
 
 	public override void _EnterTree() {
 		instance = this;
@@ -72,13 +74,18 @@ public partial class Game : Node2D
 
 		RoomManager roomManager = new RoomManager(roomsDirectory, roomCount);
 		roomManager.Layout(startingRoom);
-		boss = roomManager.AddSpecialRoom(GD.Load<PackedScene>("rooms/reef/special/treasure.tscn"), new(0, -1));
+		bossRoom = roomManager.AddSpecialRoom(GD.Load<PackedScene>("rooms/reef/special/treasure.tscn"), new(0, -1));
 		map.GenMap(roomManager.Finalize(this));
 
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
+		var boss = (Boss)camera.currentRoom.boss;
+		if (boss != null) {
+			bossBar.MaxValue = boss.maxHealth;
+			bossBar.Value = boss.health;
+		}
 		for (int j = 0; j < shockwaves.Length; j++) {
 			shockwaves[j].Z += (float)delta;
 		}
@@ -93,6 +100,7 @@ public partial class Game : Node2D
 				((HealthIndicator)heart).SetState("lose");
 			} else {
 				((HealthIndicator)heart).SetState("normal");
+				//heart.GetNode<Node2D>("Slot/Icon").Scale = Vector2.One * Mathf.Min(1, player.Health - i);
 			}
 			i++;
 		}
@@ -118,7 +126,12 @@ public partial class Game : Node2D
 		}
 
 		if (Input.IsActionJustPressed("debug_boss")) {
-			player.GlobalPosition = boss.GlobalPosition + boss.PixelSize / 2;
+			player.GlobalPosition = bossRoom.GlobalPosition + bossRoom.PixelSize / 2;
+		}
+		if (Input.IsActionJustPressed("debug_kill_boss")) {
+			if (camera.currentRoom.boss is Boss bos) {
+				bos.Damage(bos.health);
+			}
 		}
 	}
 

@@ -70,13 +70,12 @@ size = Vector2(32, 16)
 script = ExtResource("1_q0mkl")
 
 [node name="Icon" type="AnimatedSprite2D" parent="."]
-position = Vector2(8, -8)
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_k72fi")
 animation = &"urchin"
 autoplay = "closed"
 frame_progress = 0.575569
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_04u38")
 disabled = true

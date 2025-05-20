@@ -11,6 +11,9 @@ public partial class Room : Node2D {
 	public bool visited = false;
 	public int enemyPoints = 0;
 
+	[Export]
+	public Node2D boss;
+
 	private Vector2I roomSize = new Vector2I(1, 1);
 	[Export]
 	public Vector2I RoomSize {
@@ -42,7 +45,9 @@ public partial class Room : Node2D {
 
 	public override void _Ready() {
 		if (Engine.IsEditorHint()) return;
-		Modulate = new Color(0f, 0f, 0f, 0f);
+		if (Game.instance.camera.currentRoom != this) {
+			Modulate = new Color(0f, 0f, 0f, 0f);
+		}
 		if (lineTexture == null) {
 			lineTexture = new GradientTexture2D();
 			GD.Print(lineTexture.GetSize());
@@ -65,7 +70,7 @@ public partial class Room : Node2D {
 		line.TextureMode = Line2D.LineTextureMode.Stretch;
 		line.Texture = lineTexture;
 		line.Width = 128;
-		line.ZIndex = 999;
+		line.ZIndex = 10;
 		line.ZAsRelative = false;
 		line.EndCapMode = Line2D.LineCapMode.Box;
 		line.BeginCapMode = Line2D.LineCapMode.Box;
@@ -179,6 +184,7 @@ public partial class Room : Node2D {
 		if (Engine.IsEditorHint()) {
 			QueueRedraw();
 		}
+
 	}
 
 	public override void _Draw() {
@@ -197,6 +203,10 @@ public partial class Room : Node2D {
 		active = true;
 		visited = true;
 		Game.instance.roomDebug.Text = ToString();
+		if (boss != null) {
+			GD.Print("boss");
+			Game.instance.GetNode<AnimationPlayer>("%BossBarAnim").Play("intro");
+		}
 	}
 
 	public void Stop() {

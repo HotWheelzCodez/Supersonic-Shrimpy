@@ -17,7 +17,7 @@ public partial class Door : StaticBody2D
 			return;
 		}
 		foreach (var node in room.GetChildren()) {
-			if (node is Enemy || node is SpiderCrab) { //TODO: change to `Boss`
+			if (node is Enemy || node is Boss bs && bs.health > 0) {
 				icon.Animation = "urchin";
 				col.Disabled = false;
 				return;

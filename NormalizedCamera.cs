@@ -29,14 +29,14 @@ public partial class NormalizedCamera : Camera2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
-		var size = new Vector2I(1280, 720);
-		var zh = (float)size.X / unitsH;
-		var zv = (float)size.Y / unitsV;
-		Zoom = (mode) switch {
-			Mode.Fill => new(Mathf.Max(zh, zv), Mathf.Max(zh, zv)),
-			Mode.Fit => new(Mathf.Min(zh, zv), Mathf.Min(zh, zv)),
-			Mode.Stretch => new(zh, zv),
-		};
+		//var size = new Vector2I(192, 108);
+		//var zh = (float)size.X / unitsH;
+		//var zv = (float)size.Y / unitsV;
+		//Zoom = (mode) switch {
+		//	Mode.Fill => new(Mathf.Max(zh, zv), Mathf.Max(zh, zv)),
+		//	Mode.Fit => new(Mathf.Min(zh, zv), Mathf.Min(zh, zv)),
+		//	Mode.Stretch => new(zh, zv),
+		//};
 		GlobalPosition = Game.instance.player.GlobalPosition.Clamp(currentRoom.GlobalPosition + Game.roomSize / 2, currentRoom.GlobalPosition + currentRoom.PixelSize - Game.roomSize / 2);
 	}
 
