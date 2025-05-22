@@ -48,7 +48,9 @@ public partial class Spinefish : Enemy
 			sprite.FlipH = Velocity.X > 0;
 		}
 
-		MoveAndSlide();
+		if (MoveAndSlide() && anim.GetCurrentNode() == "hurt") {
+			Velocity += GetSlideCollision(0).GetNormal() * speed * 8;
+		}
 
 	}
 

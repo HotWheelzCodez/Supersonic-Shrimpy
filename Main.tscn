@@ -1,9 +1,9 @@
-[gd_scene load_steps=34 format=4 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=37 format=4 uid="uid://dbde0mmbs7yg5"]
 
 [ext_resource type="Script" uid="uid://b75xvyy24pn2a" path="res://Game.cs" id="1_mealk"]
+[ext_resource type="Shader" uid="uid://dpfet2i52louo" path="res://water.gdshader" id="3_devvj"]
 [ext_resource type="Script" uid="uid://drrpbslu1qm4p" path="res://NormalizedCamera.cs" id="3_n8r31"]
 [ext_resource type="PackedScene" uid="uid://bkfmp6gv66g5n" path="res://player/Player.tscn" id="4_h42pe"]
-[ext_resource type="Shader" uid="uid://bxr8gnf64cfu0" path="res://shockwave.gdshader" id="5_vbwl1"]
 [ext_resource type="Texture2D" uid="uid://xldj1q57pmsu" path="res://items/coin.png" id="6_o41u1"]
 [ext_resource type="Script" uid="uid://nt74tqu04k71" path="res://Map.cs" id="7_10li1"]
 [ext_resource type="PackedScene" uid="uid://bdte40ee6g6md" path="res://rooms/spawn.tscn" id="7_477c5"]
@@ -22,8 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://be0g5r33clmeq" path="res://ui/map_boss.png" id="12_2gh4u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ck1gw"]
-shader = ExtResource("5_vbwl1")
-shader_parameter/centers = PackedVector3Array(0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1)
+shader = ExtResource("3_devvj")
+shader_parameter/speeds = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/texCount = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_er0aj"]
 fractal_type = 2
@@ -32,6 +33,22 @@ fractal_octaves = 1
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_24p2d"]
 seamless = true
 noise = SubResource("FastNoiseLite_er0aj")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2gh4u"]
+noise_type = 3
+fractal_type = 2
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_devvj"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_2gh4u")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3b0ty"]
+shader = ExtResource("3_devvj")
+shader_parameter/tex = SubResource("NoiseTexture2D_devvj")
+shader_parameter/speeds = PackedVector4Array(8, 8, 1, 4, 16, 16, 1, 2, 4, 4, 1, 1)
+shader_parameter/texCount = 3
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kjvhd"]
 texture = ExtResource("7_fpfj3")
@@ -172,6 +189,14 @@ material = SubResource("ShaderMaterial_ck1gw")
 scale = Vector2(8, 8)
 texture = SubResource("NoiseTexture2D_24p2d")
 
+[node name="Shockwave2" type="Sprite2D" parent="Camera2D"]
+unique_name_in_owner = true
+z_index = 999
+texture_repeat = 2
+material = SubResource("ShaderMaterial_3b0ty")
+scale = Vector2(8, 8)
+texture = SubResource("NoiseTexture2D_24p2d")
+
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera2D"]
 current = true
 
@@ -236,10 +261,13 @@ text = "0"
 [node name="Map" type="Control" parent="CanvasLayer/Control2/Control"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
 offset_top = 6.0
+offset_right = -1.0
+offset_bottom = 6.0
 grow_horizontal = 0
 script = ExtResource("7_10li1")
 unknown = SubResource("StyleBoxTexture_kjvhd")

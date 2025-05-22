@@ -50,7 +50,9 @@ public partial class Crab : Enemy
 			AccelerateTo(Vector2.Zero, delta);
 		}
 
-		MoveAndSlide();
+		if (MoveAndSlide() && anim.GetCurrentNode() == "hurt") {
+			Velocity += GetSlideCollision(0).GetNormal() * speed * 4;
+		}
 
 	}
 

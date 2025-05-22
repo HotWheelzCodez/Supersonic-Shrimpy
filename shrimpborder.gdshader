@@ -73,7 +73,7 @@ void fragment() {
 		for (int i = 0; i < texCount; i++) {
 			v += (0.5 - abs(
 				texture(texs[0],
-					mod((floor(WORLD_SPACE.xy / 1.0) * 1.0 + speeds[i].xy * TIME) / 128.0 / speeds[i].w, 1)
+					mod((WORLD_SPACE + speeds[i].xy * TIME) / 128.0 / speeds[i].w, 1)
 				).x - 0.5)) * speeds[i].z;
 		}
 		v = floor(v * 8.0) / 32.0;

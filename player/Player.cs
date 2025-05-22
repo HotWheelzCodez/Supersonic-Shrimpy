@@ -100,7 +100,7 @@ public partial class Player : CharacterBody2D, IHittable
 	public bool Hit(IDamageSource source) {
 		if (invul > 0) return false;
 		hurtSound.Play();
-		Game.instance.Freeze(0.5f);
+		Game.instance.Freeze(0.25f);
 		Game.instance.Shake(3, 4);
 		Health -= source.Damage;
 		Velocity += source.Knockback;

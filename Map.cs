@@ -38,7 +38,7 @@ public partial class Map : Control
 			mx = Math.Max(mx, room.RoomPosition.X + room.RoomSize.X);
 			my = Math.Max(my, room.RoomPosition.Y + room.RoomSize.Y);
 		}
-		//CustomMinimumSize = new Vector2((mx - nx) * 2, (my - ny) * 2);
+		CustomMinimumSize = new Vector2((mx - nx) * 7, (my - ny) * 7);
 	}
 
 	public override void _Process(double delta) {

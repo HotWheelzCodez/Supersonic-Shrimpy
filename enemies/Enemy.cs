@@ -18,6 +18,8 @@ public partial class Enemy : CharacterBody2D, IHittable, IDamageSource {
 	public int value;
 	[Export]
 	public int score;
+	[Export]
+	public int cost;
 
 	public Vector2 Direction => (player.GlobalPosition - GlobalPosition).Normalized();
 	public Vector2 Knockback => Direction * knockbackStrength;

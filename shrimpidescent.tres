@@ -13,5 +13,5 @@ noise = SubResource("FastNoiseLite_er0aj")
 [resource]
 shader = ExtResource("1_ybfr4")
 shader_parameter/texs = Array[Texture2D]([SubResource("NoiseTexture2D_x4oso")])
-shader_parameter/speeds = PackedVector4Array(100, 100, 1, 1, -100, -100, 1, 1)
-shader_parameter/texCount = 2
+shader_parameter/speeds = PackedVector4Array(8, 8, 1, 1, 16, 16, 1, 0.5, 4, 4, 1, 0.25)
+shader_parameter/texCount = 3

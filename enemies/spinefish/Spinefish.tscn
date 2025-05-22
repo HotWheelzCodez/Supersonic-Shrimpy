@@ -249,6 +249,7 @@ Damage = 1.0
 knockbackStrength = 128.0
 value = 5
 score = 1000
+cost = 3
 Health = 24.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]

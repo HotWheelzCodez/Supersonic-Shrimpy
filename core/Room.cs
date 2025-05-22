@@ -9,6 +9,8 @@ public partial class Room : Node2D {
 
 	public bool active = false;
 	public bool visited = false;
+
+	[Export]
 	public int enemyPoints = 0;
 
 	[Export]
