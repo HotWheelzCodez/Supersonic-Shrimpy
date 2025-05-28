@@ -12,10 +12,12 @@ public partial class Door : StaticBody2D
 
 	public override void _Process(double delta) {
 		bool playerNear = GlobalPosition.DistanceTo(Game.instance.player.GlobalPosition) < 24;
+		/*
 		if (col.Disabled && playerNear) {
 			icon.Animation = "opened";
 			return;
 		}
+		*/
 		foreach (var node in room.GetChildren()) {
 			if (node is Enemy || node is Boss bs && bs.health > 0) {
 				icon.Animation = "urchin";

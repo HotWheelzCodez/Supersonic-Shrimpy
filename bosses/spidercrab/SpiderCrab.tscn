@@ -1537,5 +1537,5 @@ disabled = true
 
 [connection signal="body_entered" from="ClawL/CollisionShape2D/AttackBox" to="ClawL" method="_OnHitBody"]
 [connection signal="body_entered" from="ClawR/CollisionShape2D/AttackBox" to="ClawR" method="_OnHitBody"]
-[connection signal="timeout" from="StompTimer" to="." method="OnStompTimer"]
 [connection signal="timeout" from="StompTimer" to="." method="_OnStompTimer"]
+[connection signal="timeout" from="StompTimer" to="." method="OnStompTimer"]

@@ -10,7 +10,7 @@ public partial class Player : CharacterBody2D, IHittable
 	public float acceleration;
 
 	private float _health;
-	public float soul = 3;
+	public float soul;
 
 	[Export]
 	public float Health {
