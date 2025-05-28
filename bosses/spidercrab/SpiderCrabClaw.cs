@@ -54,7 +54,7 @@ public partial class SpiderCrabClaw : CharacterBody2D, IDamageSource, IHittable
 		}
 		if (!Engine.IsEditorHint() && GetNode<SpiderCrab>("..").health > 0) {
 			var parent = GetParent<SpiderCrab>();
-			anims.SpeedScale = 2 - (parent.health / parent.maxHealth);
+			//anims.SpeedScale = 2 - (parent.health / parent.maxHealth);
 			if (!anims.IsPlaying()) {
 				PickAttack();
 			}

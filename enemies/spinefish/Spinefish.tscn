@@ -233,7 +233,7 @@ states/shoot/position = Vector2(305, 21)
 states/walk/node = SubResource("AnimationNodeAnimation_k804a")
 states/walk/position = Vector2(494, 120)
 transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_g4taw"), "shoot", "walk", SubResource("AnimationNodeStateMachineTransition_0f27r"), "hurt", "walk", SubResource("AnimationNodeStateMachineTransition_ssbg2"), "die", "End", SubResource("AnimationNodeStateMachineTransition_lwqvf")]
-graph_offset = Vector2(-153, -48)
+graph_offset = Vector2(-153, -57.1728)
 
 [node name="Spinefish" type="CharacterBody2D"]
 collision_layer = 4
@@ -254,7 +254,6 @@ Health = 24.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_igupl")
-frame_progress = 0.643355
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_c5nlq")

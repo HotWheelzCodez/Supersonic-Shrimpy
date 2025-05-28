@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cwbx4mm6flnka"]
+[gd_scene load_steps=12 format=3 uid="uid://bxbsn1hhwbwtp"]
 
-[ext_resource type="Script" uid="uid://dstmxi2pbuojl" path="res://items/minerals/hornfels/Hornfels.cs" id="1_hraxr"]
-[ext_resource type="Material" uid="uid://crkbmicu8ook4" path="res://items/minerals/hornfels/outline.tres" id="2_fcgnv"]
-[ext_resource type="Texture2D" uid="uid://dqj76jhivy1ny" path="res://items/minerals/hornfels/hornfels.png" id="3_s7twb"]
+[ext_resource type="Script" uid="uid://d1d4co1qoinme" path="res://items/minerals/lodestone/Lodestone.cs" id="1_bhate"]
+[ext_resource type="Material" uid="uid://crkbmicu8ook4" path="res://items/minerals/hornfels/outline.tres" id="2_6bpmu"]
+[ext_resource type="Texture2D" uid="uid://bv85wyee43yri" path="res://items/minerals/lodestone/lodestone.png" id="3_bhate"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pty7l"]
 size = Vector2(16, 16)
@@ -63,17 +63,15 @@ _data = {
 [node name="Hornfels" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_hraxr")
+script = ExtResource("1_bhate")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_pty7l")
 
 [node name="Icon" type="Sprite2D" parent="."]
 texture_filter = 1
-material = ExtResource("2_fcgnv")
-instance_shader_parameters/alpha = 1.0
-instance_shader_parameters/dist = 0.0
-texture = ExtResource("3_s7twb")
+material = ExtResource("2_6bpmu")
+texture = ExtResource("3_bhate")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_j7ob7")

@@ -157,7 +157,7 @@ particles_anim_loop = false
 [sub_resource type="Gradient" id="Gradient_o31op"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7rdop"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i10nq"]
 gradient = SubResource("Gradient_o31op")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x4oso"]
@@ -174,7 +174,7 @@ initial_velocity_max = 128.0
 gravity = Vector3(0, 49, 0)
 damping_min = 1.0
 damping_max = 1.0
-color_ramp = SubResource("GradientTexture1D_7rdop")
+color_ramp = SubResource("GradientTexture1D_i10nq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivrbq"]
 size = Vector2(24, 24)
@@ -1537,5 +1537,5 @@ disabled = true
 
 [connection signal="body_entered" from="ClawL/CollisionShape2D/AttackBox" to="ClawL" method="_OnHitBody"]
 [connection signal="body_entered" from="ClawR/CollisionShape2D/AttackBox" to="ClawR" method="_OnHitBody"]
-[connection signal="timeout" from="StompTimer" to="." method="_OnStompTimer"]
 [connection signal="timeout" from="StompTimer" to="." method="OnStompTimer"]
+[connection signal="timeout" from="StompTimer" to="." method="_OnStompTimer"]

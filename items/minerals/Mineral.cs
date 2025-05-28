@@ -10,8 +10,7 @@ public abstract partial class Mineral : CharacterBody2D, IHittable {
 	private float t = 0;
 
 	[Node("Icon")]
-	public Node2D spirte;
-	public ShaderMaterial mat;
+	public Node2D sprite;
 
 	public bool Hit(IDamageSource source) {
 		if (hit) return false;
@@ -26,14 +25,15 @@ public abstract partial class Mineral : CharacterBody2D, IHittable {
 
 	public override void _Ready() {
 		target = GlobalPosition;
-		mat = (ShaderMaterial)spirte.Material;
+		SetInstanceShaderParameter("alpha", 1);
 	}
 
 	public override void _PhysicsProcess(double delta) {
 		if (hit) {
+			GD.Print("shader");
 			t += (float)delta;
-			mat.SetShaderParameter("dist", t / 4);
-			mat.SetShaderParameter("alpha", 1-t);
+			sprite.SetInstanceShaderParameter("dist", t / 4);
+			sprite.SetInstanceShaderParameter("alpha", 1-t);
 			if (t > 1) {
 				QueueFree();
 			}

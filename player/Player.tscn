@@ -1,29 +1,11 @@
-[gd_scene load_steps=37 format=4 uid="uid://bkfmp6gv66g5n"]
+[gd_scene load_steps=32 format=3 uid="uid://bkfmp6gv66g5n"]
 
-[ext_resource type="Material" uid="uid://crkbmicu8ook4" path="res://items/minerals/hornfels/outline.tres" id="1_gskgj"]
 [ext_resource type="Script" uid="uid://cv7nqs52q32lf" path="res://player/Player.cs" id="1_s7fyg"]
 [ext_resource type="Texture2D" uid="uid://b4mqkoo5uthck" path="res://player/player.png" id="2_3dm0c"]
-[ext_resource type="Shader" uid="uid://bk706fera2fvg" path="res://items/minerals/mineral.gdshader" id="3_06mnu"]
 [ext_resource type="Script" uid="uid://q786da1ttb6s" path="res://player/Segment.cs" id="3_tlvuf"]
 [ext_resource type="AudioStream" uid="uid://dwaovk2y3addt" path="res://player/attack.wav" id="4_5332o"]
 [ext_resource type="Script" uid="uid://e15spfheibqf" path="res://player/Claw.cs" id="4_fcecb"]
 [ext_resource type="AudioStream" uid="uid://buwlsgy05r5fy" path="res://player/hurt.wav" id="5_1je5h"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_er0aj"]
-fractal_type = 2
-fractal_octaves = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x4oso"]
-seamless = true
-noise = SubResource("FastNoiseLite_er0aj")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndjxb"]
-shader = ExtResource("3_06mnu")
-shader_parameter/texs = Array[Texture2D]([SubResource("NoiseTexture2D_x4oso")])
-shader_parameter/speeds = PackedVector4Array(100, 100, 1, 1, -100, -100, 1, 1)
-shader_parameter/texCount = 2
-shader_parameter/alpha = 0.0
-shader_parameter/overlay = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ndjxb"]
 atlas = ExtResource("2_3dm0c")
@@ -907,7 +889,6 @@ _data = {
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprites")]
 y_sort_enabled = true
 texture_filter = 1
-material = ExtResource("1_gskgj")
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_s7fyg")
@@ -920,25 +901,21 @@ sprites = [NodePath("Sprite"), NodePath("Sprite/Segment"), NodePath("Sprite/Segm
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 texture_filter = 1
-material = SubResource("ShaderMaterial_ndjxb")
 sprite_frames = SubResource("SpriteFrames_mblf3")
 animation = &"down"
 
 [node name="Segment" type="AnimatedSprite2D" parent="Sprite"]
 y_sort_enabled = true
-material = SubResource("ShaderMaterial_ndjxb")
 sprite_frames = SubResource("SpriteFrames_57i7n")
 script = ExtResource("3_tlvuf")
 
 [node name="Segment" type="AnimatedSprite2D" parent="Sprite/Segment"]
 y_sort_enabled = true
-material = SubResource("ShaderMaterial_ndjxb")
 sprite_frames = SubResource("SpriteFrames_57i7n")
 script = ExtResource("3_tlvuf")
 
 [node name="Tail" type="AnimatedSprite2D" parent="Sprite/Segment/Segment"]
 y_sort_enabled = true
-material = SubResource("ShaderMaterial_ndjxb")
 sprite_frames = SubResource("SpriteFrames_06qy0")
 script = ExtResource("3_tlvuf")
 
@@ -948,7 +925,6 @@ position = Vector2(4, 7)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="LeftClaw"]
 y_sort_enabled = true
-material = SubResource("ShaderMaterial_ndjxb")
 sprite_frames = SubResource("SpriteFrames_omex0")
 script = ExtResource("4_fcecb")
 
@@ -958,7 +934,6 @@ position = Vector2(-4, 7)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="RightClaw"]
 y_sort_enabled = true
-material = SubResource("ShaderMaterial_ndjxb")
 sprite_frames = SubResource("SpriteFrames_omex0")
 flip_h = true
 script = ExtResource("4_fcecb")

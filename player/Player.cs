@@ -51,6 +51,8 @@ public partial class Player : CharacterBody2D, IHittable
 	public AudioStreamPlayer2D punchSound;
 	[Node("HurtSound")]
 	public AudioStreamPlayer2D hurtSound;
+	[Node("Hitbox")]
+	public CollisionShape2D col;
 
 	public static readonly string[] rotationAnims = new string[8] {
 		"right", "right", "down", "left", "left", "left_up", "up", "right_up"
@@ -95,6 +97,9 @@ public partial class Player : CharacterBody2D, IHittable
 		if (Input.IsActionJustPressed("debug_god")) {
 			invul = invul < 100 ? float.PositiveInfinity : 0;
 		}
+		if (Input.IsActionJustPressed("debug_noclip")) {
+			col.Disabled = !col.Disabled;
+		}
 	}
 
 	public bool Hit(IDamageSource source) {
@@ -115,6 +120,7 @@ public partial class Player : CharacterBody2D, IHittable
 
 	public void Die() {
 		Modulate = Colors.Red;
+		Game.instance.camera.currentRoom.ProcessMode = ProcessModeEnum.Disabled;
 		//GetTree().ChangeSceneToFile("res://Main.tscn");
 
 	}

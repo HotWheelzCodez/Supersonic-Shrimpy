@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=4 uid="uid://bdte40ee6g6md"]
+[gd_scene load_steps=5 format=4 uid="uid://bdte40ee6g6md"]
 
 [ext_resource type="Script" uid="uid://dfctl4r7idv7s" path="res://core/Room.cs" id="1_sxutt"]
 [ext_resource type="TileSet" uid="uid://b2ae6jfmxoxq4" path="res://tiles/coral.tres" id="2_jggqu"]
 [ext_resource type="PackedScene" uid="uid://cwbx4mm6flnka" path="res://items/minerals/hornfels/Hornfels.tscn" id="3_17h01"]
+[ext_resource type="PackedScene" uid="uid://bk8ing0wsbfx0" path="res://items/minerals/ruby/Ruby.tscn" id="4_uuou3"]
 
 [node name="Spawn" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_sxutt")
+active = true
+visited = true
 doors = Array[bool]([false, false, false, true])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -17,3 +20,6 @@ tile_set = ExtResource("2_jggqu")
 
 [node name="Hornfels" parent="." instance=ExtResource("3_17h01")]
 position = Vector2(151, 39)
+
+[node name="Hornfels2" parent="." instance=ExtResource("4_uuou3")]
+position = Vector2(73, 40)

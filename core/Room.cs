@@ -7,7 +7,9 @@ public partial class Room : Node2D {
 
 	public static GradientTexture2D lineTexture;
 
+	[Export]
 	public bool active = false;
+	[Export]
 	public bool visited = false;
 
 	[Export]
@@ -44,6 +46,8 @@ public partial class Room : Node2D {
 	public float Bottom => GlobalPosition.Y + PixelSize.Y;
 
 	public Rect2 Rect => new Rect2(GlobalPosition, PixelSize);
+
+	public int depth;
 
 	public override void _Ready() {
 		if (Engine.IsEditorHint()) return;
@@ -84,6 +88,7 @@ public partial class Room : Node2D {
 				enemy.player = Game.instance.player;
 			}
 		}
+		enemyPoints += depth / 2;
 	}
 	public int GetDoorIndex(Side side, int index = 0) => (side) switch {
 		Side.Top => 0,

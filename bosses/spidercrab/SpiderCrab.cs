@@ -31,7 +31,7 @@ public partial class SpiderCrab : Boss
 		if (health > 0 && !anims.IsPlaying()) {
 			PickLegAttack();
 		}
-		anims.SpeedScale = 2 - (health / maxHealth);
+		//anims.SpeedScale = 2 - (health / maxHealth);
 	}
 
 	public void PickLegAttack() {

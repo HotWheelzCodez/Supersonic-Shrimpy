@@ -75,6 +75,7 @@ public partial class Game : Node2D
 		RoomManager roomManager = new RoomManager(roomsDirectory, roomCount);
 		roomManager.Layout(startingRoom);
 		bossRoom = roomManager.AddSpecialRoom(GD.Load<PackedScene>("rooms/reef/special/treasure.tscn"), new(0, -1));
+		roomManager.AddRoomAdj(bossRoom, GD.Load<PackedScene>("rooms/reef/special/end.tscn").Instantiate<Room>());
 		map.GenMap(roomManager.Finalize(this));
 
 	}

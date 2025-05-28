@@ -168,6 +168,7 @@ public partial class RoomManager {
 							frontier.Enqueue(nex);
 							nex.RoomPosition = pos;
 							rooms.Add(nex);
+							nex.depth = room.depth + 1;
 							if (rooms.Count > roomCount) {
 								GD.Print("-- Reached room count --");
 								goto Finished;

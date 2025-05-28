@@ -92,8 +92,6 @@ shader = ExtResource("10_c2ibq")
 shader_parameter/texs = Array[Texture2D]([])
 shader_parameter/speeds = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/texCount = 0
-shader_parameter/alpha = 1.0
-shader_parameter/overlay = 0.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_fpfj3"]
 font_size = 5
