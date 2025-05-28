@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://d0pcyny0s0whv"]
 
-[ext_resource type="Script" uid="uid://bwc5rswh6in11" path="res://items/minerals/ruby/Ruby.cs" id="1_hcn3b"]
+[ext_resource type="Script" uid="uid://b0rcvq5o7kc5l" path="res://items/minerals/sapphire/Sapphire.cs" id="1_hcn3b"]
 [ext_resource type="Material" uid="uid://crkbmicu8ook4" path="res://items/minerals/hornfels/outline.tres" id="2_s02dg"]
-[ext_resource type="Texture2D" uid="uid://ddrwisis66ku2" path="res://items/minerals/ruby/ruby.png" id="3_1cbps"]
+[ext_resource type="Texture2D" uid="uid://bue4pr7iyridj" path="res://items/minerals/sapphire/sapphire.png" id="3_hcn3b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pty7l"]
 size = Vector2(16, 16)
@@ -75,7 +75,7 @@ instance_shader_parameters/alpha = 1.0
 instance_shader_parameters/dist = 0.0
 instance_shader_parameters/sliceN1 = Vector2(1, 0)
 instance_shader_parameters/sliceN2 = Vector2(0, 1)
-texture = ExtResource("3_1cbps")
+texture = ExtResource("3_hcn3b")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_j7ob7")

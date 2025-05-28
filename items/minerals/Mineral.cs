@@ -30,7 +30,6 @@ public abstract partial class Mineral : CharacterBody2D, IHittable {
 
 	public override void _PhysicsProcess(double delta) {
 		if (hit) {
-			GD.Print("shader");
 			t += (float)delta;
 			sprite.SetInstanceShaderParameter("dist", t / 4);
 			sprite.SetInstanceShaderParameter("alpha", 1-t);

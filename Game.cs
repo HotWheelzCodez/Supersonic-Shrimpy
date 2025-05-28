@@ -7,8 +7,6 @@ public partial class Game : Node2D
 	[Export]
 	public Player player;
 	[Export]
-	public HBoxContainer healthBar;
-	[Export]
 	public Label moneyLabel;
 	[Export]
 	public Label scoreLabel;
@@ -57,6 +55,10 @@ public partial class Game : Node2D
 	public ColorRect loading;
 	[Node("%BossBar")]
 	public ProgressBar bossBar;
+	[Node("%Health")]
+	public HBoxContainer healthBar;
+	[Node("%Soul")]
+	public HBoxContainer soulBar;
 
 	public static readonly Color bg = new Color(0, 0.05f, 0.1f);
 
@@ -105,6 +107,23 @@ public partial class Game : Node2D
 			}
 			i++;
 		}
+
+		i = (int)Math.Ceiling(Mathf.Max(player.soul, (float)soulBar.GetChildCount()));
+		while (i --> 0) {
+			HealthIndicator node;
+			if (i >= soulBar.GetChildCount()) {
+				node = ResourceLoader.Load<PackedScene>("res://ui/soulIndicator.tscn").Instantiate<HealthIndicator>();
+				soulBar.AddChild(node);
+				node.sprite.Scale = Vector2.Zero;
+			} else {
+				node = soulBar.GetChild<HealthIndicator>(i);
+			}
+			node.sprite.Scale = node.sprite.Scale.Lerp(Vector2.One * Mathf.Clamp(player.soul - i, 0, 1), 0.1f);
+			if (player.soul <= i && node.sprite.Scale.LengthSquared() < 0.01f) {
+				node.QueueFree();
+			}
+		}
+
 		foreach (var child in GetChildren()) {
 			if (child is Room room && room != camera.currentRoom) {
 				if (room.Rect.HasPoint(player.Position)) {

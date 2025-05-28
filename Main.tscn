@@ -160,12 +160,11 @@ _data = {
 &"intro": SubResource("Animation_sc1dx")
 }
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "healthBar", "moneyLabel", "scoreLabel", "camera", "startingRoom")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "moneyLabel", "scoreLabel", "camera", "startingRoom")]
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_mealk")
 player = NodePath("Player")
-healthBar = NodePath("CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer")
 moneyLabel = NodePath("CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer2/Label")
 scoreLabel = NodePath("CanvasLayer/Control2/Control/Label2")
 camera = NodePath("Camera2D")
@@ -225,6 +224,16 @@ offset_bottom = 40.0
 theme_override_constants/separation = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control2/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Health" type="HBoxContainer" parent="CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Soul" type="HBoxContainer" parent="CanvasLayer/Control2/Control/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 

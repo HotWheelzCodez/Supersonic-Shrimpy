@@ -10,6 +10,7 @@ public partial class Player : CharacterBody2D, IHittable
 	public float acceleration;
 
 	private float _health;
+	public float soul = 3;
 
 	[Export]
 	public float Health {
@@ -107,7 +108,12 @@ public partial class Player : CharacterBody2D, IHittable
 		hurtSound.Play();
 		Game.instance.Freeze(0.25f);
 		Game.instance.Shake(3, 4);
-		Health -= source.Damage;
+		if (soul > source.Damage) {
+			soul -= source.Damage;
+		} else {
+			Health -= source.Damage - soul;
+			soul = 0;
+		}
 		Velocity += source.Knockback;
 		invul = 0.5f;
 		if (source is CanvasItem canv) {
