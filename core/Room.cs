@@ -88,7 +88,7 @@ public partial class Room : Node2D {
 				enemy.player = Game.instance.player;
 			}
 		}
-		enemyPoints = depth;
+		enemyPoints = depth * 2 - 1;
 	}
 	public int GetDoorIndex(Side side, int index = 0) => (side) switch {
 		Side.Top => 0,

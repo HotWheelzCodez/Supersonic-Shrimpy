@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=38 format=4 uid="uid://dbde0mmbs7yg5"]
 
 [ext_resource type="Script" uid="uid://b75xvyy24pn2a" path="res://Game.cs" id="1_mealk"]
 [ext_resource type="Shader" uid="uid://dpfet2i52louo" path="res://water.gdshader" id="3_devvj"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://i807jy4dngsj" path="res://music/donotuse.mp3" id="11_2bna7"]
 [ext_resource type="Texture2D" uid="uid://yqf4qwn54fgw" path="res://ui/map_door_v.png" id="11_2gh4u"]
 [ext_resource type="Texture2D" uid="uid://be0g5r33clmeq" path="res://ui/map_boss.png" id="12_2gh4u"]
+[ext_resource type="Script" uid="uid://bt56836ldmq2i" path="res://ui/GameOver.cs" id="17_devvj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ck1gw"]
 shader = ExtResource("3_devvj")
@@ -373,7 +374,6 @@ libraries = {
 
 [node name="GameOver" type="ColorRect" parent="CanvasLayer/Control2"]
 unique_name_in_owner = true
-visible = false
 top_level = true
 layout_mode = 1
 anchors_preset = 15
@@ -382,18 +382,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5)
+script = ExtResource("17_devvj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/GameOver"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = 16.0
+offset_right = 84.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -420,6 +420,226 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("7_s6owq")
 theme_override_font_sizes/font_size = 10
 text = "1000"
+
+[node name="GreatScore" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 5
+text = "GREAT SCORE!"
+horizontal_alignment = 1
+
+[node name="Initials" type="GridContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Initials"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "Z"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Initials"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Initials"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+
+[node name="Label4" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Initials"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "A"
+
+[node name="Label5" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Initials"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "A"
+
+[node name="Label6" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Initials"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "A"
+
+[node name="Label7" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Initials"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "B"
+
+[node name="Label8" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Initials"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+
+[node name="Label9" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Initials"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+
+[node name="Leaderboard" type="GridContainer" parent="CanvasLayer/Control2/GameOver/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+columns = 2
+
+[node name="Label4" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "N/A"
+
+[node name="Label5" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "0"
+horizontal_alignment = 2
+
+[node name="Label7" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "N/A"
+horizontal_alignment = 2
+
+[node name="Label8" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="Label10" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "N/A"
+
+[node name="Label11" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "0"
+horizontal_alignment = 2
+
+[node name="Label13" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "N/A"
+horizontal_alignment = 2
+
+[node name="Label14" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="Label16" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "N/A"
+
+[node name="Label17" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "0"
+horizontal_alignment = 2
+
+[node name="Label19" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "N/A"
+horizontal_alignment = 2
+
+[node name="Label20" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="Label22" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "N/A"
+
+[node name="Label23" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "0"
+horizontal_alignment = 2
+
+[node name="Label25" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "N/A"
+horizontal_alignment = 2
+
+[node name="Label26" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="Label28" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "N/A"
+
+[node name="Label29" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "0"
+horizontal_alignment = 2
+
+[node name="Label31" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "N/A"
+horizontal_alignment = 2
+
+[node name="Label32" type="Label" parent="CanvasLayer/Control2/GameOver/VBoxContainer/Leaderboard"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_s6owq")
+theme_override_font_sizes/font_size = 10
+text = "0"
 
 [node name="Loading" type="ColorRect" parent="CanvasLayer/Control2"]
 unique_name_in_owner = true

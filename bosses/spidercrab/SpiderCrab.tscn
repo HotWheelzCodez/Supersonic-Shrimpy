@@ -1322,6 +1322,8 @@ height = 112.0
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_pkcri")
+maxHealth = 250.0
+score = 25000
 
 [node name="ClawL" type="CharacterBody2D" parent="."]
 position = Vector2(-64, 96)
@@ -1537,5 +1539,5 @@ disabled = true
 
 [connection signal="body_entered" from="ClawL/CollisionShape2D/AttackBox" to="ClawL" method="_OnHitBody"]
 [connection signal="body_entered" from="ClawR/CollisionShape2D/AttackBox" to="ClawR" method="_OnHitBody"]
-[connection signal="timeout" from="StompTimer" to="." method="_OnStompTimer"]
 [connection signal="timeout" from="StompTimer" to="." method="OnStompTimer"]
+[connection signal="timeout" from="StompTimer" to="." method="_OnStompTimer"]

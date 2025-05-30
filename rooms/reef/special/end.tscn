@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dh47ebjipu87p"]
+[gd_scene load_steps=9 format=4 uid="uid://dh47ebjipu87p"]
 
 [ext_resource type="Script" uid="uid://dfctl4r7idv7s" path="res://core/Room.cs" id="1_0bfpl"]
 [ext_resource type="FontFile" uid="uid://diofk8ltw0r6r" path="res://skewpixel.ttf" id="2_k7wjo"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://yh0uetjwgssq" path="res://items/minerals/svtite/svtite.png" id="5_4a5ww"]
 [ext_resource type="PackedScene" uid="uid://bxbsn1hhwbwtp" path="res://items/minerals/lodestone/Lodestone.tscn" id="6_e7hcf"]
 [ext_resource type="PackedScene" uid="uid://54c2rfph26mp" path="res://items/minerals/diorite/Diorite.tscn" id="7_4a5ww"]
+[ext_resource type="PackedScene" uid="uid://djcsf7bvryc5p" path="res://enemies/spinefish/Snipefish.tscn" id="8_m7mla"]
 
 [node name="Fork" type="Node2D"]
 y_sort_enabled = true
@@ -65,3 +66,27 @@ position = Vector2(96, 112)
 
 [node name="Hornfels2" parent="." instance=ExtResource("7_4a5ww")]
 position = Vector2(160, 112)
+
+[node name="Spinefish" parent="." instance=ExtResource("8_m7mla")]
+position = Vector2(-16, 0)
+
+[node name="Spinefish2" parent="." instance=ExtResource("8_m7mla")]
+position = Vector2(-16, 16)
+
+[node name="Spinefish3" parent="." instance=ExtResource("8_m7mla")]
+position = Vector2(-16, 32)
+
+[node name="Spinefish4" parent="." instance=ExtResource("8_m7mla")]
+position = Vector2(-16, 48)
+
+[node name="Spinefish5" parent="." instance=ExtResource("8_m7mla")]
+position = Vector2(272, 0)
+
+[node name="Spinefish6" parent="." instance=ExtResource("8_m7mla")]
+position = Vector2(272, 16)
+
+[node name="Spinefish7" parent="." instance=ExtResource("8_m7mla")]
+position = Vector2(272, 32)
+
+[node name="Spinefish8" parent="." instance=ExtResource("8_m7mla")]
+position = Vector2(272, 48)

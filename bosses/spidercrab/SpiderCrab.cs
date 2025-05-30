@@ -12,9 +12,8 @@ public partial class SpiderCrab : Boss
 	public AnimationPlayer bossAnims;
 
 	public override void _Ready() {
+		base._Ready();
 		leg = GD.Load<PackedScene>("res://bosses/spidercrab/spider_crab_leg.tscn");
-		maxHealth = 250;
-		health = maxHealth;
 	}
 
 	/*
