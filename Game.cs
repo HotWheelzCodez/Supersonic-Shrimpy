@@ -80,6 +80,7 @@ public partial class Game : Node2D
 		roomManager.AddRoomAdj(bossRoom, GD.Load<PackedScene>("rooms/reef/special/end.tscn").Instantiate<Room>());
 		map.GenMap(roomManager.Finalize(this));
 
+		GetTree().Quit();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
