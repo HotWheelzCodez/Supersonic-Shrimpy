@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://dbde0mmbs7yg5"]
+[gd_scene load_steps=50 format=4 uid="uid://dbde0mmbs7yg5"]
 
 [ext_resource type="Script" uid="uid://b75xvyy24pn2a" path="res://Game.cs" id="1_mealk"]
 [ext_resource type="Shader" uid="uid://dpfet2i52louo" path="res://water.gdshader" id="3_devvj"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://yqf4qwn54fgw" path="res://ui/map_door_v.png" id="11_2gh4u"]
 [ext_resource type="Texture2D" uid="uid://be0g5r33clmeq" path="res://ui/map_boss.png" id="12_2gh4u"]
 [ext_resource type="Script" uid="uid://bt56836ldmq2i" path="res://ui/GameOver.cs" id="17_devvj"]
+[ext_resource type="Texture2D" uid="uid://c4qre6pl3of3w" path="res://props/attack.png" id="22_3b0ty"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ck1gw"]
 shader = ExtResource("3_devvj")
@@ -160,6 +161,84 @@ _data = {
 &"RESET": SubResource("Animation_kjvhd"),
 &"intro": SubResource("Animation_sc1dx")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bg4s2"]
+atlas = ExtResource("22_3b0ty")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhcpw"]
+atlas = ExtResource("22_3b0ty")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxvw5"]
+atlas = ExtResource("22_3b0ty")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrxkg"]
+atlas = ExtResource("22_3b0ty")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqvbp"]
+atlas = ExtResource("22_3b0ty")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3b0ty"]
+atlas = ExtResource("22_3b0ty")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hri7i"]
+atlas = ExtResource("22_3b0ty")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3rk5"]
+atlas = ExtResource("22_3b0ty")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mvff"]
+atlas = ExtResource("22_3b0ty")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oye8v"]
+atlas = ExtResource("22_3b0ty")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hri7i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bg4s2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhcpw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxvw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrxkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqvbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3b0ty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hri7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3rk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mvff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oye8v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player", "moneyLabel", "scoreLabel", "camera", "startingRoom")]
 y_sort_enabled = true
@@ -687,3 +766,9 @@ position = Vector2(-256, 0)
 stream = ExtResource("11_2bna7")
 bus = &"Music"
 parameters/looping = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(40, 80)
+sprite_frames = SubResource("SpriteFrames_hri7i")
+autoplay = "default"
+frame_progress = 0.380109

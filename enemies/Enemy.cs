@@ -124,7 +124,7 @@ public partial class Enemy : CharacterBody2D, IHittable, IDamageSource {
 
 	public virtual void FinishDeath() {
 		for (int i = 0; i < value; i++) {
-			var node = (Pickup)(player.Health < player.maxHealth && GD.Randf() > 1.0f ? healthPickup : coinPickup).Instantiate();
+			var node = (Pickup)(player.Health < player.maxHealth && GD.Randf() > 0.8f ? healthPickup : coinPickup).Instantiate();
 			node.Position = Position;
 			node.Velocity = Vector2.FromAngle(GD.Randf() * Mathf.Pi * 2) * 64 + Velocity;
 			AddSibling(node);
