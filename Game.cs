@@ -148,6 +148,9 @@ public partial class Game : Node2D
 				bos.Damage(bos.health);
 			}
 		}
+		if (Input.IsActionJustPressed("ui.cancel")) {
+			GetTree().Quit();
+		}
 	}
 
 	private void _OnTimerTimeout() {
